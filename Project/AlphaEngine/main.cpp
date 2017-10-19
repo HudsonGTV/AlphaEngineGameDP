@@ -1,13 +1,3 @@
-/******************************************************************************/
-/*!
- \file   Step1 - Empty.c
- \author Antoine Abi Chacra
- \par    Course: GAM150
- \par    Copyright © 2016 DigiPen (USA) Corporation.
- \brief
- */
-/******************************************************************************/
-
 #include <stdbool.h>
 
 #include "AEEngine.h"
@@ -20,16 +10,19 @@ int WINAPI WinMain(HINSTANCE instanceH, HINSTANCE prevInstanceH, LPSTR command_l
 	UNREFERENCED_PARAMETER(prevInstanceH);
 	UNREFERENCED_PARAMETER(command_line);
 
-	app = new Application();
+	app = new Application(800, 600);
 
+	// INITIALIZE
 	app->Init(instanceH, show);
 
+	// RENDER LOOP
 	while(app->isRunning) {
-		app->Render(instanceH);
+		app->Loop(instanceH);
 	}
 
+	// UNINITIALIZE
+	app->Uninit(instanceH);
 
-
-	return 1;
+	return 0;
 
 }

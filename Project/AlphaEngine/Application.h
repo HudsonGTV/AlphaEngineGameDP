@@ -1,6 +1,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include "GraphicsEngine.h"
+#include "GameEngine.h"
 #include "AEEngine.h"
 
 #include <stdbool.h>
@@ -15,15 +17,20 @@ class Application {
 
 	int m_windowWidth = 800;
 	int m_windowHeight = 600;
+	int m_refreshRate = 144;
+
+	Graphics *m_graphics;
+	Game *m_game;
 	
 public:
 
 	int isRunning = true;
 
-	Application();
+	Application(int winWidth, int winHeight, int refreshRate);
 
 	void Init(HINSTANCE instanceH, int show);
-	void Render(HINSTANCE instanceH);
+	void Loop(HINSTANCE instanceH);
+	void Uninit(HINSTANCE instanceH);
 
 };
 

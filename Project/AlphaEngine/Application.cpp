@@ -1,6 +1,13 @@
 #include "Application.h"
 
-Application::Application() {
+Application::Application(int winWidth, int winHeight, int refreshRate = 60) {
+
+	m_windowWidth = winWidth;
+	m_windowHeight = winHeight;
+	m_refreshRate = refreshRate;
+
+	m_graphics = new Graphics();
+	m_game = new Game();
 
 }
 
@@ -9,13 +16,14 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	// INITIALIZE THE SYSTEM 
 	AESysInitInfo sysInitInfo;
 
+	// SET SYSTEM PROPERTIES
 	sysInitInfo.mCreateWindow = 1;
 	sysInitInfo.mAppInstance = instanceH;
 	sysInitInfo.mShow = show;
-	sysInitInfo.mWinWidth = 800;
-	sysInitInfo.mWinHeight = 600;
+	sysInitInfo.mWinWidth = m_windowWidth;
+	sysInitInfo.mWinHeight = m_windowHeight;
 	sysInitInfo.mCreateConsole = 1;
-	sysInitInfo.mMaxFrameRate = 60;
+	sysInitInfo.mMaxFrameRate = m_refreshRate;
 	sysInitInfo.mpWinCallBack = NULL;
 	sysInitInfo.mClassStyle = CS_HREDRAW | CS_VREDRAW;
 	sysInitInfo.mWindowStyle = WS_OVERLAPPEDWINDOW;
@@ -26,23 +34,19 @@ void Application::Init(HINSTANCE instanceH, int show) {
 
 	AESysReset();
 
+	// GAME INIT FUNCTION
+	m_graphics->Init();
+	m_game->Init();
+
 }
 
-void Application::Render(HINSTANCE instanceH) {
+void Application::Loop(HINSTANCE instanceH) {
 
-	// INFORMING THE SYSTEM ABOUT THE LOOP'S START
-	AESysFrameStart();
+	m_graphics->Render();
+	m_game->Update();
 
-	// HANDLING INPUT
-	AEInputUpdate();
+}
 
-
-	// INFORMING THE SYSTEM ABOUT THE LOOP'S END
-	AESysFrameEnd();
-
-	// CHECK IF FORCING THE APPLICATION TO QUIT
-	if(AEInputCheckTriggered(VK_ESCAPE) || 0 == AESysDoesWindowExist()) {
-		isRunning = false;
-	}
-
+void Application::Uninit(HINSTANCE instanceH) {
+	AESysExit();
 }
