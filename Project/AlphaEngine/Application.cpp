@@ -2,10 +2,12 @@
 
 Application::Application(int winWidth, int winHeight, int refreshRate) {
 
+	// SET PASSED IN WINDOW PROPERTIES ARGUMENTS
 	m_windowWidth = winWidth;
 	m_windowHeight = winHeight;
 	m_refreshRate = refreshRate;
 
+	// CORE CLASS DECLARATIONS
 	m_graphics = new Graphics();
 	m_game = new Game();
 
@@ -30,11 +32,13 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	sysInitInfo.mWindowHandle = NULL;
 	sysInitInfo.mHandleWindowMessages = 1;
 
+	// APPLY SYSTEM PROPERTIES
 	AESysInit(&sysInitInfo);
 
-	AESysReset();
+	// RESET
+	//AESysReset();
 
-	// GAME INIT FUNCTION
+	// INITIALIZE FUNCTIONS
 	m_graphics->Init();
 	m_game->Init();
 
@@ -42,6 +46,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 
 void Application::Loop(HINSTANCE instanceH) {
 
+	// RENDER/UPDATE FUNCTIONS
 	m_graphics->Render();
 	m_game->Update();
 

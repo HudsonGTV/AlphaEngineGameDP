@@ -8,9 +8,11 @@ static Application *app;
 
 int WINAPI WinMain(HINSTANCE instanceH, HINSTANCE prevInstanceH, LPSTR command_line, int show) {
 
+	// SET WINDOW FLAGS
 	UNREFERENCED_PARAMETER(prevInstanceH);
 	UNREFERENCED_PARAMETER(command_line);
 
+	// APPLICATION
 	app = new Application(800, 600, 75);
 
 	// INITIALIZE

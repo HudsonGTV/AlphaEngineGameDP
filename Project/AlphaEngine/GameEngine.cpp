@@ -1,7 +1,7 @@
 #include "GameEngine.h"
 #include "AEEngine.h"
 
-#include "maths.h"
+#include "Math.h"
 #include <iostream>
 
 #include <stdbool.h>

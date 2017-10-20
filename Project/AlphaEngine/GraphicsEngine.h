@@ -3,6 +3,7 @@
 
 class Graphics {
 
+private:
 	bool m_isRunning = true;
 
 public:

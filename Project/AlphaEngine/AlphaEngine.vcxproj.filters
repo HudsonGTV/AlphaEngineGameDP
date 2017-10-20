@@ -80,7 +80,7 @@
     <ClInclude Include="Vec4.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="maths.h">
+    <ClInclude Include="Math.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
   </ItemGroup>

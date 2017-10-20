@@ -140,7 +140,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GraphicsEngine.h" />
-    <ClInclude Include="maths.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />
     <ClInclude Include="Vec4.h" />

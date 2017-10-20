@@ -1,6 +1,7 @@
 #include "Vec4.h"
 
-namespace maths {
+namespace math {
+
 	vec4::vec4() {
 		x = 0.0f;
 		y = 0.0f;
@@ -8,7 +9,7 @@ namespace maths {
 		w = 0.0f;
 	}
 
-	vec4::vec4(const float& x, const float& y, const float& z, const float& w) {
+	vec4::vec4(const float &x, const float &y, const float &z, const float &w) {
 		this->x = x;
 		this->y = y;
 		this->z = z;
@@ -16,7 +17,7 @@ namespace maths {
 	}
 
 
-	vec4& vec4::add(const vec4& other) {
+	vec4 &vec4::add(const vec4 &other) {
 
 		x += other.x;
 		y += other.y;
@@ -26,7 +27,7 @@ namespace maths {
 		return *this;
 	}
 
-	vec4& vec4::subtract(const vec4& other) {
+	vec4 &vec4::subtract(const vec4 &other) {
 		x -= other.x;
 		y -= other.y;
 		z -= other.z;
@@ -35,7 +36,7 @@ namespace maths {
 		return *this;
 	}
 
-	vec4& vec4::multiply(const vec4& other) {
+	vec4 &vec4::multiply(const vec4 &other) {
 		x *= other.x;
 		y *= other.y;
 		z *= other.z;
@@ -44,7 +45,7 @@ namespace maths {
 		return *this;
 	}
 
-	vec4& vec4::divide(const vec4& other) {
+	vec4 &vec4::divide(const vec4 &other) {
 		x /= other.x;
 		y /= other.y;
 		z /= other.z;
@@ -54,53 +55,54 @@ namespace maths {
 	}
 
 
-	vec4& operator+(vec4 left, const vec4& right) {
+	vec4 &operator+(vec4 left, const vec4 &right) {
 		return left.add(right);
 	}
 
-	vec4& operator-(vec4 left, const vec4& right) {
+	vec4 &operator-(vec4 left, const vec4 &right) {
 		return left.subtract(right);
 	}
 
-	vec4& operator*(vec4 left, const vec4& right) {
+	vec4 &operator*(vec4 left, const vec4 &right) {
 		return left.multiply(right);
 	}
 
-	vec4& operator/(vec4 left, const vec4& right) {
+	vec4 &operator/(vec4 left, const vec4 &right) {
 		return left.divide(right);
 	}
 
-	bool vec4::operator==(const vec4& other) {
+	bool vec4::operator==(const vec4 &other) {
 		return x == other.x && y == other.y && z == other.z && w == other.w;
 	}
 
-	bool vec4::operator!=(const vec4& other) {
+	bool vec4::operator!=(const vec4 &other) {
 		return !(*this == other);
 	}
 
-	vec4& vec4::operator+=(const vec4& other) {
+	vec4 &vec4::operator+=(const vec4 &other) {
 		*this = *this + other;
 		return *this;
 	}
 
-	vec4& vec4::operator-=(const vec4& other) {
+	vec4 &vec4::operator-=(const vec4 &other) {
 		*this = *this - other;
 		return *this;
 	}
 
-	vec4& vec4::operator*=(const vec4& other) {
+	vec4 &vec4::operator*=(const vec4 &other) {
 		*this = *this * other;
 		return *this;
 	}
 
-	vec4& vec4::operator/=(const vec4& other) {
+	vec4 &vec4::operator/=(const vec4 &other) {
 		*this = *this / other;
 		return *this;
 	}
 
 
-	std::ostream& operator<<(std::ostream& stream, const vec4& vector) {
+	std::ostream &operator<<(std::ostream &stream, const vec4 &vector) {
 		stream << "vec4: (" << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << ")";
 		return stream;
 	}
+
 }

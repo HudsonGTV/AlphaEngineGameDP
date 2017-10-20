@@ -15,6 +15,7 @@
 
 class Application {
 
+private:
 	int m_windowWidth = 800;
 	int m_windowHeight = 600;
 	int m_refreshRate = 144;
@@ -23,7 +24,6 @@ class Application {
 	Game *m_game;
 	
 public:
-
 	int isRunning = true;
 
 	Application(int winWidth, int winHeight, int refreshRate = 60);
