@@ -1,6 +1,9 @@
 #include "GameEngine.h"
 #include "AEEngine.h"
 
+#include "maths.h"
+#include <iostream>
+
 #include <stdbool.h>
 
 #ifdef _DEBUG
@@ -14,5 +17,6 @@ void Game::Init() {
 }
 
 void Game::Update() {
-
+	
+	
 }
