@@ -11,7 +11,7 @@
 
 void Graphics::Init() {
 
-	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+	AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);
 
 }
 
