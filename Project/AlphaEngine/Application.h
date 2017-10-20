@@ -26,7 +26,7 @@ public:
 
 	int isRunning = true;
 
-	Application(int winWidth, int winHeight, int refreshRate);
+	Application(int winWidth, int winHeight, int refreshRate = 60);
 
 	void Init(HINSTANCE instanceH, int show);
 	void Loop(HINSTANCE instanceH);

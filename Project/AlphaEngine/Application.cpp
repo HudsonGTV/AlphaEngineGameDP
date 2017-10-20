@@ -1,6 +1,6 @@
 #include "Application.h"
 
-Application::Application(int winWidth, int winHeight, int refreshRate = 60) {
+Application::Application(int winWidth, int winHeight, int refreshRate) {
 
 	m_windowWidth = winWidth;
 	m_windowHeight = winHeight;
