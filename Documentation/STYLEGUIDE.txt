@@ -1,0 +1,114 @@
+EXAMPLE ONE (main.cpp as example file)
+
+#include <header file here>
+
+#include "header file here"
+
+void foo();
+
+int main() {
+	
+	int foo1 = 0;
+	int foo2 = 1;
+
+	int *foo3 = &foo2;
+	
+	int &foo4 = 0;
+
+	bool bar1 = false;
+	bool bar2 = true;
+
+	customType typeOne = 0;
+	
+	if(foo1 == foo2) {
+		
+		// COMMENTS IN ALL CAPS
+		
+		/* COMMENTS STILL IN ALL CAPS */
+		
+		/*
+			MULTI LINE COMMENT
+			MORE LINES HERE
+		*/
+		
+	} else {
+		
+		// OTHER STUFF
+		
+	}
+	
+	return 0;
+	
+}
+
+[END OF EXAMPLE ONE]
+--------------------------------
+EXAMPLE 2 (class header called example.h)
+
+#ifndef EXAMPLE_H
+#define EXAMPLE_H
+
+#include <header file>
+
+#include "header file"
+
+#define SOME_THING 0x0f1
+
+class FooBar {
+	
+private:
+	int m_privateMemberVarThatALWAYSStartsWithThis = 0;
+	int m_intTwo = 1;
+	
+public:
+	int publicVar = -1;
+	
+	FooBar(int &foo2, vec4 *vecVar);
+	~FooBar();
+	
+	int GetIntTwo() const;
+	int GetPublicVar() const;
+	
+	void SetPublicVar(int input);
+	
+}
+
+#endif
+
+[END OF EXAMPLE TWO]
+--------------------------------
+EXAMPLE 3 (class source called example.cpp)
+
+#include "header file"
+
+FooBar::FooBar() {
+	
+	// CONSTRUCTOR
+	
+}
+
+~FooBar::FooBar() {
+	
+	// DESTRUCTOR
+	
+}
+
+int FooBar::GetIntTwo() const {
+	
+	return m_intTwo;
+	
+}
+
+int FooBar::GetPublicVar() const {
+	
+	return publicVar;
+	
+}
+
+void SetPublicVar(int input) {
+	
+	publicVar = input;
+	
+}
+
+[END OF EXAMPLE THREE]
