@@ -3,7 +3,7 @@
 
 static Player *player;
 
-void Objects::Init(Entity *entityArray[ENTITY_COUNT]) {
+void Objects::Init(Entity *entityID[ENTITY_COUNT]) {
 
 	// CREATE OBJECTS HERE
 	player = new Player();
@@ -12,7 +12,7 @@ void Objects::Init(Entity *entityArray[ENTITY_COUNT]) {
 	player->SetPosition(math::vec3(0.5f, 0.25f, 0.0f));
 
 	// ADD TO ARRAY
-	entityArray[ID_PLAYER] = player;
+	entityID[ID_PLAYER] = player;
 
 }
 

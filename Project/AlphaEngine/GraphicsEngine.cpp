@@ -12,21 +12,25 @@
 #endif
 
 static AEGfxVertexList *meshPlayer;
+static AEGfxVertexList *meshBoss;
+static AEGfxVertexList *meshBullet;
 
 static AEGfxTexture *texturePlayer;
+static AEGfxTexture *textureBoss;
+static AEGfxTexture *textureBullet;
 
-void Graphics::Init(Entity *entityArray[ENTITY_COUNT]) {
+void Graphics::Init(Entity *entityID[ENTITY_COUNT]) {
 
-	CreateMesh(&meshPlayer, &texturePlayer, "../../assets/entity/player/player.png", 3);
+	Graphics::CreateMesh(entityID[ID_PLAYER], &meshPlayer, &texturePlayer, "../../assets/entity/player/player.png", 3);
 
 	AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 }
 
-void Graphics::Render(Entity *entityArray[ENTITY_COUNT], double dt) {
+void Graphics::Render(Entity *entityID[ENTITY_COUNT], double dt) {
 
-	DrawMesh(entityArray[ID_PLAYER], &meshPlayer, &texturePlayer, 3);
+	Graphics::DrawMesh(entityID[ID_PLAYER], &meshPlayer, &texturePlayer, 3);
 
 }
 

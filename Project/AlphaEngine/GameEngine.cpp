@@ -12,7 +12,7 @@
 #pragma comment (lib, "Alpha_Engine.lib")
 #endif
 
-void Game::Init(Entity *entityArray[ENTITY_COUNT]) {
+void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 
 }
 

@@ -16,8 +16,7 @@ class InputManager;
 class Entity {
 
 protected:
-	float m_width = 16.0f;
-	float m_height = 16.0f;
+	float m_size = 30.0f;
 
 	float m_health = 25.0f;
 

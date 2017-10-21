@@ -39,15 +39,15 @@ void Application::Init(HINSTANCE instanceH, int show) {
 
 	// SET WINDOW TITLE
 	AESysSetWindowTitle("Weird Game Thing That We Made");
-
+	
 	// RESET SYSTEM MODULES
 	AESysReset();
 
 	// INITIALIZE FUNCTIONS
-	Objects::Init(m_entityArray);
+	Objects::Init(m_entityID);
 
-	m_graphics->Init(m_entityArray);
-	m_game->Init(m_entityArray);
+	m_graphics->Init(m_entityID);
+	m_game->Init(m_entityID);
 
 	OutputDebugStringA("Initialized!\n");
 
@@ -81,7 +81,7 @@ void Application::Loop(HINSTANCE instanceH) {
 	Objects::Update(m_deltaTime);
 
 	m_game->Update(m_deltaTime);
-	m_graphics->Render(m_entityArray, m_deltaTime);
+	m_graphics->Render(m_entityID, m_deltaTime);
 
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S END
 	AESysFrameEnd();
@@ -90,9 +90,11 @@ void Application::Loop(HINSTANCE instanceH) {
 
 void Application::Uninit(HINSTANCE instanceH) {
 
+	// DELETE UNLOADED CLASSES
 	delete m_game;
 	delete m_graphics;
-	delete *m_entityArray;
+	delete m_entityID[ID_PLAYER];
+	delete m_entityID[ID_BOSS];
 
 	AESysExit();
 

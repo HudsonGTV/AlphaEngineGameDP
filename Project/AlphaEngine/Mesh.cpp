@@ -9,7 +9,7 @@ static double timeCounter = 0;
 static clock_t thisTime = clock();
 static clock_t lastTime = thisTime;
 
-void Graphics::CreateMesh(AEGfxVertexList **mesh, AEGfxTexture **texture, char *texturePath, int frameCount) {
+void Graphics::CreateMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, char *texturePath, int frameCount) {
 
 	AEGfxMeshStart();
 

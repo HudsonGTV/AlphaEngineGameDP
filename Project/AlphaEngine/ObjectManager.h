@@ -6,7 +6,7 @@
 
 namespace Objects {
 
-	void Init(Entity *entityArray[ENTITY_COUNT]);
+	void Init(Entity *entityID[ENTITY_COUNT]);
 	void Update(double dt);
 
 }
