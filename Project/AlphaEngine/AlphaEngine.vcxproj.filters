@@ -46,6 +46,15 @@
     <Filter Include="Source Files\Application\Input">
       <UniqueIdentifier>{f06dd0ab-7db0-40fc-98d5-3e997bfad465}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Object\Entity">
+      <UniqueIdentifier>{31cb6747-dcc5-4d88-8132-06c1129f93ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Object\Entity">
+      <UniqueIdentifier>{88f35cc8-e586-4cd9-83d3-dbf5d55e5e5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Application\Input">
+      <UniqueIdentifier>{def40fa9-bab4-42af-80ea-3bc37c1aaa0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -69,14 +78,17 @@
     <ClCompile Include="Vec4.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="ObjectManager.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\Object</Filter>
+      <Filter>Source Files\Object\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
-      <Filter>Source Files\Object</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Object\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Application\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,14 +113,17 @@
     <ClInclude Include="Math.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="ObjectManager.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Header Files\Object</Filter>
+      <Filter>Header Files\Object\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectManager.h">
-      <Filter>Header Files\Object</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Object\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Application\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

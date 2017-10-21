@@ -9,8 +9,9 @@ private:
 	///
 
 public:
-	void Init(Entity entityArray[ENTITY_COUNT]);
-	void Render(double dt);
+	void Init(Entity *entityArray[ENTITY_COUNT]);
+	void Render(Entity *entityArray[ENTITY_COUNT], double dt);
+	void Uninit();
 
 };
 

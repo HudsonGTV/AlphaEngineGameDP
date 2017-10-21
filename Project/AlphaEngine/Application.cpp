@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Application.h"
 
 Application::Application(int winWidth, int winHeight, int refreshRate) {
@@ -10,8 +8,8 @@ Application::Application(int winWidth, int winHeight, int refreshRate) {
 	m_refreshRate = refreshRate;
 
 	// CORE CLASS DECLARATIONS
-	m_graphics = new Graphics();
 	m_game = new Game();
+	m_graphics = new Graphics();
 
 }
 
@@ -38,7 +36,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	AESysInit(&sysInitInfo);
 
 	// SET WINDOW TITLE
-	AESysSetWindowTitle("Title Here");
+	AESysSetWindowTitle("Weird Game Thing That We Made");
 
 	// RESET SYSTEM MODULES
 	AESysReset();
@@ -69,8 +67,10 @@ void Application::Loop(HINSTANCE instanceH) {
 	}
 
 	// RENDER/UPDATE FUNCTIONS
-	m_graphics->Render(0);
+	Objects::Update(0);
+
 	m_game->Update(0);
+	m_graphics->Render(m_entityArray, 0);
 
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S END
 	AESysFrameEnd();
@@ -78,5 +78,11 @@ void Application::Loop(HINSTANCE instanceH) {
 }
 
 void Application::Uninit(HINSTANCE instanceH) {
+
+	delete m_game;
+	delete m_graphics;
+	delete m_entityArray;
+
 	AESysExit();
+
 }

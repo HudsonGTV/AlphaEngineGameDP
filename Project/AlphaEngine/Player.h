@@ -3,11 +3,12 @@
 
 #include "Entity.h"
 #include "Math.h"
+#include "Input.h"
 
 class Player : public Entity {
 
 public:
-	Player();
+	void Update();
 
 };
 

@@ -6,7 +6,7 @@
 class Game {
 
 public:
-	void Init(Entity entityArray[ENTITY_COUNT]);
+	void Init(Entity *entityArray[ENTITY_COUNT]);
 	void Update(double dt);
 
 };

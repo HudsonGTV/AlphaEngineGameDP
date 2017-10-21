@@ -24,10 +24,10 @@ private:
 
 	bool m_isRunning = true;
 
-	Graphics *m_graphics;
 	Game *m_game;
+	Graphics *m_graphics;
 
-	Entity m_entityArray[ENTITY_COUNT];
+	Entity *m_entityArray[ENTITY_COUNT];
 	
 public:
 	int isRunning = true;
