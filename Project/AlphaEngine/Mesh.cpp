@@ -1,0 +1,65 @@
+#include <time.h>
+
+#include "GraphicsEngine.h"
+
+static int frameNum = 0;
+
+static double timeCounter = 0;
+
+static clock_t thisTime = clock();
+static clock_t lastTime = thisTime;
+
+void Graphics::CreateMesh(AEGfxVertexList **mesh, AEGfxTexture **texture, char *texturePath, int frameCount) {
+
+	AEGfxMeshStart();
+
+	AEGfxTriAdd(
+		-30.0f, -30.0f, 0xFFFF0000, 0.0f, 1.0f,
+		30.0f, -30.0f, 0xFFFF0000, 1.0f / (float)frameCount, 1.0f,
+		-30.0f, 30.0f, 0xFFFF0000, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		30.0f, -30.0f, 0xFFFF0000, 1.0f / (float)frameCount, 1.0f,
+		30.0f, 30.0f, 0xFFFF0000, 1.0f / (float)frameCount, 0.0f,
+		-30.0f, 30.0f, 0xFFFF0000, 0.0f, 0.0f);
+
+	*mesh = AEGfxMeshEnd();
+
+	*texture = AEGfxTextureLoad(texturePath);
+
+}
+
+void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, int frameCount) {
+
+	if(frameCount > 6) {
+		frameCount = 6;
+	}
+
+	float textureFrame[6] {
+		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount
+	};
+
+	thisTime = clock();
+	timeCounter += (double)(thisTime - lastTime);
+	lastTime = thisTime;
+
+	// PLAYER
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	// SET POISITION
+	AEGfxSetPosition(entity->GetPositionX(), entity->GetPositionY());
+	// SET TEXTURE
+	AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
+	// DRAW MESH
+	AEGfxSetTransparency(1.0f);
+	AEGfxMeshDraw(*mesh, AE_GFX_MDM_TRIANGLES);
+
+	if(timeCounter > (double)(0.25 * CLOCKS_PER_SEC)) {
+		timeCounter -= (double)(0.25 * CLOCKS_PER_SEC);
+		++frameNum;
+	}
+
+	if(frameNum > frameCount - 1) {
+		frameNum = 0;
+	}
+
+}

@@ -1,7 +1,6 @@
 #include "ObjectManager.h"
 #include "Input.h"
 
-
 static Player *player;
 
 void Objects::Init(Entity *entityArray[ENTITY_COUNT]) {

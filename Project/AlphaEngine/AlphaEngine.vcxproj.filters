@@ -55,6 +55,9 @@
     <Filter Include="Header Files\Application\Input">
       <UniqueIdentifier>{def40fa9-bab4-42af-80ea-3bc37c1aaa0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Graphics\Mesh">
+      <UniqueIdentifier>{b32e9438-c5a6-41e1-969b-5b04fe88f52d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -89,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Application\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Graphics\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
