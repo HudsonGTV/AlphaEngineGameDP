@@ -16,8 +16,10 @@ class InputManager;
 class Entity {
 
 protected:
-	float m_width = 16;
-	float m_height = 16;
+	float m_width = 16.0f;
+	float m_height = 16.0f;
+
+	float m_health = 25.0f;
 
 	math::vec3 m_position = math::vec3(0.0f, 0.0f, 0.0f);
 

@@ -71,7 +71,7 @@ void Application::Loop(HINSTANCE instanceH) {
 	// HANDLING INPUT
 	AEInputUpdate();
 
-	// INPUT
+	// GLOBAL INPUT
 	// CHECK IF FORCING THE APPLICATION TO QUIT
 	if(AEInputCheckTriggered(VK_ESCAPE) || !AESysDoesWindowExist()) {
 		isRunning = false;
