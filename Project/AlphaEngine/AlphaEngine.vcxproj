@@ -78,8 +78,8 @@
     <LibraryPath>C:\Users\projectfun_user\Documents\GitHub\AlphaEngineGameDP\Project\AE\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\Users\hudso\Documents\GitHub\AlphaEngineGameDP\Project\AE\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Users\hudso\Documents\GitHub\AlphaEngineGameDP\Project\AE\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\AE\include;$(SolutionDir)\OpenAL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\AE\lib;$(SolutionDir)\OpenAL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -112,6 +112,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -143,11 +145,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Music.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
