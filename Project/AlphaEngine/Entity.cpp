@@ -1,9 +1,11 @@
 #include "Entity.h"
 
 Entity::Entity() {
-
 	m_input = new InputManager();
+}
 
+Entity::~Entity() {
+	delete m_input;
 }
 
 void Entity::SetWorldPosition(math::vec3 pos) {
@@ -15,9 +17,7 @@ void Entity::SetPosition(math::vec3 pos) {
 }
 
 void Entity::Update() {
-
 	m_input->Update(this, false);
-
 }
 
 math::vec3 Entity::GetPosition() const {

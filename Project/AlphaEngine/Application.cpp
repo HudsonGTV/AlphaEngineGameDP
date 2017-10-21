@@ -1,3 +1,5 @@
+#include <time.h>
+
 #include "Application.h"
 
 Application::Application(int winWidth, int winHeight, int refreshRate) {
@@ -53,6 +55,16 @@ void Application::Init(HINSTANCE instanceH, int show) {
 
 void Application::Loop(HINSTANCE instanceH) {
 
+	m_deltaTime = clock() - m_oldTime;
+	double fps = (1.0 / m_deltaTime) * 1000;
+	m_oldTime = clock();
+
+	std::string fpsStr = std::to_string(fps);
+
+	OutputDebugStringA("FPS: ");
+	OutputDebugStringA(fpsStr.c_str());
+	OutputDebugStringA("\n");
+
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S START
 	AESysFrameStart();
 
@@ -62,15 +74,14 @@ void Application::Loop(HINSTANCE instanceH) {
 	// INPUT
 	// CHECK IF FORCING THE APPLICATION TO QUIT
 	if(AEInputCheckTriggered(VK_ESCAPE) || !AESysDoesWindowExist()) {
-		m_isRunning = false;
-		exit(0);
+		isRunning = false;
 	}
 
 	// RENDER/UPDATE FUNCTIONS
-	Objects::Update(0);
+	Objects::Update(m_deltaTime);
 
-	m_game->Update(0);
-	m_graphics->Render(m_entityArray, 0);
+	m_game->Update(m_deltaTime);
+	m_graphics->Render(m_entityArray, m_deltaTime);
 
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S END
 	AESysFrameEnd();
@@ -81,7 +92,7 @@ void Application::Uninit(HINSTANCE instanceH) {
 
 	delete m_game;
 	delete m_graphics;
-	delete m_entityArray;
+	delete *m_entityArray;
 
 	AESysExit();
 

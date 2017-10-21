@@ -25,6 +25,7 @@ protected:
 
 public:
 	Entity();
+	~Entity();
 
 	void SetWorldPosition(math::vec3 pos);
 	void SetPosition(math::vec3 pos);
