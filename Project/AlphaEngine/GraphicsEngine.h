@@ -4,11 +4,11 @@
 class Graphics {
 
 private:
-	bool m_isRunning = true;
+	///
 
 public:
 	void Init();
-	void Render();
+	void Render(double dt);
 
 };
 

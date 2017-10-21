@@ -16,7 +16,7 @@ void Game::Init() {
 
 }
 
-void Game::Update() {
+void Game::Update(double dt) {
 	
 	
 }

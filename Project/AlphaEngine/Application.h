@@ -3,7 +3,9 @@
 
 #include "GraphicsEngine.h"
 #include "GameEngine.h"
+#include "Entity.h"
 #include "AEEngine.h"
+#include "ObjectManager.h"
 
 #include <stdbool.h>
 
@@ -20,8 +22,12 @@ private:
 	int m_windowHeight = 600;
 	int m_refreshRate = 144;
 
+	bool m_isRunning = true;
+
 	Graphics *m_graphics;
 	Game *m_game;
+
+	Entity *m_entityArray[ENTITY_COUNT];
 	
 public:
 	int isRunning = true;
