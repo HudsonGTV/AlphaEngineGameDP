@@ -58,6 +58,12 @@
     <Filter Include="Source Files\Graphics\Mesh">
       <UniqueIdentifier>{b32e9438-c5a6-41e1-969b-5b04fe88f52d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Math\Vector">
+      <UniqueIdentifier>{86d6c0be-3928-4a08-b5e3-ae617cd0968e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\Vector">
+      <UniqueIdentifier>{2a63935e-e3fd-4a1f-9ea1-66d467f7b35a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -71,15 +77,6 @@
     </ClCompile>
     <ClCompile Include="GraphicsEngine.cpp">
       <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Vec2.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Vec3.cpp">
-      <Filter>Source Files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Vec4.cpp">
-      <Filter>Source Files\Math</Filter>
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Source Files\Object</Filter>
@@ -96,6 +93,15 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files\Graphics\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="Vec4.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec2.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -106,15 +112,6 @@
     </ClInclude>
     <ClInclude Include="GraphicsEngine.h">
       <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Vec2.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Vec3.h">
-      <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Vec4.h">
-      <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Header Files\Math</Filter>
@@ -131,5 +128,22 @@
     <ClInclude Include="Input.h">
       <Filter>Header Files\Application\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Vec2.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec3.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec4.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AlphaEngine.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

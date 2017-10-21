@@ -17,7 +17,30 @@ Application::Application(int winWidth, int winHeight, int refreshRate) {
 
 void Application::Init(HINSTANCE instanceH, int show) {
 
-	// INITIALIZE THE SYSTEM 
+	// REGISTER WINDOW CLASS
+	/*WNDCLASSEX winClass;
+	winClass.cbSize = sizeof(WNDCLASSEX);
+	winClass.style = 0;
+	winClass.cbClsExtra = 0;
+	winClass.cbWndExtra = 0;
+	winClass.hInstance = instanceH;
+	winClass.hIcon = LoadIcon(instanceH, IDI_APPLICATION);
+	winClass.hCursor = LoadCursor(instanceH, IDC_ARROW);
+	winClass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+	winClass.lpszMenuName = NULL;
+	winClass.lpszClassName = "appWCDGame";
+	winClass.hIconSm = LoadIcon(instanceH, IDI_APPLICATION);
+
+	HWND hwnd = CreateWindowEx(
+		WS_EX_CLIENTEDGE,
+		"appWCDGame",
+		"Title",
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, CW_USEDEFAULT, 640, 480,
+		NULL, NULL, instanceH, NULL
+	);*/
+
+	// INITIALIZE THE SYSTEM
 	AESysInitInfo sysInitInfo;
 
 	// SET SYSTEM PROPERTIES
@@ -31,7 +54,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	sysInitInfo.mpWinCallBack = NULL;
 	sysInitInfo.mClassStyle = CS_HREDRAW | CS_VREDRAW;
 	sysInitInfo.mWindowStyle = WS_OVERLAPPEDWINDOW;
-	sysInitInfo.mWindowHandle = NULL;
+	sysInitInfo.mWindowHandle = NULL /*hwnd*/;
 	sysInitInfo.mHandleWindowMessages = 1;
 
 	// APPLY SYSTEM PROPERTIES
