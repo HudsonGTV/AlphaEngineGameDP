@@ -27,7 +27,7 @@ private:
 	Graphics *m_graphics;
 	Game *m_game;
 
-	Entity *m_entityArray[ENTITY_COUNT];
+	Entity m_entityArray[ENTITY_COUNT];
 	
 public:
 	int isRunning = true;

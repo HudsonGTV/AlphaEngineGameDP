@@ -133,6 +133,7 @@
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vec3.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />

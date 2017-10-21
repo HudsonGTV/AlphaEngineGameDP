@@ -9,7 +9,7 @@
 #pragma comment (lib, "Alpha_Engine.lib")
 #endif
 
-void Graphics::Init() {
+void Graphics::Init(Entity entityArray[ENTITY_COUNT]) {
 
 	AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);
 

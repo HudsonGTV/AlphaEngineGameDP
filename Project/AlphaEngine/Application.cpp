@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Application.h"
 
 Application::Application(int winWidth, int winHeight, int refreshRate) {
@@ -44,8 +46,10 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	// INITIALIZE FUNCTIONS
 	Objects::Init(m_entityArray);
 
-	m_graphics->Init();
-	m_game->Init();
+	m_graphics->Init(m_entityArray);
+	m_game->Init(m_entityArray);
+
+	OutputDebugStringA("Initialized!\n");
 
 }
 
