@@ -151,7 +151,6 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="Music.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
