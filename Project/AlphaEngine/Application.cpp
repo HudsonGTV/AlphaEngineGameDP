@@ -78,15 +78,15 @@ void Application::Init(HINSTANCE instanceH, int show) {
 
 void Application::Loop(HINSTANCE instanceH) {
 
+	// DELTA TIME AND FPS STUFF
 	m_deltaTime = clock() - m_oldTime;
-	double fps = (1.0 / m_deltaTime) * 1000;
 	m_oldTime = clock();
 
-	std::string fpsStr = std::to_string(fps);
+	double fps = (1.0 / m_deltaTime) * 1000;
 
 	// OUTPUT FPS
 	OutputDebugStringA("FPS: ");
-	OutputDebugStringA(fpsStr.c_str());
+	OutputDebugStringA(std::to_string(fps).c_str());
 	OutputDebugStringA("\n");
 
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S START

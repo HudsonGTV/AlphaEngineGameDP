@@ -28,8 +28,8 @@ void Graphics::Init(Entity *entityID[ENTITY_COUNT]) {
 	Graphics::CreateMesh(entityID[ID_BOSS], &meshBoss, &textureBoss, "../../assets/entity/boss/boss.png", 2);
 	Graphics::CreateMesh(entityID[ID_BULLET], &meshBullet, &textureBullet, "../../assets/entity/bullet/bullet.png", 1);
 
-	AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);		// SET FB BACKGROUND COLOR
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);					// ENABLE TRANSPARENCY IN IMAGES
+	AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 }
 
@@ -49,8 +49,12 @@ void Graphics::Uninit() {
 
 	// FREE MESHES
 	AEGfxMeshFree(meshPlayer);
+	AEGfxMeshFree(meshBoss);
+	AEGfxMeshFree(meshBullet);
 
 	// FREE TEXTURES
 	AEGfxTextureUnload(texturePlayer);
+	AEGfxTextureUnload(textureBoss);
+	AEGfxTextureUnload(textureBullet);
 
 }
