@@ -57,6 +57,7 @@ EXAMPLE 2 (class header called example.h)
 class FooBar {
 	
 private:
+	// ALWAYS START PRIVATE/PROTECTED MEMBER VARIABLES WITH m_
 	int m_privateMemberVarThatALWAYSStartsWithThis = 0;
 	int m_intTwo = 1;
 	
@@ -66,6 +67,7 @@ public:
 	FooBar(int &foo2, vec4 *vecVar);
 	~FooBar();
 	
+	// MAKE ANY FUNCTIONS THAT DO NOT MODIFY ANYTHING IN THE CLASS CONSTANT
 	int GetIntTwo() const;
 	int GetPublicVar() const;
 	
