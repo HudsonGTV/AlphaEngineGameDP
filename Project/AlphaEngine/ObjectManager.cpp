@@ -1,23 +1,35 @@
 #include "ObjectManager.h"
 #include "Input.h"
 
-static Player *player;
+// OBJECTS
+static Player *entityPlayer;
+static Entity *entityBoss;
+static Entity *entityBullet;
 
 void Objects::Init(Entity *entityID[ENTITY_COUNT]) {
 
 	// CREATE OBJECTS HERE
-	player = new Player();
+	entityPlayer = new Player();
+	entityBoss = new Entity();
+	entityBullet = new Entity();
 
 	// SET PROPERTIES HERE
-	player->SetPosition(math::vec3(0.5f, 0.25f, 0.0f));
+	entityPlayer->SetWorldPosition(math::vec3(-250.0f, 0.0f, 0.0f));
+	entityBoss->SetWorldPosition(math::vec3(250.0f, 0.0f, 0.0f));
+	entityBullet->SetWorldPosition(math::vec3(0.0f, 0.0f, 0.0f));
 
 	// ADD TO ARRAY
-	entityID[ID_PLAYER] = player;
+	entityID[ID_PLAYER] = entityPlayer;
+	entityID[ID_BOSS] = entityBoss;
+	entityID[ID_BULLET] = entityBullet;
 
 }
 
 void Objects::Update(double dt) {
 
-	player->Update();
+	// UPDATE OBJECTS
+	entityPlayer->Update();
+	entityBoss->Update();
+	entityBullet->Update();
 
 }

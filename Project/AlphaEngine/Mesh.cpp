@@ -39,10 +39,6 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount
 	};
 
-	thisTime = clock();
-	timeCounter += (double)(thisTime - lastTime);
-	lastTime = thisTime;
-
 	// PLAYER
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	// SET POISITION
@@ -53,12 +49,20 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 	AEGfxSetTransparency(1.0f);
 	AEGfxMeshDraw(*mesh, AE_GFX_MDM_TRIANGLES);
 
-	if(timeCounter > (double)(0.25 * CLOCKS_PER_SEC)) {
-		timeCounter -= (double)(0.25 * CLOCKS_PER_SEC);
+}
+
+void Graphics::EnableAnimations(float speed) {
+
+	thisTime = clock();
+	timeCounter += (double)(thisTime - lastTime);
+	lastTime = thisTime;
+
+	if(timeCounter > (double)(speed * CLOCKS_PER_SEC)) {
+		timeCounter -= (double)(speed * CLOCKS_PER_SEC);
 		++frameNum;
 	}
 
-	if(frameNum > frameCount - 1) {
+	if(frameNum > 5) {
 		frameNum = 0;
 	}
 

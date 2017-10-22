@@ -71,7 +71,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 
 	m_graphics->Init(m_entityID);
 	m_game->Init(m_entityID);
-
+	
 	OutputDebugStringA("Initialized!\n");
 
 }
@@ -84,6 +84,7 @@ void Application::Loop(HINSTANCE instanceH) {
 
 	std::string fpsStr = std::to_string(fps);
 
+	// OUTPUT FPS
 	OutputDebugStringA("FPS: ");
 	OutputDebugStringA(fpsStr.c_str());
 	OutputDebugStringA("\n");
@@ -118,6 +119,7 @@ void Application::Uninit(HINSTANCE instanceH) {
 	delete m_graphics;
 	delete m_entityID[ID_PLAYER];
 	delete m_entityID[ID_BOSS];
+	delete m_entityID[ID_BULLET];
 
 	AESysExit();
 
