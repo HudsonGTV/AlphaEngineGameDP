@@ -26,7 +26,7 @@ private:
 	double m_deltaTime = 0.0;
 
 	Game *m_game;
-	Graphics *m_graphics;
+	GraphicsEngine *m_graphics;
 
 	Entity *m_entityID[ENTITY_COUNT];
 	

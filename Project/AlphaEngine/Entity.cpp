@@ -1,11 +1,23 @@
 #include "Entity.h"
+#include "GraphicsEngine.h"
 
-Entity::Entity() {
+Entity::Entity(char *texturePath, int frameCount) {
+
+	m_texturePath = texturePath;
+	m_frameCount = frameCount;
+
+	Graphics::CreateMesh(this, &m_mesh, &m_texture, m_texturePath, m_frameCount);
+
 	m_input = new InputManager();
 }
 
 Entity::~Entity() {
+
+	AEGfxMeshFree(m_mesh);
+	AEGfxTextureUnload(m_texture);
+
 	delete m_input;
+
 }
 
 void Entity::SetWorldPosition(math::vec3 pos) {
@@ -17,7 +29,11 @@ void Entity::SetPosition(math::vec3 pos) {
 }
 
 void Entity::Update() {
+
+	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
+
 	m_input->Update(this, false);
+
 }
 
 math::vec3 Entity::GetPosition() const {

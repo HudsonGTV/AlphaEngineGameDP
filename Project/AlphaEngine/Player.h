@@ -8,6 +8,8 @@
 class Player : public Entity {
 
 public:
+	Player(char *texturePath, int frameCount = 1);
+
 	void Update();
 
 };

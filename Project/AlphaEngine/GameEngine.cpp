@@ -2,6 +2,7 @@
 #include "AEEngine.h"
 #include "Math.h"
 #include "Player.h"
+#include "GraphicsEngine.h"
 
 #include <stdbool.h>
 
@@ -19,9 +20,9 @@ static Entity *entityBullet;
 void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 
 	// CREATE OBJECTS HERE
-	entityPlayer = new Player();
-	entityBoss = new Entity();
-	entityBullet = new Entity();
+	entityPlayer = new Player("../../assets/entity/player/player.png", 3);
+	entityBoss = new Entity("../../assets/entity/boss/boss.png", 2);
+	entityBullet = new Entity("", 1);
 
 	// SET PROPERTIES HERE
 	entityPlayer->SetWorldPosition(math::vec3(-250.0f, 0.0f, 0.0f));
@@ -36,6 +37,8 @@ void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 }
 
 void Game::Update(double dt) {
+
+	Graphics::EnableAnimations();
 	
 	// UPDATE OBJECTS
 	entityPlayer->Update();

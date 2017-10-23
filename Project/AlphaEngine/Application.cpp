@@ -11,7 +11,7 @@ Application::Application(int winWidth, int winHeight, int refreshRate) {
 
 	// CORE CLASS DECLARATIONS
 	m_game = new Game();
-	m_graphics = new Graphics();
+	m_graphics = new GraphicsEngine();
 
 }
 
