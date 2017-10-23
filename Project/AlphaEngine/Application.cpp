@@ -67,8 +67,6 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	AESysReset();
 
 	// INITIALIZE FUNCTIONS
-	Objects::Init(m_entityID);
-
 	m_graphics->Init(m_entityID);
 	m_game->Init(m_entityID);
 	
@@ -102,8 +100,6 @@ void Application::Loop(HINSTANCE instanceH) {
 	}
 
 	// RENDER/UPDATE FUNCTIONS
-	Objects::Update(m_deltaTime);
-
 	m_game->Update(m_deltaTime);
 	m_graphics->Render(m_entityID, m_deltaTime);
 
@@ -113,6 +109,9 @@ void Application::Loop(HINSTANCE instanceH) {
 }
 
 void Application::Uninit(HINSTANCE instanceH) {
+
+	// UNINIT
+	m_graphics->Uninit();
 
 	// DELETE UNLOADED CLASSES
 	delete m_game;
