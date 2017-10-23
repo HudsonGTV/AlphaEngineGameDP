@@ -84,9 +84,6 @@
     <ClCompile Include="GraphicsEngine.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
-      <Filter>Source Files\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Object\Entity</Filter>
     </ClCompile>
@@ -124,9 +121,6 @@
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectManager.h">
-      <Filter>Header Files\Object</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Header Files\Object\Entity</Filter>
