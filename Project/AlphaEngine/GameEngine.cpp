@@ -5,6 +5,7 @@
 #include "GraphicsEngine.h"
 
 #include <stdbool.h>
+#include <vector>
 
 #ifdef _DEBUG
 #pragma comment (lib, "Alpha_Engine_D.lib")
@@ -16,6 +17,8 @@
 static Player *entityPlayer;
 static Entity *entityBoss;
 static Entity *entityBullet;
+
+static std::vector<Entity *> entityBullets;
 
 void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 
@@ -39,6 +42,11 @@ void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 void Game::Update(double dt) {
 
 	Graphics::EnableAnimations();
+
+	// if shoot,
+	//		entityBullets.push_back(new Entity("../../assets/entity/bullet/bullet.png", 1));
+	//		entityBullets[i]->Update();
+	// END
 	
 	// UPDATE OBJECTS
 	entityPlayer->Update();
