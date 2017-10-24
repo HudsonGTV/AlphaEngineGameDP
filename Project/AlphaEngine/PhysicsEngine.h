@@ -1,13 +1,16 @@
 #ifndef PHYSICSENGINE_H
 #define PHYSICSENGINE_H
 
-class Collider {
-	
-protected:
+#include "Entity.h"
+#include "Math.h"
 
+class PhysicsEngine {
+
+private:
 
 public:
-	Collider();
+	void Init(Entity *entityID[ENTITY_COUNT]);
+	void Update(double dt);
 
 };
 

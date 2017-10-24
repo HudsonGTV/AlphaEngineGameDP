@@ -11,6 +11,7 @@ Application::Application(int winWidth, int winHeight, int refreshRate) {
 
 	// CORE CLASS DECLARATIONS
 	m_game = new Game();
+	m_physics = new PhysicsEngine();
 	m_graphics = new GraphicsEngine();
 
 }
@@ -68,6 +69,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 
 	// INITIALIZE FUNCTIONS
 	m_graphics->Init(m_entityID);
+	m_physics->Init(m_entityID);
 	m_game->Init(m_entityID);
 	
 	OutputDebugStringA("Initialized!\n");
@@ -101,6 +103,7 @@ void Application::Loop(HINSTANCE instanceH) {
 
 	// RENDER/UPDATE FUNCTIONS
 	m_game->Update(m_deltaTime);
+	m_physics->Update(m_deltaTime);
 	m_graphics->Render(m_entityID, m_deltaTime);
 
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S END

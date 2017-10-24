@@ -3,6 +3,7 @@
 
 #include "GraphicsEngine.h"
 #include "GameEngine.h"
+#include "PhysicsEngine.h"
 #include "Entity.h"
 #include "AEEngine.h"
 
@@ -26,6 +27,7 @@ private:
 	double m_deltaTime = 0.0;
 
 	Game *m_game;
+	PhysicsEngine *m_physics;
 	GraphicsEngine *m_graphics;
 
 	Entity *m_entityID[ENTITY_COUNT];
