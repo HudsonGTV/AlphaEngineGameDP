@@ -1,7 +1,7 @@
 #include "Bullet.h"
 #include "GraphicsEngine.h"
 
-Bullet::Bullet(char *texturePath, int frameCount) : Entity(texturePath, frameCount) {
+Bullet::Bullet(char *texturePath, int frameCount, std::vector<Bullet *> *entityBullets, math::vec3 position) : Entity(texturePath, frameCount) {
 
 	m_texturePath = texturePath;
 	m_frameCount = frameCount;
@@ -10,6 +10,31 @@ Bullet::Bullet(char *texturePath, int frameCount) : Entity(texturePath, frameCou
 
 	m_input = new InputManager();
 
+	m_entityBullets = entityBullets;
+	//give this bullet a uniqe id
+	int id = 0;
+	for (int j = 1; id != 0; ++j) {
+		for (int i = 0; i < m_entityBullets->size(); ++i) {
+			if ((*m_entityBullets)[i]->m_BulletID != j) {
+				id = j;
+			}
+		}
+	}
+	m_BulletID = id;
+
+	//m_entityBullets->push_back(this);
+
+	SetWorldPosition(position);
+
+}
+
+Bullet::~Bullet() {
+	for (int i = 0; i < m_entityBullets->size(); ++i) {
+		if ((*m_entityBullets)[i]->m_BulletID == this->m_BulletID) {
+			m_entityBullets->erase(m_entityBullets->begin() + i);
+			break;
+		}
+	}
 }
 
 void Bullet::Update() {

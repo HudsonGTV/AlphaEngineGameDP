@@ -3,6 +3,7 @@
 #include "Math.h"
 #include "Player.h"
 #include "GraphicsEngine.h"
+#include "Bullet.h"
 
 #include <stdbool.h>
 #include <vector>
@@ -18,7 +19,7 @@ static Player *entityPlayer;
 static Entity *entityBoss;
 static Entity *entityBullet;
 
-static std::vector<Entity *> entityBullets;
+static std::vector<Bullet *> entityBullets;
 
 void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 
@@ -40,7 +41,6 @@ void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 }
 
 void Game::Update(double dt) {
-
 	Graphics::EnableAnimations();
 
 	// if shoot,
@@ -52,5 +52,4 @@ void Game::Update(double dt) {
 	entityPlayer->Update();
 	entityBoss->Update();
 	entityBullet->Update();
-	
 }
