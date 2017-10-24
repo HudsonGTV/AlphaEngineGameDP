@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
@@ -144,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GraphicsEngine.h" />

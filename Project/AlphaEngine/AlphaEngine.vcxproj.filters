@@ -70,6 +70,12 @@
     <Filter Include="Source Files\Audio">
       <UniqueIdentifier>{d1bf3b28-b1f8-467d-9cb0-4b142b5745fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{e755f85c-6633-47dc-a7d5-1d5207359499}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{63ce90a2-28bb-4937-8afb-9c75af512276}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -108,6 +114,9 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Source Files\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsEngine.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -145,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Header Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine.h">
+      <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
