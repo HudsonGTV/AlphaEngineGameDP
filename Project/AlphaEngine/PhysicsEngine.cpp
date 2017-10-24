@@ -1,5 +1,9 @@
 #include "PhysicsEngine.h"
 
-Collider::Collider() {
+void PhysicsEngine::Init(Entity *entityID[ENTITY_COUNT]) {
+
+}
+
+void PhysicsEngine::Update(double dt) {
 
 }
