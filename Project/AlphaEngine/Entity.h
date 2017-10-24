@@ -8,6 +8,7 @@
 
 #include <string>
 
+#include "PhysicsEngine.h"
 #include "AEEngine.h"
 #include "Math.h"
 #include "Input.h"
@@ -28,6 +29,7 @@ protected:
 	math::vec3 m_position = math::vec3(0.0f, 0.0f, 0.0f);
 
 	InputManager *m_input;
+	Collider *m_collider;
 
 	AEGfxVertexList *m_mesh;
 	AEGfxTexture *m_texture;

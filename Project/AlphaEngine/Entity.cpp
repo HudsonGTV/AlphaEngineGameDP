@@ -9,6 +9,7 @@ Entity::Entity(char *texturePath, int frameCount) {
 	Graphics::CreateMesh(this, &m_mesh, &m_texture, m_texturePath, m_frameCount);
 
 	m_input = new InputManager();
+	m_collider = new Collider();
 }
 
 Entity::~Entity() {
