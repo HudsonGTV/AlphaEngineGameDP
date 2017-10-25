@@ -8,12 +8,12 @@
 
 #include <string>
 
-#include "PhysicsEngine.h"
 #include "AEEngine.h"
 #include "Math.h"
 #include "Input.h"
 
 class InputManager;
+class Collider;
 
 class Entity {
 

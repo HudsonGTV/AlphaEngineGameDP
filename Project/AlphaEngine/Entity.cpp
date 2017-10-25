@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Collider.h"
 #include "GraphicsEngine.h"
 
 Entity::Entity(char *texturePath, int frameCount) {
