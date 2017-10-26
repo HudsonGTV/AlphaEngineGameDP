@@ -3,10 +3,14 @@
 
 #include "AEEngine.h"
 #include "Entity.h"
+#include <vector>
+#include "Bullet.h"
 
 class Entity;
 
 class InputManager {
+private:
+	bool m_once = false;
 
 public:
 	InputManager();

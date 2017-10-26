@@ -32,12 +32,13 @@ protected:
 	InputManager *m_input;
 	Collider *m_collider;
 	ColliderType m_ctype;
-	Velocity m_velocity;
 
 	AEGfxVertexList *m_mesh;
 	AEGfxTexture *m_texture;
 
 public:
+	Velocity m_velocity;
+
 	Entity(char *texturePath, int frameCount = 1);
 	~Entity();
 
