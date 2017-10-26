@@ -3,15 +3,19 @@
 
 #include "AEEngine.h"
 #include "Entity.h"
+#include <vector>
+#include "Bullet.h"
 
 class Entity;
 
 class InputManager {
+private:
+	bool m_once = false;
 
 public:
 	InputManager();
 
-	void Update(Entity *entity, bool controllable, float speed = 1.0f);
+	void Update(Entity *entity, bool controllable, double dt,float speed = 1.0f);
 
 };
 
