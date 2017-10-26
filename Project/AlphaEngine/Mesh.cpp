@@ -16,12 +16,14 @@ void Graphics::CreateMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture *
 	AEGfxTriAdd(
 		-30.0f, -30.0f, 0xFFFF0000, 0.0f, 1.0f,
 		30.0f, -30.0f, 0xFFFF0000, 1.0f / (float)frameCount, 1.0f,
-		-30.0f, 30.0f, 0xFFFF0000, 0.0f, 0.0f);
+		-30.0f, 30.0f, 0xFFFF0000, 0.0f, 0.0f
+	);
 
 	AEGfxTriAdd(
 		30.0f, -30.0f, 0xFFFF0000, 1.0f / (float)frameCount, 1.0f,
 		30.0f, 30.0f, 0xFFFF0000, 1.0f / (float)frameCount, 0.0f,
-		-30.0f, 30.0f, 0xFFFF0000, 0.0f, 0.0f);
+		-30.0f, 30.0f, 0xFFFF0000, 0.0f, 0.0f
+	);
 
 	*mesh = AEGfxMeshEnd();
 
