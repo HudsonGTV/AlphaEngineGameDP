@@ -1,6 +1,9 @@
 #include "Collider.h"
 #include "Entity.h"
+#include "Math.h"
 #include <iostream>
+#include <cmath>
+#include <cstdlib>
 
 void Collider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
 	std::cout << "BoxCollision called on standard Collider object.\n";
@@ -78,7 +81,13 @@ bool CollideBoxToBox(Entity *boxEntity1, Entity *boxEntity2) {
 	max y distance is basically the same but with height \
 	get the x and y distances between the 2 \
 	if both of them are in range, return true, otherwise false
-	std::cout << "Update, WIP\n";
+
+	float maxX = (box1->GetWidth() + box2->GetWidth()) / 2;
+	float maxY = (box1->GetHeight() + box2->GetHeight()) / 2;
+	float distX = abs(boxEntity1->GetPositionX() - boxEntity2->GetPositionX());
+	float distY = abs(boxEntity1->GetPositionY() - boxEntity2->GetPositionY());
+
+	return (distX < maxX) && (distY < maxY);
 }
 
 bool CollideBoxToCircle(Entity *boxEntity, Entity *circleEntity) {
@@ -96,7 +105,39 @@ bool CollideBoxToCircle(Entity *boxEntity, Entity *circleEntity) {
 	find the distance between that closest point and the center of the circle \
 	if the distance is less than the radius of the circle, return true \
 	otherwise, return false
-	std::cout << "Update, WIP\n";
+
+	math::vec2 closestPoint;
+	bool horizontalSide = abs(circleEntity->GetPositionX() - boxEntity->GetPositionX()) < box->GetWidth() / 2;
+	bool verticalSide = abs(circleEntity->GetPositionY() - boxEntity->GetPositionY()) < box->GetHeight() / 2;
+	if (verticalSide && horizontalSide) {
+		return true;
+	} else if (horizontalSide) {
+		if (circleEntity->GetPositionY() < boxEntity->GetPositionY()) {
+			closestPoint = math::vec2(circleEntity->GetPositionX(), boxEntity->GetPositionY() - box->GetHeight() / 2);
+		} else {
+			closestPoint = math::vec2(circleEntity->GetPositionX(), boxEntity->GetPositionY() + box->GetHeight() / 2);
+		}
+	} else if (verticalSide) {
+		if (circleEntity->GetPositionX() < boxEntity->GetPositionX()) {
+			closestPoint = math::vec2(boxEntity->GetPositionX() - box->GetWidth() / 2, circleEntity->GetPositionY());
+		} else {
+			closestPoint = math::vec2(boxEntity->GetPositionX() + box->GetWidth() / 2, circleEntity->GetPositionY());
+		}
+	} else {
+		if (circleEntity->GetPositionX() < boxEntity->GetPositionX()) {
+			closestPoint.y = boxEntity->GetPositionY() - box->GetWidth() / 2;
+		} else {
+			closestPoint.y = boxEntity->GetPositionY() + box->GetWidth() / 2;
+		}
+		if (circleEntity->GetPositionX() < boxEntity->GetPositionX()) {
+			closestPoint.x = boxEntity->GetPositionX() - box->GetWidth() / 2;
+		} else {
+			closestPoint.x = boxEntity->GetPositionX() + box->GetWidth() / 2;
+		}
+	}
+	float dist = sqrt(pow(circleEntity->GetPositionX() - closestPoint.x, 2)
+		+ pow(circleEntity->GetPositionY() - closestPoint.y, 2));
+	return dist < circle->GetWidth();
 }
 
 bool CollideCircleToCircle(Entity *circleEntity1, Entity *circleEntity2) {
@@ -108,5 +149,9 @@ bool CollideCircleToCircle(Entity *circleEntity1, Entity *circleEntity2) {
 	calculate the actual distance using maaaaaath \
 	if it's within the max distance, return true \
 	otherwise, return false
-	std::cout << "Update, WIP\n";
+
+	float max = circle1->GetWidth() + circle2->GetWidth();
+	float dist = sqrt(pow(circleEntity1->GetPositionX() - circleEntity2->GetPositionX(), 2)
+		+ pow(circleEntity1->GetPositionY() - circleEntity2->GetPositionY(), 2));
+	return dist < max;
 }

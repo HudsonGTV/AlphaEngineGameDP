@@ -13,7 +13,7 @@ int WINAPI WinMain(HINSTANCE instanceH, HINSTANCE prevInstanceH, LPSTR command_l
 	UNREFERENCED_PARAMETER(command_line);
 
 	// APPLICATION
-	app = new Application(800, 600, 60);
+	app = new Application(800, 600, 75);
 
 	// INITIALIZE
 	app->Init(instanceH, show);

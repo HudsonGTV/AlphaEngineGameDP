@@ -3,7 +3,7 @@
 
 class Entity;
 
-enum ColliderType {COLLIDER_BOX, COLLIDER_CIRCLE};
+enum ColliderType {COLLIDER_BOX, COLLIDER_CIRCLE, COLLIDER_NONE};
 
 class Collider {
 

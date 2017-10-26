@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "GraphicsEngine.h"
 
-Player::Player(char *texturePath, int frameCount) : Entity(texturePath, frameCount) {
+Player::Player(char *texturePath, int frameCount, float width, float height) : Entity(texturePath, frameCount, COLLIDER_BOX, width, height) {
 
 	m_texturePath = texturePath;
 	m_frameCount = frameCount;
