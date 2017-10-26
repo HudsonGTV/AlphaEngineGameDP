@@ -2,17 +2,17 @@
 #include "Entity.h"
 #include <iostream>
 
-void Collider::BoxCollision(Entity *otherEntity) {
+void Collider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
 	std::cout << "BoxCollision called on standard Collider object.\n";
 }
 
-void Collider::CircleCollision(Entity *otherEntity) {
+void Collider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
 	std::cout << "CircleCollision called on standard Collider object.\n";
 }
 
 void Collider::Update(Entity **entities, int entityNum, int currentEntity) {
 	for (int i = currentEntity; i < entityNum; ++i) {
-		ResolveCollision(entities[i]);
+		ResolveCollision(entities[currentEntity], entities[i]);
 	}
 }
 
@@ -20,14 +20,14 @@ float Collider::GetWidth() {
 	return m_width;
 }
 
-void BoxCollider::BoxCollision(Entity *otherEntity) {
-	if (CollideBoxToBox(this, dynamic_cast<BoxCollider *>(otherEntity->GetCollider()))) {
+void BoxCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
+	if (CollideBoxToBox(thisEntity, otherEntity)) {
 		std::cout << "Box collision!\n";
 	}
 }
 
-void BoxCollider::CircleCollision(Entity *otherEntity) {
-	if (CollideBoxToCircle(this, dynamic_cast<CircleCollider *>(otherEntity->GetCollider()))) {
+void BoxCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
+	if (CollideBoxToCircle(thisEntity, otherEntity)) {
 		std::cout << "Box-Circle collision!\n";
 	}
 }
@@ -41,26 +41,26 @@ float BoxCollider::GetHeight() {
 	return m_height;
 }
 
-void Collider::ResolveCollision(Entity *otherEntity) {
+void Collider::ResolveCollision(Entity *thisEntity, Entity *otherEntity) {
 	switch (otherEntity->GetColliderType())
 	{
 	case COLLIDER_BOX:
-		this->BoxCollision(otherEntity);
+		this->BoxCollision(thisEntity, otherEntity);
 		break;
 	case COLLIDER_CIRCLE:
-		this->CircleCollision(otherEntity);
+		this->CircleCollision(thisEntity, otherEntity);
 		break;
 	}
 }
 
-void CircleCollider::BoxCollision(Entity *otherEntity) {
-	if (CollideBoxToCircle(dynamic_cast<BoxCollider *>(otherEntity->GetCollider()), this)) {
+void CircleCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
+	if (CollideBoxToCircle(otherEntity, thisEntity)) {
 		std::cout << "Box-Circle collision!\n";
 	}
 }
 
-void CircleCollider::CircleCollision(Entity *otherEntity) {
-	if (CollideCircleToCircle(this, dynamic_cast<CircleCollider *>(otherEntity->GetCollider()))) {
+void CircleCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
+	if (CollideCircleToCircle(thisEntity, otherEntity)) {
 		std::cout << "Box-Circle collision!\n";
 	}
 }
@@ -69,7 +69,9 @@ CircleCollider::CircleCollider(float width) {
 	m_width = width;
 }
 
-bool CollideBoxToBox(BoxCollider *box1, BoxCollider *box2) {
+bool CollideBoxToBox(Entity *boxEntity1, Entity *boxEntity2) {
+	BoxCollider *box1 = dynamic_cast<BoxCollider *>(boxEntity1->GetCollider());
+	BoxCollider *box2 = dynamic_cast<BoxCollider *>(boxEntity2->GetCollider());
 	//\
 	Pseudocode for Box-Box detection: \
 	max x distance = the sum of both their widths divided by 2 \
@@ -79,7 +81,9 @@ bool CollideBoxToBox(BoxCollider *box1, BoxCollider *box2) {
 	std::cout << "Update, WIP\n";
 }
 
-bool CollideBoxToCircle(BoxCollider *box, CircleCollider *circle) {
+bool CollideBoxToCircle(Entity *boxEntity, Entity *circleEntity) {
+	CircleCollider *circle = dynamic_cast<CircleCollider *>(circleEntity->GetCollider());
+	BoxCollider *box = dynamic_cast<BoxCollider *>(boxEntity->GetCollider());
 	//\
 	Pseudocode for Box-Circle detection: \
 	ok so first we need to find the point on the box that's closest to the circle \
@@ -95,7 +99,9 @@ bool CollideBoxToCircle(BoxCollider *box, CircleCollider *circle) {
 	std::cout << "Update, WIP\n";
 }
 
-bool CollideCircleToCircle(CircleCollider *circle1, CircleCollider *circle2) {
+bool CollideCircleToCircle(Entity *circleEntity1, Entity *circleEntity2) {
+	CircleCollider *circle1 = dynamic_cast<CircleCollider *>(circleEntity1->GetCollider());
+	CircleCollider *circle2 = dynamic_cast<CircleCollider *>(circleEntity2->GetCollider());
 	//\
 	Pseudocode for Circle-Circle detection: \
 	max distance = the sum of the radii of the circles \
