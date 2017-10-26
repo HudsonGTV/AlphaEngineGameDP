@@ -2,15 +2,23 @@
 #include "Collider.h"
 #include "GraphicsEngine.h"
 
-Entity::Entity(char *texturePath, int frameCount) {
+Entity::Entity(char *texturePath, int frameCount, ColliderType ctype, float width, float height) {
 
 	m_texturePath = texturePath;
 	m_frameCount = frameCount;
 
 	Graphics::CreateMesh(this, &m_mesh, &m_texture, m_texturePath, m_frameCount);
 
+	if (ctype == COLLIDER_BOX) {
+		m_collider = new BoxCollider(width, height);
+	} else if (ctype == COLLIDER_CIRCLE) {
+		m_collider = new CircleCollider(width);
+	} else {
+		m_collider = nullptr;
+	}
+
 	m_input = new InputManager();
-	m_collider = new Collider();
+	m_ctype = ctype;
 }
 
 Entity::~Entity() {
@@ -19,6 +27,7 @@ Entity::~Entity() {
 	AEGfxTextureUnload(m_texture);
 
 	delete m_input;
+	delete m_collider;
 
 }
 

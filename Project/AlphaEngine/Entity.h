@@ -38,7 +38,7 @@ protected:
 	AEGfxTexture *m_texture;
 
 public:
-	Entity(char *texturePath, int frameCount = 1);
+	Entity(char *texturePath, int frameCount, ColliderType ctype = COLLIDER_NONE, float width = 0, float height = 0);
 	~Entity();
 
 	void SetWorldPosition(math::vec3 pos);

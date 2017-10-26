@@ -84,8 +84,8 @@ bool CollideBoxToBox(Entity *boxEntity1, Entity *boxEntity2) {
 
 	float maxX = (box1->GetWidth() + box2->GetWidth()) / 2;
 	float maxY = (box1->GetHeight() + box2->GetHeight()) / 2;
-	float distX = abs(boxEntity1->GetPositionX - boxEntity2->GetPositionX);
-	float distY = abs(boxEntity1->GetPositionY - boxEntity2->GetPositionY);
+	float distX = abs(boxEntity1->GetPositionX() - boxEntity2->GetPositionX());
+	float distY = abs(boxEntity1->GetPositionY() - boxEntity2->GetPositionY());
 
 	return (distX < maxX) && (distY < maxY);
 }

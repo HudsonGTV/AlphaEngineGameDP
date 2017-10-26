@@ -8,7 +8,7 @@
 class Player : public Entity {
 
 public:
-	Player(char *texturePath, int frameCount = 1);
+	Player::Player(char *texturePath, int frameCount = 1, float width = 0, float height = 0);
 
 	void Update();
 
