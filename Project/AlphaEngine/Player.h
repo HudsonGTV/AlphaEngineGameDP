@@ -6,9 +6,10 @@
 #include "Input.h"
 
 class Player : public Entity {
-
+private:
+	std::vector<Bullet *> *m_entityBullets;
 public:
-	Player::Player(char *texturePath, int frameCount = 1, float width = 0, float height = 0);
+	Player(char *texturePath, int frameCount = 1, float width = 0, float height = 0);
 
 	void Update();
 

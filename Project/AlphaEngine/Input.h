@@ -11,11 +11,13 @@ class Entity;
 class InputManager {
 private:
 	bool m_once = false;
+	std::vector<Bullet *> *m_entityBullets;
 
 public:
 	InputManager();
+	InputManager(std::vector<Bullet *> *entityBullets);
 
-	void Update(Entity *entity, bool controllable, double dt,float speed = 1.0f);
+	void Update(Entity *entity, bool controllable, float speed = 1.0f, double dt = 1.0);
 
 };
 
