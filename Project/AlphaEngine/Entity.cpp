@@ -42,6 +42,15 @@ math::vec3 Entity::GetPosition() const {
 	return m_position;
 }
 
+Collider *Entity::GetCollider() const {
+	return m_collider;
+}
+
+ColliderType Entity::GetColliderType() const
+{
+	return m_ctype;
+}
+
 float Entity::GetPositionX() const {
 	return m_position.x;
 }

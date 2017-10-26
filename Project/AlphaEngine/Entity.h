@@ -11,9 +11,9 @@
 #include "AEEngine.h"
 #include "Math.h"
 #include "Input.h"
+#include "Collider.h"
 
 class InputManager;
-class Collider;
 
 class Entity {
 
@@ -30,6 +30,7 @@ protected:
 
 	InputManager *m_input;
 	Collider *m_collider;
+	ColliderType m_ctype;
 
 	AEGfxVertexList *m_mesh;
 	AEGfxTexture *m_texture;
@@ -44,6 +45,8 @@ public:
 	virtual void Update();
 
 	math::vec3 GetPosition() const;
+	Collider *GetCollider() const;
+	ColliderType GetColliderType() const;
 
 	float GetPositionX() const;
 	float GetPositionY() const;
