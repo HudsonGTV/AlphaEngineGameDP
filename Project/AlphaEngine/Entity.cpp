@@ -39,18 +39,27 @@ void Entity::SetPosition(math::vec3 pos) {
 	m_position += pos;
 }
 
+void Entity::SetVelocity(math::vec3 vel) {
+	m_velocity = vel;
+}
+
 void Entity::Update() {
 
 	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
 
-	SetPosition(m_velocity.GetVelocity());
+	SetPosition(m_velocity);
 
-	m_input->Update(this, false);
+	m_input->Update(this, false, 0.0f);
 
 }
 
 math::vec3 Entity::GetPosition() const {
 	return m_position;
+}
+
+math::vec3 Entity::GetVelocity() const
+{
+	return m_velocity;
 }
 
 Collider *Entity::GetCollider() const {

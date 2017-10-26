@@ -4,7 +4,6 @@
 #include "AEEngine.h"
 #include "Entity.h"
 #include <vector>
-#include "Bullet.h"
 
 class Entity;
 
@@ -15,7 +14,7 @@ private:
 public:
 	InputManager();
 
-	void Update(Entity *entity, bool controllable, double dt,float speed = 1.0f);
+	void Update(Entity *entity, bool controllable, double dt = 1.0, float speed = 1.0f);
 
 };
 

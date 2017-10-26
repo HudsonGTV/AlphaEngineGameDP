@@ -7,9 +7,11 @@
 class PhysicsEngine {
 
 private:
+	Entity **m_entities;
+	int m_entcount;
 
 public:
-	void Init(Entity *entityID[ENTITY_COUNT]);
+	void Init(Entity **entityID, int count);
 	void Update(double dt);
 
 };

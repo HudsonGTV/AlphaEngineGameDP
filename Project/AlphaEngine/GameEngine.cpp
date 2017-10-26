@@ -24,9 +24,9 @@ static std::vector<Bullet *> entityBullets;
 void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 
 	// CREATE OBJECTS HERE
-	entityPlayer = new Player("../../assets/entity/player/player.png", 3);
-	entityBoss = new Entity("../../assets/entity/boss/boss.png", 2);
-	entityBullet = new Entity("", 1);
+	entityPlayer = new Player("../../assets/entity/player/player.png", 3, 100, 100);
+	entityBoss = new Entity("../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 100);
+	entityBullet = new Entity("", 1, COLLIDER_CIRCLE, 20);
 
 	// SET PROPERTIES HERE
 	entityPlayer->SetWorldPosition(math::vec3(-250.0f, 0.0f, 0.0f));

@@ -69,7 +69,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 
 	// INITIALIZE FUNCTIONS
 	m_graphics->Init(m_entityID);
-	m_physics->Init(m_entityID);
+	m_physics->Init(m_entityID, ENTITY_COUNT);
 	m_game->Init(m_entityID);
 	
 	OutputDebugStringA("Initialized!\n");

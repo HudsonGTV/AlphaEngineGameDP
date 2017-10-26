@@ -1,5 +1,6 @@
-#include "Collider.h"
+
 #include "Entity.h"
+#include "Collider.h"
 #include "Math.h"
 #include <iostream>
 #include <cmath>
@@ -75,13 +76,13 @@ CircleCollider::CircleCollider(float width) {
 bool CollideBoxToBox(Entity *boxEntity1, Entity *boxEntity2) {
 	BoxCollider *box1 = dynamic_cast<BoxCollider *>(boxEntity1->GetCollider());
 	BoxCollider *box2 = dynamic_cast<BoxCollider *>(boxEntity2->GetCollider());
-	//\
-	Pseudocode for Box-Box detection: \
-	max x distance = the sum of both their widths divided by 2 \
-	max y distance is basically the same but with height \
-	get the x and y distances between the 2 \
+	/*
+	Pseudocode for Box-Box detection:
+	max x distance = the sum of both their widths divided by 2
+	max y distance is basically the same but with height
+	get the x and y distances between the 2
 	if both of them are in range, return true, otherwise false
-
+	*/
 	float maxX = (box1->GetWidth() + box2->GetWidth()) / 2;
 	float maxY = (box1->GetHeight() + box2->GetHeight()) / 2;
 	float distX = abs(boxEntity1->GetPositionX() - boxEntity2->GetPositionX());
@@ -93,19 +94,19 @@ bool CollideBoxToBox(Entity *boxEntity1, Entity *boxEntity2) {
 bool CollideBoxToCircle(Entity *boxEntity, Entity *circleEntity) {
 	CircleCollider *circle = dynamic_cast<CircleCollider *>(circleEntity->GetCollider());
 	BoxCollider *box = dynamic_cast<BoxCollider *>(boxEntity->GetCollider());
-	//\
-	Pseudocode for Box-Circle detection: \
-	ok so first we need to find the point on the box that's closest to the circle \
-	so is the circle's midpoint within the same x and/or y range as the box? \
-	if it's in both the x and the y ranges, return true, obviously \
-	if it's in the same x range, then find which side of the box it's on (up/down) \
-	then, find the point on that side with the same x coordinate as the circle \
-	that will give you the closest point \
-	you can do the same for y \
-	find the distance between that closest point and the center of the circle \
-	if the distance is less than the radius of the circle, return true \
+	/*
+	Pseudocode for Box-Circle detection:
+	ok so first we need to find the point on the box that's closest to the circle
+	so is the circle's midpoint within the same x and/or y range as the box?
+	if it's in both the x and the y ranges, return true, obviously
+	if it's in the same x range, then find which side of the box it's on (up/down)
+	then, find the point on that side with the same x coordinate as the circle
+	that will give you the closest point
+	you can do the same for y
+	find the distance between that closest point and the center of the circle
+	if the distance is less than the radius of the circle, return true
 	otherwise, return false
-
+	*/
 	math::vec2 closestPoint;
 	bool horizontalSide = abs(circleEntity->GetPositionX() - boxEntity->GetPositionX()) < box->GetWidth() / 2;
 	bool verticalSide = abs(circleEntity->GetPositionY() - boxEntity->GetPositionY()) < box->GetHeight() / 2;
@@ -143,13 +144,13 @@ bool CollideBoxToCircle(Entity *boxEntity, Entity *circleEntity) {
 bool CollideCircleToCircle(Entity *circleEntity1, Entity *circleEntity2) {
 	CircleCollider *circle1 = dynamic_cast<CircleCollider *>(circleEntity1->GetCollider());
 	CircleCollider *circle2 = dynamic_cast<CircleCollider *>(circleEntity2->GetCollider());
-	//\
-	Pseudocode for Circle-Circle detection: \
-	max distance = the sum of the radii of the circles \
-	calculate the actual distance using maaaaaath \
-	if it's within the max distance, return true \
+	/*
+	Pseudocode for Circle-Circle detection:
+	max distance = the sum of the radii of the circles
+	calculate the actual distance using maaaaaath
+	if it's within the max distance, return true
 	otherwise, return false
-
+	*/
 	float max = circle1->GetWidth() + circle2->GetWidth();
 	float dist = sqrt(pow(circleEntity1->GetPositionX() - circleEntity2->GetPositionX(), 2)
 		+ pow(circleEntity1->GetPositionY() - circleEntity2->GetPositionY(), 2));

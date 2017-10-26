@@ -28,12 +28,12 @@ protected:
 	char *m_texturePath = "../../assets/";
 
 	math::vec3 m_position = math::vec3(0.0f, 0.0f, 0.0f);
+	math::vec3 m_velocity;
 
 	InputManager *m_input;
 	Collider *m_collider;
 	ColliderType m_ctype;
-	Velocity m_velocity;
-
+	
 	AEGfxVertexList *m_mesh;
 	AEGfxTexture *m_texture;
 
@@ -43,10 +43,12 @@ public:
 
 	void SetWorldPosition(math::vec3 pos);
 	void SetPosition(math::vec3 pos);
+	void SetVelocity(math::vec3 vel);
 	
 	virtual void Update();
 
 	math::vec3 GetPosition() const;
+	math::vec3 GetVelocity() const;
 	Collider *GetCollider() const;
 	ColliderType GetColliderType() const;
 
