@@ -50,7 +50,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	sysInitInfo.mShow = show;
 	sysInitInfo.mWinWidth = m_windowWidth;
 	sysInitInfo.mWinHeight = m_windowHeight;
-	sysInitInfo.mCreateConsole = 0;
+	sysInitInfo.mCreateConsole = 1;
 	sysInitInfo.mMaxFrameRate = m_refreshRate;
 	sysInitInfo.mpWinCallBack = NULL;
 	sysInitInfo.mClassStyle = CS_HREDRAW | CS_VREDRAW;
