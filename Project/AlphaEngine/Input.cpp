@@ -6,7 +6,7 @@ InputManager::InputManager() {
 
 }
 
-void InputManager::Update(Entity *entity, bool controllable, float speed) {
+void InputManager::Update(Entity *entity, bool controllable, double dt,float speed) {
 
 	if(controllable) {
 

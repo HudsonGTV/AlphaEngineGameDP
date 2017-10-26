@@ -15,7 +15,7 @@ private:
 public:
 	InputManager();
 
-	void Update(Entity *entity, bool controllable, float speed = 1.0f);
+	void Update(Entity *entity, bool controllable, double dt,float speed = 1.0f);
 
 };
 
