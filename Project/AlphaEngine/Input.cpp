@@ -6,7 +6,11 @@ InputManager::InputManager() {
 
 }
 
-void InputManager::Update(Entity *entity, bool controllable, double dt, float speed) {
+InputManager::InputManager(std::vector<Bullet *> *entityBullets) {
+	m_entityBullets = entityBullets;
+}
+
+void InputManager::Update(Entity *entity, bool controllable, float speed, double dt) {
 
 	if(controllable) {
 
@@ -39,8 +43,8 @@ void InputManager::Update(Entity *entity, bool controllable, double dt, float sp
 				int Y = mY;
 
 				//shoot
-				//Bullet bullet("../../assets/entity/bullet/bullet.png", 1, entityBullets, entity->GetPosition());
-				//bullet.m_velocity.SetVelocity(math::vec3(1, 1, 0));
+				Bullet bullet("../../assets/entity/bullet/bullet.png", 1, m_entityBullets, entity->GetPosition());
+				
 			}
 			m_once = true;
 		}

@@ -19,7 +19,7 @@ static Player *entityPlayer;
 static Entity *entityBoss;
 static Entity *entityBullet;
 
-static std::vector<Bullet *> entityBullets;
+
 
 void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 

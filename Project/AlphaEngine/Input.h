@@ -2,7 +2,7 @@
 #define INPUT_H
 
 #include "AEEngine.h"
-#include "Entity.h"
+#include "Bullet.h"
 #include <vector>
 
 class Entity;
@@ -10,11 +10,13 @@ class Entity;
 class InputManager {
 private:
 	bool m_once = false;
+	std::vector<Bullet *> *m_entityBullets;
 
 public:
 	InputManager();
+	InputManager(std::vector<Bullet *> *entityBullets);
 
-	void Update(Entity *entity, bool controllable, double dt = 1.0, float speed = 1.0f);
+	void Update(Entity *entity, bool controllable, float speed = 1.0f, double dt = 1.0);
 
 };
 
