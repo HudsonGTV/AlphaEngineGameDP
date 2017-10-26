@@ -34,6 +34,8 @@ void Entity::Update() {
 
 	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
 
+	SetPosition(m_velocity.GetVelocity());
+
 	m_input->Update(this, false);
 
 }
