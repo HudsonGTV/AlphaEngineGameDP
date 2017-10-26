@@ -132,6 +132,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="GameEngine.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="GameEngine.h" />
