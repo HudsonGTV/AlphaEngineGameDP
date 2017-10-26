@@ -12,6 +12,7 @@
 #include "Math.h"
 #include "Input.h"
 #include "Collider.h"
+#include "Velocity.h"
 
 class InputManager;
 
@@ -31,6 +32,7 @@ protected:
 	InputManager *m_input;
 	Collider *m_collider;
 	ColliderType m_ctype;
+	Velocity m_velocity;
 
 	AEGfxVertexList *m_mesh;
 	AEGfxTexture *m_texture;
