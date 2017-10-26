@@ -62,7 +62,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	AESysInit(&sysInitInfo);
 
 	// SET WINDOW TITLE
-	AESysSetWindowTitle("Weird Game Thing That We Made");
+	AESysSetWindowTitle("Foo");
 	
 	// RESET SYSTEM MODULES
 	AESysReset();
