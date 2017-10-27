@@ -123,9 +123,6 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Velocity.cpp">
-      <Filter>Source Files\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Object\Entity</Filter>
     </ClCompile>
@@ -174,9 +171,6 @@
       <Filter>Header Files\Object\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>Header Files\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Velocity.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">

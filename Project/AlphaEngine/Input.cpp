@@ -1,5 +1,4 @@
 #include "Input.h"
-#include "Math.h"
 
 
 InputManager::InputManager() {
@@ -44,7 +43,7 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 
 				//shoot
 				Bullet bullet("../../assets/entity/bullet/bullet.png", 1, m_entityBullets, entity->GetPosition());
-				
+				bullet.SetVelocity(math::vec3(1,1,0));
 			}
 			m_once = true;
 		}

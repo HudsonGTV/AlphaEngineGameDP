@@ -1,9 +1,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "AEEngine.h"
 #include "Bullet.h"
-#include <vector>
 
 class Entity;
 
