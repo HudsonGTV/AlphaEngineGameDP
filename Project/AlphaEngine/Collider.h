@@ -12,11 +12,13 @@ protected:
 
 	virtual void BoxCollision(Entity *thisEntity, Entity *otherEntity);
 	virtual void CircleCollision(Entity *thisEntity, Entity *otherEntity);
+
 	void ResolveCollision(Entity *thisEntity, Entity *otherEntity);
 
 public:
 	void Update(Entity **entities, int entityNum, int currentEntity);
-	float GetWidth();
+
+	float GetWidth() const;
 
 };
 
@@ -30,7 +32,7 @@ protected:
 
 public:
 	BoxCollider(float width, float height);
-	float GetHeight();
+	float GetHeight() const;
 
 };
 
