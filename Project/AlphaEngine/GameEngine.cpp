@@ -19,8 +19,6 @@ static Player *entityPlayer;
 static Entity *entityBoss;
 static Entity *entityBullet;
 
-
-
 void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 
 	// CREATE OBJECTS HERE
