@@ -11,8 +11,11 @@ Bullet::Bullet(char *texturePath, int frameCount, std::vector<Bullet *> *entityB
 	m_input = new InputManager();
 
 	m_entityBullets = entityBullets;
-	//give this bullet a uniqe id
+
+	// GIVE THIS BULLET A UNIQUE ID
+
 	int id = 0;
+
 	for (int j = 1; id != 0; ++j) {
 		for (int i = 0; i < m_entityBullets->size(); ++i) {
 			if ((*m_entityBullets)[i]->m_BulletID != j) {
@@ -20,6 +23,7 @@ Bullet::Bullet(char *texturePath, int frameCount, std::vector<Bullet *> *entityB
 			}
 		}
 	}
+
 	m_BulletID = id;
 
 	//m_entityBullets->push_back(this);
@@ -29,8 +33,9 @@ Bullet::Bullet(char *texturePath, int frameCount, std::vector<Bullet *> *entityB
 }
 
 Bullet::~Bullet() {
-	for (int i = 0; i < m_entityBullets->size(); ++i) {
-		if ((*m_entityBullets)[i]->m_BulletID == this->m_BulletID) {
+	// TODO: SUBMITING BROKEN SHITTY LOOKING CODE IS NOT ALLOWED
+	for(int i = 0; this->m_entityBullets != nullptr && i < m_entityBullets->size(); ++i) {
+		if((*m_entityBullets)[i]->m_BulletID == this->m_BulletID) {
 			m_entityBullets->erase(m_entityBullets->begin() + i);
 			break;
 		}
