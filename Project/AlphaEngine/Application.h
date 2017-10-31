@@ -1,10 +1,11 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include "AEEngine.h"
+#include "Entity.h"
 #include "GraphicsEngine.h"
 #include "GameEngine.h"
 #include "PhysicsEngine.h"
-#include "AEEngine.h"
 
 #include <stdbool.h>
 
