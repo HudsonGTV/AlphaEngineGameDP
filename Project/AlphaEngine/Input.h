@@ -1,9 +1,9 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "Bullet.h"
-
+class Bullet;
 class Entity;
+#include <vector>
 
 class InputManager {
 private:

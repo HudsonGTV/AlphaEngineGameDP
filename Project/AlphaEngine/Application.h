@@ -1,7 +1,6 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "Entity.h"
 #include "GraphicsEngine.h"
 #include "GameEngine.h"
 #include "PhysicsEngine.h"

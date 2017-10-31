@@ -1,5 +1,5 @@
 #include "Input.h"
-
+#include "Bullet.h"
 
 InputManager::InputManager() {
 

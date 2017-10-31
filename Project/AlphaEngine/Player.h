@@ -1,9 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Entity.h"
 #include "Math.h"
 #include "Input.h"
+#include "Bullet.h"
 
 class Player : public Entity {
 private:
