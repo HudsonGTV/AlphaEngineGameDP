@@ -9,15 +9,15 @@ class Bullet : public Entity {
 
 private:
 
-	std::vector<Bullet *> *m_entityBullets;
-
 	int m_BulletID;
 
 
 public:
 
-	Bullet(char *texturePath, int frameCount, std::vector<Bullet *> *entityBullets, math::vec3 position);
+	Bullet(char *texturePath, int frameCount, math::vec3 position);
 	~Bullet();
+
+	void Destory(int index, std::vector<Bullet *> *entityBullets);
 	
 	void Update();
 
