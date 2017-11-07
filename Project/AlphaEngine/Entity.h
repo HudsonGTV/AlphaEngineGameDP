@@ -6,6 +6,8 @@
 #define ID_BOSS 1
 #define ID_BULLET 2
 
+#define ENABLE_DEBUG_LINES 1
+
 #include <string>
 
 #include "AEEngine.h"
@@ -21,7 +23,8 @@ protected:
 
 	int m_frameCount = 1;
 
-	float m_size = 30.0f;
+	float m_textureWidth = 60.0f;
+	float m_textureHeight = 60.0f;
 	float m_health = 25.0f;
 
 	char *m_texturePath = "../../assets/";
@@ -35,10 +38,12 @@ protected:
 	
 	AEGfxVertexList *m_mesh;
 	AEGfxVertexList *m_debugMesh;
+
 	AEGfxTexture *m_texture;
+	AEGfxTexture *m_debugTexture;
 
 public:
-	Entity(char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0, float height = 0);
+	Entity(char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
 	~Entity();
 
 	void SetWorldPosition(math::vec3 pos);

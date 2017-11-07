@@ -4,21 +4,16 @@
 #include "GraphicsEngine.h"
 
 Player::Player(char *texturePath, int frameCount, float width, float height) : Entity(texturePath, frameCount, COLLIDER_BOX, width, height) {
-
-	m_texturePath = texturePath;
-	m_frameCount = frameCount;
-
-	Graphics::CreateMesh(this, &m_mesh, &m_texture, m_texturePath, m_frameCount);
-
-
-
 	m_input = new InputManager(&m_entityBullets);
-
 }
 
 void Player::Update() {
 
 	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
+
+	if(ENABLE_DEBUG_LINES) {
+		Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture);
+	}
 
 	m_input->Update(this, true, 1.5f);
 
