@@ -43,7 +43,8 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 
 				//shoot
 				m_entityBullets->push_back(new Bullet("../../assets/entity/bullet/bullet.png", 1, entity->GetPosition()));
-				//bullet.SetVelocity(math::vec3(1,1,0));
+				m_entityBullets->back()->SetVelocity(math::vec3(1,1,0));
+				
 			}
 			m_once = true;
 		}
