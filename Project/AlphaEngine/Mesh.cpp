@@ -9,20 +9,20 @@ static double timeCounter = 0;
 static clock_t thisTime = clock();
 static clock_t lastTime = thisTime;
 
-void Graphics::CreateMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, char *texturePath, int frameCount) {
+void Graphics::CreateMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, char *texturePath, int frameCount, math::vec2 size) {
 
 	AEGfxMeshStart();
 
 	AEGfxTriAdd(
-		-30.0f, -30.0f, 0xFFFF0000, 0.0f, 1.0f,
-		30.0f, -30.0f, 0xFFFF0000, 1.0f / (float)frameCount, 1.0f,
-		-30.0f, 30.0f, 0xFFFF0000, 0.0f, 0.0f
+		-size.x / 2, -size.y / 2, 0xFFFF0000, 0.0f, 1.0f,
+		size.x / 2, -size.y / 2, 0xFFFF0000, 1.0f / (float)frameCount, 1.0f,
+		-size.x / 2, size.y / 2, 0xFFFF0000, 0.0f, 0.0f
 	);
 
 	AEGfxTriAdd(
-		30.0f, -30.0f, 0xFFFF0000, 1.0f / (float)frameCount, 1.0f,
-		30.0f, 30.0f, 0xFFFF0000, 1.0f / (float)frameCount, 0.0f,
-		-30.0f, 30.0f, 0xFFFF0000, 0.0f, 0.0f
+		size.x / 2, -size.y / 2, 0xFFFF0000, 1.0f / (float)frameCount, 1.0f,
+		size.x / 2, size.y / 2, 0xFFFF0000, 1.0f / (float)frameCount, 0.0f,
+		-size.x / 2, size.y / 2, 0xFFFF0000, 0.0f, 0.0f
 	);
 
 	*mesh = AEGfxMeshEnd();
