@@ -2,23 +2,39 @@
 #include "Collider.h"
 #include "GraphicsEngine.h"
 
-Entity::Entity(char *texturePath, int frameCount, ColliderType ctype, float width, float height) {
+Entity::Entity(char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
+
+	m_textureWidth = textureWidth;
+	m_textureHeight = textureHeight;
 
 	m_texturePath = texturePath;
 	m_frameCount = frameCount;
 
-	if (ctype == COLLIDER_BOX) {
+	if(ctype == COLLIDER_BOX) {
 		m_collider = new BoxCollider(width, height);
-	} else if (ctype == COLLIDER_CIRCLE) {
+	} else if(ctype == COLLIDER_CIRCLE) {
 		m_collider = new CircleCollider(width);
 	} else {
 		m_collider = nullptr;
 	}
 
-	Graphics::CreateMesh(this, &m_mesh, &m_texture, m_texturePath, m_frameCount);
+	Graphics::CreateMesh(this, &m_mesh, &m_texture, m_texturePath, m_frameCount, math::vec2(m_textureWidth, m_textureHeight));
 
-	m_input = new InputManager();
+	if(ENABLE_DEBUG_LINES) {
+		switch(ctype) {
+		case COLLIDER_BOX:
+			Graphics::CreateMesh(this, &m_debugMesh, &m_debugTexture, "../../assets/debug/box.png", 1, math::vec2(width, height));
+			break;
+		case COLLIDER_CIRCLE:
+			Graphics::CreateMesh(this, &m_debugMesh, &m_debugTexture, "../../assets/debug/circle.png", 1, math::vec2(width, width));
+			break;
+		default:
+			break;
+		}
+	}
+
 	m_ctype = ctype;
+
 }
 
 Entity::~Entity() {
@@ -47,6 +63,10 @@ void Entity::SetVelocity(math::vec3 vel) {
 void Entity::Update() {
 
 	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
+
+	if(ENABLE_DEBUG_LINES) {
+		Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 1, 5.0f);
+	}
 
 	SetPosition(m_velocity);
 

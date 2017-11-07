@@ -31,7 +31,7 @@ void Graphics::CreateMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture *
 
 }
 
-void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, int frameCount) {
+void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, int frameCount, float zOrder) {
 
 	if(frameCount > 6) {
 		frameCount = 6;
@@ -45,7 +45,7 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	// SET POISITION
 	//AEGfxSetPosition(entity->GetPositionX(), entity->GetPositionY());
-	AEGfxSetFullTransformWithZOrder(entity->GetPositionX(), entity->GetPositionY(), entity->GetPositionZ(), 0.0f, 1.0f, 1.0f);
+	AEGfxSetFullTransformWithZOrder(entity->GetPositionX(), entity->GetPositionY(), entity->GetPositionZ() + zOrder, 0.0f, 1.0f, 1.0f);
 	// SET TEXTURE
 	AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
 	// DRAW MESH
