@@ -34,6 +34,7 @@ protected:
 	ColliderType m_ctype;
 	
 	AEGfxVertexList *m_mesh;
+	AEGfxVertexList *m_debugMesh;
 	AEGfxTexture *m_texture;
 
 public:
@@ -43,6 +44,10 @@ public:
 	void SetWorldPosition(math::vec3 pos);
 	void SetPosition(math::vec3 pos);
 	void SetVelocity(math::vec3 vel);
+	void CreateDebugCircle();
+	void CreateDebugBox();
+	void DrawDebugCircle();
+	void DrawDebugBox();
 	
 	virtual void Update();
 
