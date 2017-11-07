@@ -7,8 +7,6 @@ Entity::Entity(char *texturePath, int frameCount, ColliderType ctype, float widt
 	m_texturePath = texturePath;
 	m_frameCount = frameCount;
 
-	Graphics::CreateMesh(this, &m_mesh, &m_texture, m_texturePath, m_frameCount);
-
 	if (ctype == COLLIDER_BOX) {
 		m_collider = new BoxCollider(width, height);
 	} else if (ctype == COLLIDER_CIRCLE) {
@@ -16,6 +14,9 @@ Entity::Entity(char *texturePath, int frameCount, ColliderType ctype, float widt
 	} else {
 		m_collider = nullptr;
 	}
+
+	Graphics::CreateMesh(this, &m_mesh, &m_texture, m_texturePath, m_frameCount);
+	
 
 	m_input = new InputManager();
 	m_ctype = ctype;
@@ -41,6 +42,50 @@ void Entity::SetPosition(math::vec3 pos) {
 
 void Entity::SetVelocity(math::vec3 vel) {
 	m_velocity = vel;
+}
+
+void Entity::CreateDebugCircle() {
+
+	AEGfxMeshStart();
+	AEGfxSphere(m_position.x, m_position.y, m_position.z, m_collider->GetWidth(), 0xFFFF0000, 0xFFFF0000, 1);
+
+	m_debugMesh = AEGfxMeshEnd();
+
+}
+
+void Entity::CreateDebugBox() {
+
+	AEGfxMeshStart();
+	AEGfxBox(m_position.x, m_position.y, m_position.z, m_collider->GetWidth(), static_cast<BoxCollider *>(m_collider)->GetHeight(), 1.0f, 0xFFFF0000, 0xFFFF0000);
+
+	m_debugMesh = AEGfxMeshEnd();
+
+}
+
+void Entity::DrawDebugCircle() {
+
+	// PLAYER
+	AEGfxSetRenderMode(AE_GFX_MDM_LINES);
+	// SET POISITION
+	//AEGfxSetPosition(entity->GetPositionX(), entity->GetPositionY());
+	AEGfxSetFullTransformWithZOrder(m_position.x, m_position.y, m_position.z, 0.0f, 1.0f, 1.0f);
+	// DRAW MESH
+	AEGfxSetTransparency(1.0f);
+	AEGfxMeshDraw(m_debugMesh, AE_GFX_MDM_LINES);
+
+}
+
+void Entity::DrawDebugBox() {
+
+	// PLAYER
+	AEGfxSetRenderMode(AE_GFX_MDM_LINES);
+	// SET POISITION
+	//AEGfxSetPosition(entity->GetPositionX(), entity->GetPositionY());
+	AEGfxSetFullTransformWithZOrder(m_position.x, m_position.y, m_position.z, 0.0f, 1.0f, 1.0f);
+	// DRAW MESH
+	AEGfxSetTransparency(1.0f);
+	AEGfxMeshDraw(m_debugMesh, AE_GFX_MDM_LINES);
+
 }
 
 void Entity::Update() {
