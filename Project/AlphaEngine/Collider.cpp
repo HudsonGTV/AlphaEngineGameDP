@@ -153,39 +153,39 @@ bool CollideBoxToCircle(Entity *boxEntity, Entity *circleEntity) {
 
 	math::vec2 closestPoint;
 
-	bool horizontalSide = abs(circleEntity->GetPositionX() - boxEntity->GetPositionX()) < box->GetWidth() / 2;
-	bool verticalSide = abs(circleEntity->GetPositionY() - boxEntity->GetPositionY()) < box->GetHeight() / 2;
+	bool horizontalSide = abs(circleEntity->GetPositionX() - boxEntity->GetPositionX()) < (box->GetWidth() / 2);
+	bool verticalSide = abs(circleEntity->GetPositionY() - boxEntity->GetPositionY()) < (box->GetHeight() / 2);
 
 	if(verticalSide && horizontalSide) {
 		return true;
-	} else if(horizontalSide) {
+	} else if(horizontalSide) { //horizontal size
 
 		if(circleEntity->GetPositionY() < boxEntity->GetPositionY()) {
-			closestPoint = math::vec2(circleEntity->GetPositionX(), boxEntity->GetPositionY() - box->GetHeight() / 2);
+			closestPoint = math::vec2(circleEntity->GetPositionX(), boxEntity->GetPositionY() - (box->GetHeight() / 2));
 		} else {
-			closestPoint = math::vec2(circleEntity->GetPositionX(), boxEntity->GetPositionY() + box->GetHeight() / 2);
+			closestPoint = math::vec2(circleEntity->GetPositionX(), boxEntity->GetPositionY() + (box->GetHeight() / 2));
 		}
 
-	} else if(verticalSide) {
+	} else if(verticalSide) { //vertical side
 
 		if(circleEntity->GetPositionX() < boxEntity->GetPositionX()) {
-			closestPoint = math::vec2(boxEntity->GetPositionX() - box->GetWidth() / 2, circleEntity->GetPositionY());
+			closestPoint = math::vec2(boxEntity->GetPositionX() - (box->GetWidth() / 2), circleEntity->GetPositionY());
 		} else {
-			closestPoint = math::vec2(boxEntity->GetPositionX() + box->GetWidth() / 2, circleEntity->GetPositionY());
+			closestPoint = math::vec2(boxEntity->GetPositionX() + (box->GetWidth() / 2), circleEntity->GetPositionY());
 		}
 
 	} else {
 
-		if(circleEntity->GetPositionX() < boxEntity->GetPositionX()) {
-			closestPoint.y = boxEntity->GetPositionY() - box->GetWidth() / 2;
+		if(circleEntity->GetPositionX() < boxEntity->GetPositionX()) { //horizontal corner
+			closestPoint.y = boxEntity->GetPositionY() - (box->GetWidth() / 2);
 		} else {
-			closestPoint.y = boxEntity->GetPositionY() + box->GetWidth() / 2;
+			closestPoint.y = boxEntity->GetPositionY() + (box->GetWidth() / 2);
 		}
 
-		if(circleEntity->GetPositionX() < boxEntity->GetPositionX()) {
-			closestPoint.x = boxEntity->GetPositionX() - box->GetWidth() / 2;
+		if(circleEntity->GetPositionY() < boxEntity->GetPositionY()) { //vertical corner
+			closestPoint.x = boxEntity->GetPositionX() - (box->GetWidth() / 2);
 		} else {
-			closestPoint.x = boxEntity->GetPositionX() + box->GetWidth() / 2;
+			closestPoint.x = boxEntity->GetPositionX() + (box->GetWidth() / 2);
 		}
 
 	}
@@ -195,7 +195,7 @@ bool CollideBoxToCircle(Entity *boxEntity, Entity *circleEntity) {
 		pow(circleEntity->GetPositionY() - closestPoint.y, 2)
 	);
 
-	return dist < circle->GetWidth();
+	return dist < circle->GetWidth() / 2;
 
 }
 
@@ -208,7 +208,7 @@ bool CollideCircleToCircle(Entity *circleEntity1, Entity *circleEntity2) {
 	CircleCollider *circle1 = dynamic_cast<CircleCollider *>(circleEntity1->GetCollider());
 	CircleCollider *circle2 = dynamic_cast<CircleCollider *>(circleEntity2->GetCollider());
 
-	float max = circle1->GetWidth() + circle2->GetWidth();
+	float max = (circle1->GetWidth() + circle2->GetWidth()) / 2;
 	float dist = sqrt(
 		pow(circleEntity1->GetPositionX() - circleEntity2->GetPositionX(), 2) +
 		pow(circleEntity1->GetPositionY() - circleEntity2->GetPositionY(), 2)
