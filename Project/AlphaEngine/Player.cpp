@@ -22,9 +22,9 @@ void Player::Update() {
 	// DEBUG STRING OUTPUT
 	std::string tempPos = std::to_string(m_position.x) + ", " + std::to_string(m_position.y);
 	// UPDATE BULLETS
-	for(auto &bullet : m_entityBullets) {
+	for (int i = 0; i < m_entityBullets.size(); ++i) {
 
-		bullet->Update();
+		m_entityBullets[i]->Update();
 
 	}
 
