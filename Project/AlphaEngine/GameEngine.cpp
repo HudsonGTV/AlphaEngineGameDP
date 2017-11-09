@@ -45,9 +45,8 @@ void Game::Update(Entity *entityID[ENTITY_COUNT], double dt) {
 	Graphics::EnableAnimations();
 	
 	// UPDATE OBJECTS
-	entityPlayer->Update();
 	entityBoss->Update();
-	//entityBullet->Update();
+	entityPlayer->Update();
 
 	// UPDATE AI
 	entityBoss->AiUpdate(&entityID[ID_PLAYER]);
