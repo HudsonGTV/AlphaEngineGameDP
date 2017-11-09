@@ -23,9 +23,9 @@ static Entity *entityBullet;
 void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 
 	// CREATE OBJECTS HERE
-	entityPlayer = new Player("../../assets/entity/player/player.png", 3, 100, 100);
-	entityBoss = new Enemy("../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 100);
-	entityBullet = new Entity("", 1, COLLIDER_CIRCLE, 20);
+	entityPlayer = new Player("../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
+	entityBoss = new Enemy("../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 60.0f);
+	entityBullet = new Entity("", 1, COLLIDER_CIRCLE, 20.0f);
 
 	// SET PROPERTIES HERE
 	entityPlayer->SetWorldPosition(math::vec3(-250.0f, 0.0f, 0.0f));
@@ -47,7 +47,7 @@ void Game::Update(Entity *entityID[ENTITY_COUNT], double dt) {
 	// UPDATE OBJECTS
 	entityPlayer->Update();
 	entityBoss->Update();
-	entityBullet->Update();
+	//entityBullet->Update();
 
 	// UPDATE AI
 	entityBoss->AiUpdate(&entityID[ID_PLAYER]);

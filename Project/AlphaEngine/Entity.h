@@ -6,7 +6,7 @@
 #define ID_BOSS 1
 #define ID_BULLET 2
 
-#define ENABLE_DEBUG_LINES 1
+#define ENABLE_DEBUG_LINES 0
 
 #include <string>
 
