@@ -13,20 +13,32 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 
 	if(controllable) {
 
-		if(AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W')) {
+		if ((AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) && (AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S'))) {
+			entity->SetVelocity(math::vec3(speed, -speed, 0.0f));
+		}
+		else if ((AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) && (AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W'))) {
+			entity->SetVelocity(math::vec3(speed, speed, 0.0f));
+		}
+		else if ((AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) && (AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S'))) {
+			entity->SetVelocity(math::vec3(-speed, -speed, 0.0f));
+		}
+		else if ((AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) && (AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W'))) {
+			entity->SetVelocity(math::vec3(-speed, speed, 0.0f));
+		}
+		else if(AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W')) {
 			entity->SetVelocity(math::vec3(0.0f, speed, 0.0f));
 		}
-
-		if(AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S')) {
+		else if(AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S')) {
 			entity->SetVelocity(math::vec3(0.0f, -speed, 0.0f));
 		}
-
-		if(AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) {
+		else if(AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) {
 			entity->SetVelocity(math::vec3(-speed, 0.0f, 0.0f));
 		}
-
-		if(AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) {
+		else if(AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) {
 			entity->SetVelocity(math::vec3(speed, 0.0f, 0.0f));
+		}
+		else {
+			entity->SetVelocity(math::vec3(0.0f, 0.0f, 0.0f));
 		}
 		
 		
