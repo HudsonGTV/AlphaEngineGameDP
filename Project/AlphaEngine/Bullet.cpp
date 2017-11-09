@@ -17,6 +17,8 @@ void Bullet::Update() {
 		Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 1, 5.0f);
 	}
 
+	SetPosition(m_velocity);
+
 	m_input->Update(this, false, 0.0f);
 
 }

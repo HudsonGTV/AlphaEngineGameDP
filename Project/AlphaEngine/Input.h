@@ -9,6 +9,7 @@ class InputManager {
 private:
 	bool m_once = false;
 	std::vector<Bullet *> *m_entityBullets;
+	double m_bulletSpeed = 3;
 
 public:
 	InputManager();
