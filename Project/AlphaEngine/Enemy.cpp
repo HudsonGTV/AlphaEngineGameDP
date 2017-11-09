@@ -17,7 +17,7 @@ void Enemy::Update() {
 
 	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
 
-	if (ENABLE_DEBUG_LINES) {
+	if(ENABLE_DEBUG_LINES) {
 		Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 1, 5.0f);
 	}
 
