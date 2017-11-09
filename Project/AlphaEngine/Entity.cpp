@@ -23,10 +23,10 @@ Entity::Entity(char *texturePath, int frameCount, ColliderType ctype, float widt
 	if(ENABLE_DEBUG_LINES) {
 		switch(ctype) {
 		case COLLIDER_BOX:
-			Graphics::CreateMesh(this, &m_debugMesh, &m_debugTexture, "../../assets/debug/box.png", 1, math::vec2(width, height));
+			Graphics::CreateMesh(this, &m_debugMesh, &m_debugTexture, "../../assets/dbug/box.png", 1, math::vec2(width, height));
 			break;
 		case COLLIDER_CIRCLE:
-			Graphics::CreateMesh(this, &m_debugMesh, &m_debugTexture, "../../assets/debug/circle.png", 1, math::vec2(width, width));
+			Graphics::CreateMesh(this, &m_debugMesh, &m_debugTexture, "../../assets/dbug/circle.png", 1, math::vec2(width, width));
 			break;
 		default:
 			break;
