@@ -45,21 +45,30 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 		if (AEInputCheckCurr(' ') || AEInputCheckCurr(VK_LBUTTON)) {
 			
 			if (!m_once) {
-				//shooting code
+				//SHOOTING
 				//get mouse pos
 				s32 mX = 0;
 				s32 mY = 0;
 				AEInputGetCursorPosition(&mX, &mY);
-				math::vec2 mousePos(mX, mY);
+				
+				mX = mX - AEGfxGetWinMaxX();
+				mY = mY - AEGfxGetWinMaxY();
 
-				//shoot
+				math::vec2 mousePos(mX, -mY);
+				AESysPrintf("%d", mX);
+				AESysPrintf(", %d", mY);
+				AESysPrintf("\n");
+
+				//FIRE BULLET
 				m_entityBullets->push_back(new Bullet("../../assets/entity/bullet/bullet.png", 1, entity->GetPosition()));
 
 				//get bullet direction
 				math::vec2 bulletPos(entity->GetPosition().x, entity->GetPosition().y);
-				math::vec2 vec = bulletPos - mousePos;
-				double angle = atan2(vec.x, vec.y);
-				math::vec3 vel = math::vec3(cos(angle), sin(angle), 0);
+				math::vec2 vec = mousePos - bulletPos;
+				double angle = atan2(vec.y, vec.x);
+
+				//set bullet velocity to bullet direction * bullet speed
+				math::vec3 vel = math::vec3(cos(angle)*m_bulletSpeed, sin(angle)*m_bulletSpeed, 0);
 				m_entityBullets->back()->SetVelocity(vel);
 
 			}
