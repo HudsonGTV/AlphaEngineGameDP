@@ -29,6 +29,18 @@ void Enemy::Update() {
 
 void Enemy::AiUpdate(Entity *entityID[ENTITY_COUNT]) {
 
+	math::vec2 currPos(m_position.x, m_position.y);
+
+	// GET PLAYER DIRECTION
+	math::vec2 playerPos(entityID[ID_PLAYER]->GetPosition().x, entityID[ID_PLAYER]->GetPosition().y);
+	math::vec2 vec = playerPos - currPos;
+
+	double angle = atan2(vec.y, vec.x);
+
+	math::vec3 vel = math::vec3(cos(angle) * 0.75, sin(angle)* 0.75, 0);
+
+	SetVelocity(vel);
+
 }
 
 float Enemy::GetHealth() const {
