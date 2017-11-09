@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "GraphicsEngine.h"
 #include "Bullet.h"
+#include "Enemy.h"
 
 #include <stdbool.h>
 #include <vector>
@@ -16,14 +17,14 @@
 
 // OBJECTS
 static Player *entityPlayer;
-static Entity *entityBoss;
+static Enemy *entityBoss;
 static Entity *entityBullet;
 
 void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 
 	// CREATE OBJECTS HERE
 	entityPlayer = new Player("../../assets/entity/player/player.png", 3, 100, 100);
-	entityBoss = new Entity("../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 100);
+	entityBoss = new Enemy("../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 100);
 	entityBullet = new Entity("", 1, COLLIDER_CIRCLE, 20);
 
 	// SET PROPERTIES HERE
