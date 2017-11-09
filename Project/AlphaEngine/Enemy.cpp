@@ -27,6 +27,10 @@ void Enemy::Update() {
 
 }
 
+void Enemy::AiUpdate(Entity *entityID[ENTITY_COUNT]) {
+
+}
+
 float Enemy::GetHealth() const {
 	return m_health;
 }

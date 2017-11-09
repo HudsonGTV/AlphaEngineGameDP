@@ -13,6 +13,7 @@ public:
 
 	void SetHealth(float health);
 	void Update();
+	void AiUpdate(Entity *entityID[ENTITY_COUNT]);
 
 	float GetHealth() const;
 

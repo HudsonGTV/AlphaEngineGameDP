@@ -107,7 +107,7 @@ void Application::Loop(HINSTANCE instanceH) {
 	}
 
 	// RENDER/UPDATE FUNCTIONS
-	m_game->Update(m_deltaTime);
+	m_game->Update(m_entityID, m_deltaTime);
 	m_physics->Update(m_deltaTime);
 	m_graphics->Render(m_entityID, m_deltaTime);
 
