@@ -7,7 +7,7 @@ class Game {
 
 public:
 	void Init(Entity *entityID[ENTITY_COUNT]);
-	void Update(double dt);
+	void Update(Entity *entityID[ENTITY_COUNT], double dt);
 
 };
 

@@ -39,16 +39,17 @@ void Game::Init(Entity *entityID[ENTITY_COUNT]) {
 
 }
 
-void Game::Update(double dt) {
-	Graphics::EnableAnimations();
+void Game::Update(Entity *entityID[ENTITY_COUNT], double dt) {
 
-	// if shoot,
-	//		entityBullets.push_back(new Entity("../../assets/entity/bullet/bullet.png", 1));
-	//		entityBullets[i]->Update();
-	// END
+	// ENABLE ANIMATIONS
+	Graphics::EnableAnimations();
 	
 	// UPDATE OBJECTS
 	entityPlayer->Update();
 	entityBoss->Update();
 	entityBullet->Update();
+
+	// UPDATE AI
+	entityBoss->AiUpdate(&entityID[ID_PLAYER]);
+
 }
