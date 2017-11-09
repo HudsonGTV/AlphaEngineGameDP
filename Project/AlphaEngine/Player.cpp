@@ -17,6 +17,8 @@ void Player::Update() {
 
 	m_input->Update(this, true, 1.5f);
 
+	SetPosition(m_velocity);
+
 	// DEBUG STRING OUTPUT
 	std::string tempPos = std::to_string(m_position.x) + ", " + std::to_string(m_position.y);
 	// UPDATE BULLETS
