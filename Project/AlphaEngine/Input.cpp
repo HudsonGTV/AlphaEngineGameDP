@@ -49,18 +49,24 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 				//get mouse pos
 				s32 mX = 0;
 				s32 mY = 0;
-				AEInputGetCursorPositionDelta(&mX, &mY);
-				int X = mX;
-				int Y = mY;
+				AEInputGetCursorPosition(&mX, &mY);
+				math::vec2 mousePos(mX, mY);
 
 				//shoot
 				m_entityBullets->push_back(new Bullet("../../assets/entity/bullet/bullet.png", 1, entity->GetPosition()));
-				m_entityBullets->back()->SetVelocity(math::vec3(1,1,0));
-				
+
+				//get bullet direction
+				math::vec2 bulletPos(entity->GetPosition().x, entity->GetPosition().y);
+				math::vec2 vec = bulletPos - mousePos;
+				double angle = atan2(vec.x, vec.y);
+				math::vec3 vel = math::vec3(cos(angle), sin(angle), 0);
+				m_entityBullets->back()->SetVelocity(vel);
+
 			}
+
 			m_once = true;
-		}
-		else {
+
+		} else {
 			m_once = false;
 		}
 	}
