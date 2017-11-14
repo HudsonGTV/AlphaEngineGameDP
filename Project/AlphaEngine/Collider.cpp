@@ -27,19 +27,12 @@ float Collider::GetWidth() const {
 void BoxCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
 
 	if(CollideBoxToBox(thisEntity, otherEntity)) {
-
-		OutputDebugStringA("Box collision at ");
-
-		std::string tempPos = std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA(" and ");
-
-		tempPos = std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA("\n");
-
+		std::string toPrint = "Box collision at ";
+		toPrint += std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
+		toPrint += " and ";
+		toPrint += std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
+		toPrint += "\n";
+		AESysPrintf(toPrint.c_str());
 	}
 
 }
@@ -47,19 +40,12 @@ void BoxCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
 void BoxCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
 
 	if(CollideBoxToCircle(thisEntity, otherEntity)) {
-
-		OutputDebugStringA("Box-Circle collision at ");
-
-		std::string tempPos = std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA(" and ");
-
-		tempPos = std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA("\n");
-
+		std::string toPrint = "Box-Circle collision at ";
+		toPrint += std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
+		toPrint += " and ";
+		toPrint += std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
+		toPrint += "\n";
+		AESysPrintf(toPrint.c_str());
 	}
 }
 
@@ -88,18 +74,12 @@ void Collider::ResolveCollision(Entity *thisEntity, Entity *otherEntity) {
 void CircleCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
 
 	if(CollideBoxToCircle(otherEntity, thisEntity)) {
-
-		OutputDebugStringA("Box-Circle collision at ");
-
-		std::string tempPos = std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA(" and ");
-
-		tempPos = std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA("\n");
+		std::string toPrint = "Box-Circle collision at ";
+		toPrint += std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
+		toPrint += " and ";
+		toPrint += std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
+		toPrint += "\n";
+		AESysPrintf(toPrint.c_str());
 	}
 
 }
@@ -107,19 +87,12 @@ void CircleCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
 void CircleCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
 
 	if(CollideCircleToCircle(thisEntity, otherEntity)) {
-
-		OutputDebugStringA("Circle collision at ");
-
-		std::string tempPos = std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA(" and ");
-
-		tempPos = std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA("\n");
-
+		std::string toPrint = "Circle collision at ";
+		toPrint += std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
+		toPrint += " and ";
+		toPrint += std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
+		toPrint += "\n";
+		AESysPrintf(toPrint.c_str());
 	}
 
 }
