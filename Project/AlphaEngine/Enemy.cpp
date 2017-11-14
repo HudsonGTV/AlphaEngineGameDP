@@ -11,7 +11,12 @@ void Enemy::SetHealth(float health) {
 
 void Enemy::Update() {
 
-	if(m_health > 0.0f || m_isDead) {
+	if(!m_isDead) {
+
+		if(m_health <= 0.0f) {
+			m_isDead = true;
+			return;
+		}
 
 		Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
 
@@ -29,17 +34,21 @@ void Enemy::Update() {
 
 void Enemy::AiUpdate(Entity *entityID[ENTITY_COUNT]) {
 
-	math::vec2 currPos(m_position.x, m_position.y);
+	if(!m_isDead) {
 
-	// GET PLAYER DIRECTION
-	math::vec2 playerPos(entityID[ID_PLAYER]->GetPosition().x, entityID[ID_PLAYER]->GetPosition().y);
-	math::vec2 vec = playerPos - currPos;
+		math::vec2 currPos(m_position.x, m_position.y);
 
-	double angle = atan2(vec.y, vec.x);
+		// GET PLAYER DIRECTION
+		math::vec2 playerPos(entityID[ID_PLAYER]->GetPosition().x, entityID[ID_PLAYER]->GetPosition().y);
+		math::vec2 vec = playerPos - currPos;
 
-	math::vec3 vel = math::vec3(cos(angle) * 0.75, sin(angle)* 0.75, 0);
+		double angle = atan2(vec.y, vec.x);
 
-	SetVelocity(vel);
+		math::vec3 vel = math::vec3(cos(angle) * 0.75, sin(angle)* 0.75, 0);
+
+		SetVelocity(vel);
+
+	}
 
 }
 
