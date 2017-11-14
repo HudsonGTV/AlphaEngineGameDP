@@ -28,8 +28,8 @@ void Player::Update() {
 
 	}
 
-	OutputDebugStringA("Player Position: ");
-	OutputDebugStringA(tempPos.c_str());
-	OutputDebugStringA("\n");
+	//OutputDebugStringA("Player Position: ");
+	//OutputDebugStringA(tempPos.c_str());
+	//OutputDebugStringA("\n");
 
 }
