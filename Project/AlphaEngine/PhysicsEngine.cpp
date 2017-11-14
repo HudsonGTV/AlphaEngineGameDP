@@ -1,13 +1,12 @@
 #include "PhysicsEngine.h"
 #include "Collider.h"
 
-void PhysicsEngine::Init(Entity **entityID, int count) {
+void PhysicsEngine::Init(std::vector<Entity *> *entityID) {
 	m_entities = entityID;
-	m_entcount = count;
 }
 
 void PhysicsEngine::Update(double dt) {
-	for (int i = 0; i < m_entcount; ++i) {
-		m_entities[i]->GetCollider()->Update(m_entities, m_entcount, i);
+	for (int i = 0; i < m_entities->size(); ++i) {
+		(*m_entities)[i]->GetCollider()->Update(m_entities, m_entities->size(), i);
 	}
 }

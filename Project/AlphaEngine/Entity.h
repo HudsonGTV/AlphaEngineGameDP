@@ -1,10 +1,9 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#define ENTITY_COUNT 3
+#define ENTITY_COUNT 2
 #define ID_PLAYER 0
 #define ID_BOSS 1
-#define ID_BULLET 2
 
 #define ENABLE_DEBUG_LINES 1
 
@@ -45,7 +44,9 @@ protected:
 	AEGfxTexture *m_debugTexture;
 
 public:
-	Entity(char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
+	int m_id = -1;
+
+	Entity(int id, char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
 	~Entity();
 
 	void SetWorldPosition(math::vec3 pos);
@@ -65,5 +66,9 @@ public:
 	float GetPositionZ() const;
 
 };
+
+namespace GameObjects {
+	Entity *getEntityByID(std::vector<Entity *> *entityID, int id);
+}
 
 #endif

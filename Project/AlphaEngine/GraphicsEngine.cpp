@@ -23,7 +23,7 @@
 //static AEGfxTexture *textureBullet;
 //static AEGfxTexture *textureMine;
 
-void GraphicsEngine::Init(Entity *entityID[ENTITY_COUNT]) {
+void GraphicsEngine::Init(std::vector<Entity *> *entityID) {
 
 	// CREATE MESHES
 	//Graphics::CreateMesh(entityID[ID_PLAYER], &meshPlayer, &texturePlayer, "../../assets/entity/player/player.png", 3);
@@ -36,7 +36,7 @@ void GraphicsEngine::Init(Entity *entityID[ENTITY_COUNT]) {
 
 }
 
-void GraphicsEngine::Render(Entity *entityID[ENTITY_COUNT], double dt) {
+void GraphicsEngine::Render(std::vector<Entity *> *entityID, double dt) {
 
 	//ENABLE ANIMATIONS
 	//Graphics::EnableAnimations();

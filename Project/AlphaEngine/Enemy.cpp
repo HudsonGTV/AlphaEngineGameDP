@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "GraphicsEngine.h"
 
-Enemy::Enemy(char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) : Entity(texturePath, frameCount, ctype, width, height, textureWidth, textureHeight) {
+Enemy::Enemy(char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) : Entity(ID_BOSS, texturePath, frameCount, ctype, width, height, textureWidth, textureHeight) {
 
 }
 
@@ -32,21 +32,27 @@ void Enemy::Update() {
 
 }
 
-void Enemy::AiUpdate(Entity *entityID[ENTITY_COUNT]) {
+void Enemy::AiUpdate(std::vector<Entity *> *entityID) {
 
 	if(!m_isDead) {
 
 		math::vec2 currPos(m_position.x, m_position.y);
 
+		Entity *player = GameObjects::getEntityByID(entityID, ID_PLAYER);
+
 		// GET PLAYER DIRECTION
-		math::vec2 playerPos(entityID[ID_PLAYER]->GetPosition().x, entityID[ID_PLAYER]->GetPosition().y);
-		math::vec2 vec = playerPos - currPos;
+		if(player != nullptr) {
 
-		double angle = atan2(vec.y, vec.x);
+			math::vec2 playerPos(player->GetPosition().x, player->GetPosition().y);
+			math::vec2 vec = playerPos - currPos;
 
-		math::vec3 vel = math::vec3(cos(angle) * 0.75, sin(angle)* 0.75, 0);
+			double angle = atan2(vec.y, vec.x);
 
-		SetVelocity(vel);
+			math::vec3 vel = math::vec3(cos(angle) * 0.75, sin(angle)* 0.75, 0);
+
+			SetVelocity(vel);
+
+		}
 
 	}
 

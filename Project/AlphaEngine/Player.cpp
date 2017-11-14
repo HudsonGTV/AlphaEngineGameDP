@@ -3,11 +3,13 @@
 #include "Player.h"
 #include "GraphicsEngine.h"
 
-Player::Player(char *texturePath, int frameCount, float width, float height) : Entity(texturePath, frameCount, COLLIDER_BOX, width, height) {
+Player::Player(char *texturePath, int frameCount, float width, float height) : Entity(ID_PLAYER, texturePath, frameCount, COLLIDER_BOX, width, height) {
 	m_input = new InputManager(&m_entityBullets);
 }
 
 void Player::Update() {
+
+	//AESysPrintf("Player ID: %i", m_id);
 
 	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
 

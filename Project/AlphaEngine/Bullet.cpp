@@ -1,7 +1,7 @@
 #include "Bullet.h"
 #include "GraphicsEngine.h"
 
-Bullet::Bullet(char *texturePath, int frameCount, math::vec3 position) : Entity(texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
+Bullet::Bullet(char *texturePath, int frameCount, math::vec3 position) : Entity(-1, texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
 	SetWorldPosition(position);
 }
 

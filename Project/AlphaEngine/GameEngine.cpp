@@ -20,26 +20,25 @@ static Player *entityPlayer;
 static Enemy *entityBoss;
 static Entity *entityBullet;
 
-void Game::Init(Entity *entityID[ENTITY_COUNT]) {
+void Game::Init(std::vector<Entity *> *entityID) {
 
 	// CREATE OBJECTS HERE
 	entityPlayer = new Player("../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
 	entityBoss = new Enemy("../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 60.0f);
-	entityBullet = new Entity("", 1, COLLIDER_CIRCLE, 20.0f);
 
 	// SET PROPERTIES HERE
 	entityPlayer->SetWorldPosition(math::vec3(-250.0f, 0.0f, 0.0f));
 	entityBoss->SetWorldPosition(math::vec3(250.0f, 0.0f, 0.0f));
-	entityBullet->SetWorldPosition(math::vec3(0.0f, 0.0f, 0.0f));
 
 	// ADD TO ARRAY
-	entityID[ID_PLAYER] = entityPlayer;
-	entityID[ID_BOSS] = entityBoss;
-	entityID[ID_BULLET] = entityBullet;
+	entityID->push_back(entityPlayer);
+	entityID->push_back(entityBoss);
+
+	AESysPrintf("still works\n");
 
 }
 
-void Game::Update(Entity *entityID[ENTITY_COUNT], double dt) {
+void Game::Update(std::vector<Entity *> *entityID, double dt) {
 
 	// ENABLE ANIMATIONS
 	Graphics::EnableAnimations();
@@ -49,6 +48,6 @@ void Game::Update(Entity *entityID[ENTITY_COUNT], double dt) {
 	entityPlayer->Update();
 
 	// UPDATE AI
-	entityBoss->AiUpdate(&entityID[ID_PLAYER]);
+	entityBoss->AiUpdate(entityID);
 
 }

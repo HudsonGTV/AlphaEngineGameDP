@@ -2,7 +2,9 @@
 #include "Collider.h"
 #include "GraphicsEngine.h"
 
-Entity::Entity(char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
+Entity::Entity(int id, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
+
+	m_id = id;
 
 	m_textureWidth = textureWidth;
 	m_textureHeight = textureHeight;
@@ -74,22 +76,24 @@ void Entity::Update() {
 
 }
 
-void Entity::Collide(Entity *other)
-{
+void Entity::Collide(Entity *other) {
+
 	std::string toPrint = "Collision at ";
+
 	toPrint += std::to_string(m_position.x) + ", " + std::to_string(m_position.y);
 	toPrint += " and ";
 	toPrint += std::to_string(other->GetPosition().x) + ", " + std::to_string(other->GetPosition().y);
 	toPrint += "\n";
+
 	AESysPrintf(toPrint.c_str());
+
 }
 
 math::vec3 Entity::GetPosition() const {
 	return m_position;
 }
 
-math::vec3 Entity::GetVelocity() const
-{
+math::vec3 Entity::GetVelocity() const {
 	return m_velocity;
 }
 
@@ -97,8 +101,7 @@ Collider *Entity::GetCollider() const {
 	return m_collider;
 }
 
-ColliderType Entity::GetColliderType() const
-{
+ColliderType Entity::GetColliderType() const {
 	return m_ctype;
 }
 
@@ -112,4 +115,16 @@ float Entity::GetPositionY() const {
 
 float Entity::GetPositionZ() const {
 	return m_position.z;
+}
+
+Entity *GameObjects::getEntityByID(std::vector<Entity *> *entityID, int id) {
+
+	for(int i = 0; i < entityID->size(); ++i) {
+		if((*entityID)[i]->m_id == id) {
+			return (*entityID)[i];
+		}
+	}
+
+	return nullptr;
+
 }

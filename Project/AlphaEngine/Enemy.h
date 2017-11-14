@@ -13,7 +13,7 @@ public:
 
 	void SetHealth(float health);
 	void Update();
-	void AiUpdate(Entity *entityID[ENTITY_COUNT]);
+	void AiUpdate(std::vector<Entity *> *entityID);
 
 	float GetHealth() const;
 

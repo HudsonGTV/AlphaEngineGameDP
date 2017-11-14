@@ -30,7 +30,9 @@ private:
 	PhysicsEngine *m_physics;
 	GraphicsEngine *m_graphics;
 
-	Entity *m_entityID[ENTITY_COUNT];
+	//Entity *m_entityID[ENTITY_COUNT];
+
+	std::vector<Entity *> m_entityID;
 	
 public:
 	int isRunning = true;

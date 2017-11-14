@@ -14,8 +14,8 @@ namespace Graphics {
 class GraphicsEngine {
 
 public:
-	void Init(Entity *entityID[ENTITY_COUNT]);
-	void Render(Entity *entityID[ENTITY_COUNT], double dt);
+	void Init(std::vector<Entity *> *entityID);
+	void Render(std::vector<Entity *> *entityID, double dt);
 	void Uninit();
 
 };

@@ -68,9 +68,9 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	AESysReset();
 
 	// INITIALIZE FUNCTIONS
-	m_graphics->Init(m_entityID);
-	m_physics->Init(m_entityID, ENTITY_COUNT);
-	m_game->Init(m_entityID);
+	m_graphics->Init(&m_entityID);
+	m_physics->Init(&m_entityID);
+	m_game->Init(&m_entityID);
 	
 	OutputDebugStringA("Initialized!\n");
 
@@ -107,9 +107,9 @@ void Application::Loop(HINSTANCE instanceH) {
 	}
 
 	// RENDER/UPDATE FUNCTIONS
-	m_game->Update(m_entityID, m_deltaTime);
+	m_game->Update(&m_entityID, m_deltaTime);
 	m_physics->Update(m_deltaTime);
-	m_graphics->Render(m_entityID, m_deltaTime);
+	m_graphics->Render(&m_entityID, m_deltaTime);
 
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S END
 	AESysFrameEnd();
@@ -124,9 +124,8 @@ void Application::Uninit(HINSTANCE instanceH) {
 	// DELETE UNLOADED CLASSES
 	delete m_game;
 	delete m_graphics;
-	delete m_entityID[ID_PLAYER];
-	delete m_entityID[ID_BOSS];
-	delete m_entityID[ID_BULLET];
+	//delete m_entityID[ID_PLAYER];
+	//delete m_entityID[ID_BOSS];
 
 	AESysExit();
 

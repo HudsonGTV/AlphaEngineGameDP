@@ -16,7 +16,7 @@ protected:
 	void ResolveCollision(Entity *thisEntity, Entity *otherEntity);
 
 public:
-	void Update(Entity **entities, int entityNum, int currentEntity);
+	void Update(std::vector<Entity *> *entities, int entityNum, int currentEntity);
 
 	float GetWidth() const;
 
