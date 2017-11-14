@@ -21,6 +21,8 @@ class Entity {
 
 protected:
 
+	bool m_isDead = false;
+
 	int m_frameCount = 1;
 
 	float m_textureWidth = 60.0f;
