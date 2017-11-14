@@ -6,7 +6,7 @@
 #define ID_BOSS 1
 #define ID_BULLET 2
 
-#define ENABLE_DEBUG_LINES 0
+#define ENABLE_DEBUG_LINES 1
 
 #include <string>
 
@@ -53,6 +53,7 @@ public:
 	void SetVelocity(math::vec3 vel);
 	
 	virtual void Update();
+	virtual void Collide(Entity *other);
 
 	math::vec3 GetPosition() const;
 	math::vec3 GetVelocity() const;

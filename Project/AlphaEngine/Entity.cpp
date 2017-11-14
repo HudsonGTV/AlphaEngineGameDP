@@ -74,6 +74,16 @@ void Entity::Update() {
 
 }
 
+void Entity::Collide(Entity *other)
+{
+	std::string toPrint = "Collision at ";
+	toPrint += std::to_string(m_position.x) + ", " + std::to_string(m_position.y);
+	toPrint += " and ";
+	toPrint += std::to_string(other->GetPosition().x) + ", " + std::to_string(other->GetPosition().y);
+	toPrint += "\n";
+	AESysPrintf(toPrint.c_str());
+}
+
 math::vec3 Entity::GetPosition() const {
 	return m_position;
 }

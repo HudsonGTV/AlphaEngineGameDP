@@ -27,12 +27,7 @@ float Collider::GetWidth() const {
 void BoxCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
 
 	if(CollideBoxToBox(thisEntity, otherEntity)) {
-		std::string toPrint = "Box collision at ";
-		toPrint += std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-		toPrint += " and ";
-		toPrint += std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-		toPrint += "\n";
-		AESysPrintf(toPrint.c_str());
+		thisEntity->Collide(otherEntity);
 	}
 
 }
@@ -40,12 +35,7 @@ void BoxCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
 void BoxCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
 
 	if(CollideBoxToCircle(thisEntity, otherEntity)) {
-		std::string toPrint = "Box-Circle collision at ";
-		toPrint += std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-		toPrint += " and ";
-		toPrint += std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-		toPrint += "\n";
-		AESysPrintf(toPrint.c_str());
+		thisEntity->Collide(otherEntity);
 	}
 }
 
@@ -74,12 +64,7 @@ void Collider::ResolveCollision(Entity *thisEntity, Entity *otherEntity) {
 void CircleCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
 
 	if(CollideBoxToCircle(otherEntity, thisEntity)) {
-		std::string toPrint = "Box-Circle collision at ";
-		toPrint += std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-		toPrint += " and ";
-		toPrint += std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-		toPrint += "\n";
-		AESysPrintf(toPrint.c_str());
+		thisEntity->Collide(otherEntity);
 	}
 
 }
@@ -87,12 +72,7 @@ void CircleCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
 void CircleCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
 
 	if(CollideCircleToCircle(thisEntity, otherEntity)) {
-		std::string toPrint = "Circle collision at ";
-		toPrint += std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-		toPrint += " and ";
-		toPrint += std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-		toPrint += "\n";
-		AESysPrintf(toPrint.c_str());
+		thisEntity->Collide(otherEntity);
 	}
 
 }
