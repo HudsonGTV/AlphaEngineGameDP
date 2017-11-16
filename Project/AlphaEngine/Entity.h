@@ -68,7 +68,11 @@ public:
 };
 
 namespace GameObjects {
+
+	int giveUniqueID(std::vector<Entity *> *entityID, int &id);
+
 	Entity *getEntityByID(std::vector<Entity *> *entityID, int id);
+
 }
 
 #endif

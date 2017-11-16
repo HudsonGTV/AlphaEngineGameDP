@@ -3,26 +3,9 @@
 
 Bullet::Bullet(char *texturePath, std::vector<Entity *> *entityID, int frameCount, math::vec3 position) : Entity(-1, texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
 
-	for(int i = 0; i < entityID->size() + 1; ++i) {
+	m_entityID = entityID;
 
-		for(int j = 0; j < entityID->size(); ++j) {
-			if((*entityID)[j]->m_id != i) {
-				m_id = i;
-			} else {
-				m_id = -1;
-				break;
-			}
-		}
-
-		if(m_id != -1) {
-			break;
-		}
-
-	}
-
-	if(m_id == -1) {
-		m_id = entityID->size() + 1;
-	}
+	GameObjects::giveUniqueID(entityID, m_id);
 
 	entityID->push_back(this);
 
@@ -31,7 +14,7 @@ Bullet::Bullet(char *texturePath, std::vector<Entity *> *entityID, int frameCoun
 }
 
 Bullet::~Bullet() {
-	
+
 }
 
 void Bullet::Update() {
