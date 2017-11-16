@@ -121,6 +121,17 @@ float Entity::GetPositionZ() const {
 	return m_position.z;
 }
 
+void GameObjects::removeEntityByID(std::vector<Entity *> *entityID, int id) {
+
+	for(int i = 0; i < entityID->size(); ++i) {
+		if((*entityID)[i]->m_id == id) {
+			entityID->erase(entityID->begin() + i);
+			break;
+		}
+	}
+
+}
+
 int GameObjects::giveUniqueID(std::vector<Entity *> *entityID, int &id) {
 
 	for(int i = 0; i < entityID->size() + 1; ++i) {

@@ -70,6 +70,8 @@ public:
 
 namespace GameObjects {
 
+	void removeEntityByID(std::vector<Entity *> *entityID, int id);
+
 	int giveUniqueID(std::vector<Entity *> *entityID, int &id);
 
 	Entity *getEntityByID(std::vector<Entity *> *entityID, int id);
