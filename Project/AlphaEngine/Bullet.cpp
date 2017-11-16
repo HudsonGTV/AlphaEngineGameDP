@@ -4,6 +4,7 @@
 Bullet::Bullet(char *texturePath, std::vector<Entity *> *entityID, int frameCount, math::vec3 position) : Entity(-1, texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
 
 	m_entityID = entityID;
+	m_name = "Bullet";
 
 	GameObjects::giveUniqueID(entityID, m_id);
 

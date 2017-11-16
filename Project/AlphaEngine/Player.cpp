@@ -5,6 +5,7 @@
 
 Player::Player(char *texturePath, std::vector<Entity *> *entityID, int frameCount, float width, float height) : Entity(ID_PLAYER, texturePath, frameCount, COLLIDER_BOX, width, height) {
 	m_input = new InputManager(entityID, &m_entityBullets);
+	m_name = "Player";
 }
 
 void Player::Update() {

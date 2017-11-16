@@ -48,6 +48,8 @@ protected:
 public:
 	int m_id = -1;
 
+	std::string m_name = "Entity";
+
 	Entity(int id, char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
 	~Entity();
 

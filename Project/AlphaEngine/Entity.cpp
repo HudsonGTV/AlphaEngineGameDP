@@ -1,6 +1,7 @@
 #include "Entity.h"
 #include "Collider.h"
 #include "GraphicsEngine.h"
+#include "Enemy.h"
 
 Entity::Entity(int id, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
 
@@ -81,7 +82,7 @@ void Entity::Update() {
 }
 
 void Entity::Collide(Entity *other) {
-
+	/*
 	std::string toPrint = "Collision at ";
 
 	toPrint += std::to_string(m_position.x) + ", " + std::to_string(m_position.y);
@@ -90,7 +91,25 @@ void Entity::Collide(Entity *other) {
 	toPrint += "\n";
 
 	AESysPrintf(toPrint.c_str());
-
+	*/
+	if (m_name == "Bullet")
+	{
+		if (other->m_name == "Enemy")
+		{
+			Enemy *enemy = dynamic_cast<Enemy *>(other);
+			enemy->SetHealth(enemy->GetHealth() - 1);
+			GameObjects::removeEntityByID(m_entityID, m_id);
+		}
+	}
+	if (m_name == "Enemy")
+	{
+		if (other->m_name == "Bullet")
+		{
+			Enemy *enemy = dynamic_cast<Enemy *>(this);
+			enemy->SetHealth(enemy->GetHealth() - 1);
+			GameObjects::removeEntityByID(m_entityID, other->m_id);
+		}
+	}
 }
 
 math::vec3 Entity::GetPosition() const {

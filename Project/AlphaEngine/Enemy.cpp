@@ -2,7 +2,7 @@
 #include "GraphicsEngine.h"
 
 Enemy::Enemy(char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) : Entity(ID_BOSS, texturePath, frameCount, ctype, width, height, textureWidth, textureHeight) {
-
+	m_name = "Enemy";
 }
 
 void Enemy::Update() {
