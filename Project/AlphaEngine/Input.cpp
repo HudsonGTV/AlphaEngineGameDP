@@ -57,8 +57,6 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 				mY = mY - AEGfxGetWinMaxY();
 
 				math::vec2 mousePos(mX, -mY);
-				
-				Console::out::println(mousePos);
 
 				//FIRE BULLET
 				m_entityBullets->push_back(new Bullet("../../assets/entity/bullet/bullet.png", m_entityID, 1, entity->GetPosition()));
