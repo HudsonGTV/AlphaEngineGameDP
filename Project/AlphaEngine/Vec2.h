@@ -2,8 +2,6 @@
 #define VEC2
 
 #include <ostream>
-#include <string>
-#include <sstream>
 
 namespace math {
 
