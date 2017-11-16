@@ -1,6 +1,7 @@
 #include <time.h>
 
 #include "Application.h"
+#include "consoleio.h"
 
 Application::Application(int winWidth, int winHeight, int refreshRate) {
 

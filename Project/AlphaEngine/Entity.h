@@ -33,6 +33,8 @@ protected:
 	math::vec3 m_position = math::vec3(0.0f, 0.0f, 0.0f);
 	math::vec3 m_velocity;
 
+	std::vector<Entity *> *m_entityID;
+
 	InputManager *m_input;
 	Collider *m_collider;
 	ColliderType m_ctype;
@@ -69,6 +71,8 @@ public:
 };
 
 namespace GameObjects {
+
+	void removeEntityByID(std::vector<Entity *> *entityID, int id);
 
 	int giveUniqueID(std::vector<Entity *> *entityID, int &id);
 
