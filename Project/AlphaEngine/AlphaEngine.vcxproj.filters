@@ -126,6 +126,9 @@
     <ClCompile Include="out.cpp">
       <Filter>Source Files\Application\IO</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjects.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="consoleio.h">
       <Filter>Header Files\Application\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

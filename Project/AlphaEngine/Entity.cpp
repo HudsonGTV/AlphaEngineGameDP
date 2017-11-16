@@ -92,19 +92,16 @@ void Entity::Collide(Entity *other) {
 
 	AESysPrintf(toPrint.c_str());
 	*/
-	if (m_name == "Bullet")
-	{
-		if (other->m_name == "Enemy")
-		{
+	if(m_name == "Bullet") {
+		if(other->m_name == "Enemy") {
 			Enemy *enemy = dynamic_cast<Enemy *>(other);
 			enemy->SetHealth(enemy->GetHealth() - 1);
 			GameObjects::removeEntityByID(m_entityID, m_id);
 		}
 	}
-	if (m_name == "Enemy")
-	{
-		if (other->m_name == "Bullet")
-		{
+
+	if(m_name == "Enemy") {
+		if (other->m_name == "Bullet") {
 			Enemy *enemy = dynamic_cast<Enemy *>(this);
 			enemy->SetHealth(enemy->GetHealth() - 1);
 			GameObjects::removeEntityByID(m_entityID, other->m_id);
@@ -138,52 +135,4 @@ float Entity::GetPositionY() const {
 
 float Entity::GetPositionZ() const {
 	return m_position.z;
-}
-
-void GameObjects::removeEntityByID(std::vector<Entity *> *entityID, int id) {
-
-	for(int i = 0; i < entityID->size(); ++i) {
-		if((*entityID)[i]->m_id == id) {
-			entityID->erase(entityID->begin() + i);
-			break;
-		}
-	}
-
-}
-
-int GameObjects::giveUniqueID(std::vector<Entity *> *entityID, int &id) {
-
-	for(int i = 0; i < entityID->size() + 1; ++i) {
-
-		for(int j = 0; j < entityID->size(); ++j) {
-			if((*entityID)[j]->m_id != i) {
-				id = i;
-			} else {
-				id = -1;
-				break;
-			}
-		}
-
-		if(id != -1) {
-			return id;
-		}
-
-	}
-
-	if(id == -1) {
-		return entityID->size() + 1;
-	}
-
-}
-
-Entity *GameObjects::getEntityByID(std::vector<Entity *> *entityID, int id) {
-
-	for(int i = 0; i < entityID->size(); ++i) {
-		if((*entityID)[i]->m_id == id) {
-			return (*entityID)[i];
-		}
-	}
-
-	return nullptr;
-
 }

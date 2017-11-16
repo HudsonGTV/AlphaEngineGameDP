@@ -63,7 +63,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	AESysInit(&sysInitInfo);
 
 	// SET WINDOW TITLE
-	AESysSetWindowTitle("Foo");
+	AESysSetWindowTitle("Potato Man");
 	
 	// RESET SYSTEM MODULES
 	AESysReset();
@@ -123,8 +123,6 @@ void Application::Uninit(HINSTANCE instanceH) {
 	// DELETE UNLOADED CLASSES
 	delete m_game;
 	delete m_graphics;
-	//delete m_entityID[ID_PLAYER];
-	//delete m_entityID[ID_BOSS];
 
 	AESysExit();
 

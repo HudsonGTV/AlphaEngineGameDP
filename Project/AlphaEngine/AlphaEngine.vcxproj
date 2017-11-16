@@ -133,6 +133,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="GameObjects.cpp" />
     <ClCompile Include="out.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="GameEngine.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="consoleio.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GameObjects.h" />
     <ClInclude Include="out.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="GameEngine.h" />

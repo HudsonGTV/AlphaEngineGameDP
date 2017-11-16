@@ -13,6 +13,7 @@
 #include "Math.h"
 #include "Input.h"
 #include "Collider.h"
+#include "GameObjects.h"
 
 class InputManager;
 
@@ -71,15 +72,5 @@ public:
 	float GetPositionZ() const;
 
 };
-
-namespace GameObjects {
-
-	void removeEntityByID(std::vector<Entity *> *entityID, int id);
-
-	int giveUniqueID(std::vector<Entity *> *entityID, int &id);
-
-	Entity *getEntityByID(std::vector<Entity *> *entityID, int id);
-
-}
 
 #endif
