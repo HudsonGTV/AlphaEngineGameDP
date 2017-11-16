@@ -35,12 +35,6 @@ namespace math {
 
 		friend std::ostream &operator<<(std::ostream& stream, const vec2& vector);
 
-		operator std::string() const {
-			std::stringstream stream;
-			stream << "vec2(" << x << ", " << y << ")" << std::endl;
-			return stream.str();
-		}
-
 	};
 
 }
