@@ -23,7 +23,7 @@ static Entity *entityBullet;
 void Game::Init(std::vector<Entity *> *entityID) {
 
 	// CREATE OBJECTS HERE
-	entityPlayer = new Player("../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
+	entityPlayer = new Player("../../assets/entity/player/player.png", entityID, 3, 60.0f, 60.0f);
 	entityBoss = new Enemy("../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 60.0f);
 
 	// SET PROPERTIES HERE

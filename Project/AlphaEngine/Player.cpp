@@ -3,8 +3,8 @@
 #include "Player.h"
 #include "GraphicsEngine.h"
 
-Player::Player(char *texturePath, int frameCount, float width, float height) : Entity(ID_PLAYER, texturePath, frameCount, COLLIDER_BOX, width, height) {
-	m_input = new InputManager(&m_entityBullets);
+Player::Player(char *texturePath, std::vector<Entity *> *entityID, int frameCount, float width, float height) : Entity(ID_PLAYER, texturePath, frameCount, COLLIDER_BOX, width, height) {
+	m_input = new InputManager(entityID, &m_entityBullets);
 }
 
 void Player::Update() {

@@ -5,7 +5,8 @@ InputManager::InputManager() {
 
 }
 
-InputManager::InputManager(std::vector<Bullet *> *entityBullets) {
+InputManager::InputManager(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBullets) {
+	m_entityID = entityID;
 	m_entityBullets = entityBullets;
 }
 
@@ -60,7 +61,7 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 				AESysPrintf("\n");
 
 				//FIRE BULLET
-				m_entityBullets->push_back(new Bullet("../../assets/entity/bullet/bullet.png", 1, entity->GetPosition()));
+				m_entityBullets->push_back(new Bullet("../../assets/entity/bullet/bullet.png", m_entityID, 1, entity->GetPosition()));
 
 				//get bullet direction
 				math::vec2 bulletPos(entity->GetPosition().x, entity->GetPosition().y);
