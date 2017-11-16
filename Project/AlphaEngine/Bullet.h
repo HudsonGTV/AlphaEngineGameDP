@@ -8,6 +8,7 @@
 class Bullet : public Entity {
 
 private:
+
 	std::vector<Entity *> *m_entityID;
 
 public:
@@ -20,4 +21,3 @@ public:
 };
 
 #endif
-
