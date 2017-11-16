@@ -4,6 +4,7 @@
 Bullet::Bullet(char *texturePath, std::vector<Entity *> *entityID, int frameCount, math::vec3 position) : Entity(-1, texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
 
 	for(int i = 0; i < entityID->size() + 1; ++i) {
+
 		for(int j = 0; j < entityID->size(); ++j) {
 			if((*entityID)[j]->m_id != i) {
 				m_id = i;
