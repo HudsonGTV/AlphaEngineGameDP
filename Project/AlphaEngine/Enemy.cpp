@@ -5,10 +5,6 @@ Enemy::Enemy(char *texturePath, int frameCount, ColliderType ctype, float width,
 
 }
 
-void Enemy::SetHealth(float health) {
-	m_health = health;
-}
-
 void Enemy::Update() {
 
 	if(!m_isDead) {

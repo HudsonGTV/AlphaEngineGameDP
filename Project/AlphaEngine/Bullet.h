@@ -14,8 +14,6 @@ public:
 
 	Bullet(char *texturePath, std::vector<Entity *> *entityID, int frameCount, math::vec3 position);
 	~Bullet();
-
-	void Destory(int index, std::vector<Bullet *> *entityBullets);
 	
 	void Update();
 

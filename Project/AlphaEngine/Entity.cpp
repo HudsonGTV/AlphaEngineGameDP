@@ -62,6 +62,10 @@ void Entity::SetVelocity(math::vec3 vel) {
 	m_velocity = vel;
 }
 
+void Entity::SetHealth(float health) {
+	m_health = health;
+}
+
 void Entity::Update() {
 
 	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);

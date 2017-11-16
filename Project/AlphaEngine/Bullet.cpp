@@ -14,7 +14,7 @@ Bullet::Bullet(char *texturePath, std::vector<Entity *> *entityID, int frameCoun
 }
 
 Bullet::~Bullet() {
-
+	//entityBullets->erase(entityBullets->begin() + index);
 }
 
 void Bullet::Update() {
@@ -28,12 +28,5 @@ void Bullet::Update() {
 	SetPosition(m_velocity);
 
 	m_input->Update(this, false, 0.0f);
-
-}
-
-void Bullet::Destory(int index, std::vector<Bullet *> *entityBullets) {
-
-	entityBullets->erase(entityBullets->begin() + index);
-	delete this;
 
 }

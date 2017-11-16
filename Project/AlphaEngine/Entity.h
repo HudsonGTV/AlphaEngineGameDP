@@ -52,6 +52,7 @@ public:
 	void SetWorldPosition(math::vec3 pos);
 	void SetPosition(math::vec3 pos);
 	void SetVelocity(math::vec3 vel);
+	void SetHealth(float health);
 	
 	virtual void Update();
 	virtual void Collide(Entity *other);
