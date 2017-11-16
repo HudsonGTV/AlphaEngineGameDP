@@ -1,5 +1,6 @@
 #include "Input.h"
 #include "Bullet.h"
+#include "out.h"
 
 InputManager::InputManager() {
 
@@ -56,9 +57,6 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 				mY = mY - AEGfxGetWinMaxY();
 
 				math::vec2 mousePos(mX, -mY);
-				AESysPrintf("%d", mX);
-				AESysPrintf(", %d", mY);
-				AESysPrintf("\n");
 
 				//FIRE BULLET
 				m_entityBullets->push_back(new Bullet("../../assets/entity/bullet/bullet.png", m_entityID, 1, entity->GetPosition()));
