@@ -1,10 +1,17 @@
 #include "GameObjects.h"
+#include "consoleio.h"
 
 void GameObjects::removeEntityByID(std::vector<Entity *> *entityID, int id) {
+
+	if(entityID == nullptr) {
+		Console::out::println(std::string("Could not remove entity with ID " + std::to_string(id) + ". It does not exist in the specified vector."), "Warning");
+		return;
+	}
 
 	for(int i = 0; i < entityID->size(); ++i) {
 		if((*entityID)[i]->m_id == id) {
 			entityID->erase(entityID->begin() + i);
+			Console::out::println(std::string("Entity with ID " + std::to_string(id) + " was killed successfully."));
 			break;
 		}
 	}
@@ -43,6 +50,8 @@ Entity *GameObjects::getEntityByID(std::vector<Entity *> *entityID, int id) {
 			return (*entityID)[i];
 		}
 	}
+
+	Console::out::println(std::string("Could not find entity with ID " + std::to_string(id) + ". It does not exist in the specified vector."), "Warning");
 
 	return nullptr;
 

@@ -14,17 +14,17 @@ std::string currentDateTime() {
 
 }
 
-void Console::out::print(std::string str) {
+void Console::out::print(std::string str, std::string tag) {
 
-	std::string finalStr = currentDateTime() + " [Debug] " + str;
+	std::string finalStr = currentDateTime() + " [" + tag + "] " + str;
 
 	AESysPrintf(finalStr.c_str());
 
 }
 
-void Console::out::println(std::string str) {
+void Console::out::println(std::string str, std::string tag) {
 
-	std::string finalStr = currentDateTime() + " [Debug] " + str + "\n";
+	std::string finalStr = currentDateTime() + " [" + tag + "] " + str + "\n";
 
 	AESysPrintf(finalStr.c_str());
 

@@ -10,8 +10,8 @@ namespace Console {
 
 	namespace out {
 
-		void print(std::string str);
-		void println(std::string str);
+		void print(std::string str, std::string tag = "Debug");
+		void println(std::string str, std::string tag = "Debug");
 
 	}
 
