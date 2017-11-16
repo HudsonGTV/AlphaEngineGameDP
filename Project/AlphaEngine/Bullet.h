@@ -2,6 +2,7 @@
 #define BULLET_H
 
 #include <vector>
+
 #include "Math.h"
 #include "Entity.h"
 
