@@ -8,12 +8,7 @@
 
 class Bullet : public Entity {
 
-private:
-
-	std::vector<Entity *> *m_entityID;
-
 public:
-
 	Bullet(char *texturePath, std::vector<Entity *> *entityID, int frameCount, math::vec3 position);
 	~Bullet();
 	
