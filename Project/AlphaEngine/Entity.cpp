@@ -100,6 +100,7 @@ void Entity::Collide(Entity *other) {
 			Enemy *enemy = dynamic_cast<Enemy *>(other);
 			enemy->SetHealth(enemy->GetHealth() - 1);
 			GameObjects::removeEntityByID(m_entityID, m_id);
+			return;
 		}
 	}
 
@@ -108,6 +109,7 @@ void Entity::Collide(Entity *other) {
 			Enemy *enemy = dynamic_cast<Enemy *>(this);
 			enemy->SetHealth(enemy->GetHealth() - 1);
 			GameObjects::removeEntityByID(m_entityID, other->m_id);
+			return;
 		}
 	}
 

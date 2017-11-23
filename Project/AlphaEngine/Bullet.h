@@ -8,8 +8,11 @@
 
 class Bullet : public Entity {
 
+private:
+	std::vector<Bullet *> *m_entityBullets;
+
 public:
-	Bullet(std::vector<Entity *> *entityID, char *texturePath, int frameCount, math::vec3 position);
+	Bullet(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBullets, char *texturePath, int frameCount, math::vec3 position);
 	~Bullet();
 	
 	void Update();

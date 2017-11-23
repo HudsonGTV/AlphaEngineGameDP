@@ -1,8 +1,9 @@
 #include "Bullet.h"
 #include "GraphicsEngine.h"
 
-Bullet::Bullet(std::vector<Entity *> *entityID, char *texturePath, int frameCount, math::vec3 position) : Entity(entityID, -1, texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
+Bullet::Bullet(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBullets, char *texturePath, int frameCount, math::vec3 position) : Entity(entityID, -1, texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
 
+	m_entityBullets = entityBullets;
 	m_name = "Bullet";
 
 	GameObjects::giveUniqueID(entityID, m_id);
@@ -14,7 +15,7 @@ Bullet::Bullet(std::vector<Entity *> *entityID, char *texturePath, int frameCoun
 }
 
 Bullet::~Bullet() {
-	//entityBullets->erase(entityBullets->begin() + index);
+	//GameObjects::removeEntityByID(std::vector<Entity *>(m_entityBullets), m_id);
 }
 
 void Bullet::Update() {

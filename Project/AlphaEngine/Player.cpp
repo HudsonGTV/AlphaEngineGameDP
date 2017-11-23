@@ -27,7 +27,14 @@ void Player::Update() {
 
 	// UPDATE BULLETS
 	for(int i = 0; i < m_entityBullets.size(); ++i) {
+
+		if(m_entityBullets[i]->m_queueDeallocation == true) {
+			m_entityBullets.erase(m_entityBullets.begin() + i);
+			break;
+		}
+
 		m_entityBullets[i]->Update();
+
 	}
 
 	//OutputDebugStringA("Player Position: ");

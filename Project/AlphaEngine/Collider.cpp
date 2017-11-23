@@ -14,8 +14,8 @@ void Collider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
 	std::cout << "CircleCollision called on standard Collider object.\n";
 }
 
-void Collider::Update(std::vector<Entity *> *entities, int entityNum, int currentEntity) {
-	for (int i = currentEntity; i < entityNum; ++i) {
+void Collider::Update(std::vector<Entity *> *entities, int currentEntity) {
+	for (int i = currentEntity; i < entities->size(); ++i) {
 		ResolveCollision((*entities)[currentEntity], (*entities)[i]);
 	}
 }

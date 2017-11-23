@@ -47,6 +47,8 @@ protected:
 	AEGfxTexture *m_debugTexture;
 
 public:
+	bool m_queueDeallocation = false;
+
 	int m_id = -1;
 
 	std::string m_name = "Entity";
