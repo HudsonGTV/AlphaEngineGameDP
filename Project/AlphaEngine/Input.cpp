@@ -59,7 +59,7 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 				math::vec2 mousePos(mX, -mY);
 
 				//FIRE BULLET
-				m_entityBullets->push_back(new Bullet("../../assets/entity/bullet/bullet.png", m_entityID, 1, entity->GetPosition()));
+				m_entityBullets->push_back(new Bullet(m_entityID, "../../assets/entity/bullet/bullet.png", 1, entity->GetPosition()));
 
 				//get bullet direction
 				math::vec2 bulletPos(entity->GetPosition().x, entity->GetPosition().y);

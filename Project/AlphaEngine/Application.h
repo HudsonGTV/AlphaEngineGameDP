@@ -41,6 +41,8 @@ public:
 	void Loop(HINSTANCE instanceH);
 	void Uninit(HINSTANCE instanceH);
 
+	void GlobalInputManager(double dt);
+
 };
 
 #endif

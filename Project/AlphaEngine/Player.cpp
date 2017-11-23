@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "GraphicsEngine.h"
 
-Player::Player(char *texturePath, std::vector<Entity *> *entityID, int frameCount, float width, float height) : Entity(ID_PLAYER, texturePath, frameCount, COLLIDER_BOX, width, height) {
+Player::Player(std::vector<Entity *> *entityID, char *texturePath, int frameCount, float width, float height) : Entity(entityID, ID_PLAYER, texturePath, frameCount, COLLIDER_BOX, width, height) {
 	m_input = new InputManager(entityID, &m_entityBullets);
 	m_name = "Player";
 }
@@ -24,11 +24,10 @@ void Player::Update() {
 
 	// DEBUG STRING OUTPUT
 	std::string tempPos = std::to_string(m_position.x) + ", " + std::to_string(m_position.y);
+
 	// UPDATE BULLETS
-	for (int i = 0; i < m_entityBullets.size(); ++i) {
-
+	for(int i = 0; i < m_entityBullets.size(); ++i) {
 		m_entityBullets[i]->Update();
-
 	}
 
 	//OutputDebugStringA("Player Position: ");

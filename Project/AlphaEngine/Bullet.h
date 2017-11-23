@@ -9,7 +9,7 @@
 class Bullet : public Entity {
 
 public:
-	Bullet(char *texturePath, std::vector<Entity *> *entityID, int frameCount, math::vec3 position);
+	Bullet(std::vector<Entity *> *entityID, char *texturePath, int frameCount, math::vec3 position);
 	~Bullet();
 	
 	void Update();

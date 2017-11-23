@@ -11,7 +11,7 @@ private:
 	std::vector<Bullet *> m_entityBullets;
 
 public:
-	Player(char *texturePath, std::vector<Entity *> *entityID, int frameCount = 1, float width = 0, float height = 0);
+	Player(std::vector<Entity *> *entityID, char *texturePath, int frameCount = 1, float width = 0, float height = 0);
 
 	void Update();
 

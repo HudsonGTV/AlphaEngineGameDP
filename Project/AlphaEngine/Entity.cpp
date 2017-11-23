@@ -3,8 +3,9 @@
 #include "GraphicsEngine.h"
 #include "Enemy.h"
 
-Entity::Entity(int id, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
+Entity::Entity(std::vector<Entity *> *entityID, int id, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
 
+	m_entityID = entityID;
 	m_id = id;
 
 	m_textureWidth = textureWidth;
@@ -82,6 +83,7 @@ void Entity::Update() {
 }
 
 void Entity::Collide(Entity *other) {
+
 	/*
 	std::string toPrint = "Collision at ";
 
@@ -92,6 +94,7 @@ void Entity::Collide(Entity *other) {
 
 	AESysPrintf(toPrint.c_str());
 	*/
+
 	if(m_name == "Bullet") {
 		if(other->m_name == "Enemy") {
 			Enemy *enemy = dynamic_cast<Enemy *>(other);
@@ -101,12 +104,13 @@ void Entity::Collide(Entity *other) {
 	}
 
 	if(m_name == "Enemy") {
-		if (other->m_name == "Bullet") {
+		if(other->m_name == "Bullet") {
 			Enemy *enemy = dynamic_cast<Enemy *>(this);
 			enemy->SetHealth(enemy->GetHealth() - 1);
 			GameObjects::removeEntityByID(m_entityID, other->m_id);
 		}
 	}
+
 }
 
 math::vec3 Entity::GetPosition() const {
