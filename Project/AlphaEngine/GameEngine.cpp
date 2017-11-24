@@ -34,8 +34,6 @@ void Game::Init(std::vector<Entity *> *entityID) {
 	entityID->push_back(entityPlayer);
 	entityID->push_back(entityBoss);
 
-	AESysPrintf("still works\n");
-
 }
 
 void Game::Update(std::vector<Entity *> *entityID, double dt) {
@@ -44,10 +42,14 @@ void Game::Update(std::vector<Entity *> *entityID, double dt) {
 	Graphics::EnableAnimations();
 	
 	// UPDATE OBJECTS
-	entityBoss->Update();
-	entityPlayer->Update();
+	//entityBoss->Update();
+	//entityPlayer->Update();
+	ObjectManager::updateObject(entityBoss);
+	ObjectManager::updateObject(entityPlayer);
 
 	// UPDATE AI
 	entityBoss->AiUpdate(entityID);
+
+	//ObjectManager::removeEntityByID(entityID, ID_BOSS);
 
 }

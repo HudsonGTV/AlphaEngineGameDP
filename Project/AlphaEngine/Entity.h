@@ -13,7 +13,7 @@
 #include "Math.h"
 #include "Input.h"
 #include "Collider.h"
-#include "GameObjects.h"
+#include "ObjectManager.h"
 
 class InputManager;
 
@@ -47,7 +47,7 @@ protected:
 	AEGfxTexture *m_debugTexture;
 
 public:
-	bool m_queueDeallocation = false;
+	bool m_objectWasRemovedByID = false;
 
 	int m_id = -1;
 

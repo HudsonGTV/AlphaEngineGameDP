@@ -70,15 +70,19 @@ void Entity::SetHealth(float health) {
 
 void Entity::Update() {
 
-	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
+	if(!m_objectWasRemovedByID) {
 
-	if(ENABLE_DEBUG_LINES) {
-		Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 1, 5.0f);
+		Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
+
+		if(ENABLE_DEBUG_LINES) {
+			Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 1, 5.0f);
+		}
+
+		SetPosition(m_velocity);
+
+		m_input->Update(this, false, 0.0f);
+
 	}
-
-	SetPosition(m_velocity);
-
-	m_input->Update(this, false, 0.0f);
 
 }
 
@@ -99,7 +103,7 @@ void Entity::Collide(Entity *other) {
 		if(other->m_name == "Enemy") {
 			Enemy *enemy = dynamic_cast<Enemy *>(other);
 			enemy->SetHealth(enemy->GetHealth() - 1);
-			GameObjects::removeEntityByID(m_entityID, m_id);
+			//ObjectManager::removeEntityByID(m_entityID, m_id);
 			return;
 		}
 	}
@@ -108,7 +112,7 @@ void Entity::Collide(Entity *other) {
 		if(other->m_name == "Bullet") {
 			Enemy *enemy = dynamic_cast<Enemy *>(this);
 			enemy->SetHealth(enemy->GetHealth() - 1);
-			GameObjects::removeEntityByID(m_entityID, other->m_id);
+			ObjectManager::removeEntityByID(m_entityID, other->m_id);
 			return;
 		}
 	}

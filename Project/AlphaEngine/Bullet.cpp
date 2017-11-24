@@ -6,7 +6,7 @@ Bullet::Bullet(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBul
 	m_entityBullets = entityBullets;
 	m_name = "Bullet";
 
-	GameObjects::giveUniqueID(entityID, m_id);
+	ObjectManager::giveUniqueID(entityID, m_id);
 
 	entityID->push_back(this);
 
@@ -15,7 +15,7 @@ Bullet::Bullet(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBul
 }
 
 Bullet::~Bullet() {
-	//GameObjects::removeEntityByID(std::vector<Entity *>(m_entityBullets), m_id);
+	//ObjectManager::removeEntityByID(std::vector<Entity *>(m_entityBullets), m_id);
 }
 
 void Bullet::Update() {

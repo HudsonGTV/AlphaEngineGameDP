@@ -34,7 +34,7 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityID) {
 
 		math::vec2 currPos(m_position.x, m_position.y);
 
-		Entity *player = GameObjects::getEntityByID(entityID, ID_PLAYER);
+		Entity *player = ObjectManager::getEntityByID(entityID, ID_PLAYER);
 
 		// GET PLAYER DIRECTION
 		if(player != nullptr) {

@@ -28,7 +28,7 @@ void Player::Update() {
 	// UPDATE BULLETS
 	for(int i = 0; i < m_entityBullets.size(); ++i) {
 
-		if(m_entityBullets[i]->m_queueDeallocation == true) {
+		if(m_entityBullets[i]->m_objectWasRemovedByID == true) {
 			m_entityBullets.erase(m_entityBullets.begin() + i);
 			break;
 		}

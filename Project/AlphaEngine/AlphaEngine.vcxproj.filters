@@ -126,7 +126,7 @@
     <ClCompile Include="out.cpp">
       <Filter>Source Files\Application\IO</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects.cpp">
+    <ClCompile Include="ObjectManager.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -182,7 +182,7 @@
     <ClInclude Include="consoleio.h">
       <Filter>Header Files\Application\IO</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjects.h">
+    <ClInclude Include="ObjectManager.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>

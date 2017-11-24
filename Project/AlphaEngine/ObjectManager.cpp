@@ -1,7 +1,15 @@
-#include "GameObjects.h"
+#include "ObjectManager.h"
 #include "consoleio.h"
 
-void GameObjects::removeEntityByID(std::vector<Entity *> *entityID, int id) {
+void ObjectManager::updateObject(Entity *obj) {
+
+	if(!obj->m_objectWasRemovedByID) {
+		obj->Update();
+	}
+
+}
+
+void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id) {
 
 	if(entityID == nullptr) {
 		Console::out::println(std::string("Could not remove entity with ID " + std::to_string(id) + ". It does not exist in the specified vector."), "Warning");
@@ -10,7 +18,8 @@ void GameObjects::removeEntityByID(std::vector<Entity *> *entityID, int id) {
 
 	for(int i = 0; i < entityID->size(); ++i) {
 		if((*entityID)[i]->m_id == id) {
-			(*entityID)[i]->m_queueDeallocation = true;
+			(*entityID)[i]->m_objectWasRemovedByID = true;
+			//delete (*entityID)[i];
 			entityID->erase(entityID->begin() + i);
 			Console::out::println(std::string("Entity with ID " + std::to_string(id) + " was killed successfully."));
 			break;
@@ -19,7 +28,7 @@ void GameObjects::removeEntityByID(std::vector<Entity *> *entityID, int id) {
 
 }
 
-int GameObjects::giveUniqueID(std::vector<Entity *> *entityID, int &id) {
+void ObjectManager::giveUniqueID(std::vector<Entity *> *entityID, int &id) {
 
 	for(int i = 0; i < entityID->size() + 1; ++i) {
 
@@ -33,18 +42,18 @@ int GameObjects::giveUniqueID(std::vector<Entity *> *entityID, int &id) {
 		}
 
 		if(id != -1) {
-			return id;
+			return;
 		}
 
 	}
 
 	if(id == -1) {
-		return entityID->size() + 1;
+		id = entityID->size() + 1;
 	}
 
 }
 
-Entity *GameObjects::getEntityByID(std::vector<Entity *> *entityID, int id) {
+Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityID, int id) {
 
 	for(int i = 0; i < entityID->size(); ++i) {
 		if((*entityID)[i]->m_id == id) {
