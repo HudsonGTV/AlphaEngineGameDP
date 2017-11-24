@@ -30,7 +30,7 @@ void Enemy::Update() {
 
 void Enemy::AiUpdate(std::vector<Entity *> *entityID) {
 
-	if(!m_isDead) {
+	if(!m_isDead && !m_objectWasRemovedByID) {
 
 		math::vec2 currPos(m_position.x, m_position.y);
 
