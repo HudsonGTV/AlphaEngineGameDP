@@ -26,13 +26,13 @@ void Game::Init(std::vector<Entity *> *entityID) {
 	entityPlayer = new Player(entityID, "../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
 	entityBoss = new Enemy(entityID, "../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 60.0f);
 
-	// SET PROPERTIES HERE
+	// SET WORLD POSITION HERE
 	entityPlayer->SetWorldPosition(math::vec3(-250.0f, 0.0f, 0.0f));
 	entityBoss->SetWorldPosition(math::vec3(250.0f, 0.0f, 0.0f));
 
-	// ADD TO ARRAY
-	entityID->push_back(entityPlayer);
-	entityID->push_back(entityBoss);
+	// SET HEALTH HERE
+	entityPlayer->SetHealth(20.0f);
+	entityBoss->SetHealth(20.0f);
 
 }
 
@@ -42,14 +42,10 @@ void Game::Update(std::vector<Entity *> *entityID, double dt) {
 	Graphics::EnableAnimations();
 	
 	// UPDATE OBJECTS
-	//entityBoss->Update();
-	//entityPlayer->Update();
 	ObjectManager::updateObject(entityBoss);
 	ObjectManager::updateObject(entityPlayer);
 
 	// UPDATE AI
 	entityBoss->AiUpdate(entityID);
-
-	//ObjectManager::removeEntityByID(entityID, ID_BOSS);
 
 }

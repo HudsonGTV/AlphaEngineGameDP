@@ -41,15 +41,12 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount
 	};
 
-	// PLAYER
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	// SET POISITION
-	//AEGfxSetPosition(entity->GetPositionX(), entity->GetPositionY());
+
 	AEGfxSetFullTransformWithZOrder(entity->GetPositionX(), entity->GetPositionY(), entity->GetPositionZ() + zOrder, 0.0f, 1.0f, 1.0f);
-	// SET TEXTURE
 	AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
-	// DRAW MESH
 	AEGfxSetTransparency(1.0f);
+
 	AEGfxMeshDraw(*mesh, AE_GFX_MDM_TRIANGLES);
 
 }

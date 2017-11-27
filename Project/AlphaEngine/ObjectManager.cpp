@@ -9,7 +9,7 @@ void ObjectManager::updateObject(Entity *obj) {
 
 }
 
-void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id) {
+void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bool shouldDeallocate) {
 
 	if(entityID == nullptr) {
 		Console::out::println(std::string("Could not remove entity with ID " + std::to_string(id) + ". It does not exist in the specified vector."), "Warning");
@@ -18,11 +18,18 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id) {
 
 	for(int i = 0; i < entityID->size(); ++i) {
 		if((*entityID)[i]->m_id == id) {
+
 			(*entityID)[i]->m_objectWasRemovedByID = true;
-			//delete (*entityID)[i];
+
+			if(shouldDeallocate) {
+				delete (*entityID)[i];
+			}
+
 			entityID->erase(entityID->begin() + i);
 			Console::out::println(std::string("Entity with ID " + std::to_string(id) + " was killed successfully."));
+
 			break;
+
 		}
 	}
 
@@ -62,6 +69,20 @@ Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityID, int id) {
 	}
 
 	Console::out::println(std::string("Could not find entity with ID " + std::to_string(id) + ". It does not exist in the specified vector."), "Warning");
+
+	return nullptr;
+
+}
+
+Entity * ObjectManager::getEntityByName(std::vector<Entity*>* entityID, std::string name) {
+	
+	for(int i = 0; i < entityID->size(); ++i) {
+		if((*entityID)[i]->m_name == name) {
+			return (*entityID)[i];
+		}
+	}
+
+	Console::out::println(std::string("Could not find entity with name " + name + ". It does not exist in the specified vector."), "Warning");
 
 	return nullptr;
 

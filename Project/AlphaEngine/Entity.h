@@ -1,10 +1,6 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#define ENTITY_COUNT 2
-#define ID_PLAYER 0
-#define ID_BOSS 1
-
 #define ENABLE_DEBUG_LINES 1
 
 #include <string>
