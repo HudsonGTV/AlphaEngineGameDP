@@ -76,6 +76,9 @@
     <Filter Include="Source Files\Application\IO">
       <UniqueIdentifier>{3deb5fd9-6130-4ff6-ade5-8df35d4b3288}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Object\Entity\Interface">
+      <UniqueIdentifier>{680e9722-95c3-4183-abe1-30e1ffcfa5e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -128,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="IEntityAi.cpp">
+      <Filter>Source Files\Object\Entity\Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

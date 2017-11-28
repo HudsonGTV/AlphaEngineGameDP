@@ -1,7 +1,4 @@
 #include "Entity.h"
-#include "Collider.h"
-#include "GraphicsEngine.h"
-#include "Enemy.h"
 #include "consoleio.h"
 
 Entity::Entity(std::vector<Entity *> *entityID, int id, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
@@ -40,9 +37,6 @@ Entity::Entity(std::vector<Entity *> *entityID, int id, char *texturePath, int f
 
 	// SET COLLIDER TYPE
 	m_ctype = ctype;
-
-	// PUSH ENTITY TO VECTOR
-	entityID->push_back(this);
 
 }
 

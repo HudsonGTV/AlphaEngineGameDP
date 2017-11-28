@@ -34,6 +34,9 @@ void Game::Init(std::vector<Entity *> *entityID) {
 	entityPlayer->SetHealth(20.0f);
 	entityBoss->SetHealth(20.0f);
 
+	entityID->push_back(entityPlayer);
+	entityID->push_back(entityBoss);
+
 }
 
 void Game::Update(std::vector<Entity *> *entityID, double dt) {
@@ -46,6 +49,6 @@ void Game::Update(std::vector<Entity *> *entityID, double dt) {
 	ObjectManager::updateObject(entityPlayer);
 
 	// UPDATE AI
-	entityBoss->AiUpdate(entityID);
+	ObjectManager::updateObjectAi(entityID, entityBoss);
 
 }

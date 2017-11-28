@@ -3,9 +3,12 @@
 
 #include "Entity.h"
 
+class IEntityAi;
+
 namespace ObjectManager {
 
 	void updateObject(Entity *obj);
+	void updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *obj);
 
 	void removeEntityByID(std::vector<Entity *> *entityID, int id, bool shouldDeallocate = true);
 	void giveUniqueID(std::vector<Entity *> *entityID, int &id);

@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "GraphicsEngine.h"
 
-Enemy::Enemy(std::vector<Entity *> *entityID, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) : Entity(entityID, 1, texturePath, frameCount, ctype, width, height, textureWidth, textureHeight) {
+Enemy::Enemy(std::vector<Entity *> *entityID, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) : IEntityAi(entityID, 1, texturePath, frameCount, ctype, width, height, textureWidth, textureHeight) {
 	m_name = "Enemy";
 }
 

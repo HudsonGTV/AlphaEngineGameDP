@@ -3,8 +3,16 @@
 
 void ObjectManager::updateObject(Entity *obj) {
 
-	if(!obj->m_objectWasRemovedByID) {
+	if(obj != nullptr && !obj->m_objectWasRemovedByID) {
 		obj->Update();
+	}
+
+}
+
+void ObjectManager::updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *obj) {
+
+	if(obj != nullptr && !obj->m_objectWasRemovedByID) {
+		obj->AiUpdate(entityID);
 	}
 
 }
@@ -23,6 +31,8 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bo
 
 			if(shouldDeallocate) {
 				delete (*entityID)[i];
+				// UGLY SOLUTION SINCE I'M NOT GOING TO TRY TO LEARN SMART POINTERS
+				(*entityID)[i] = nullptr;
 			}
 
 			entityID->erase(entityID->begin() + i);

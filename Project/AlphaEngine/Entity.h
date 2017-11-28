@@ -1,7 +1,9 @@
-#ifndef OBJECT_H
-#define OBJECT_H
+#ifndef ENTITY_H
+#define ENTITY_H
 
+#ifndef ENABLE_DEBUG_LINES
 #define ENABLE_DEBUG_LINES 1
+#endif
 
 #include <string>
 
@@ -10,8 +12,7 @@
 #include "Input.h"
 #include "Collider.h"
 #include "ObjectManager.h"
-
-class InputManager;
+#include "GraphicsEngine.h"
 
 class Entity {
 
@@ -68,6 +69,16 @@ public:
 	float GetPositionX() const;
 	float GetPositionY() const;
 	float GetPositionZ() const;
+
+};
+
+class IEntityAi : public Entity {
+
+public:
+	IEntityAi(std::vector<Entity *> *entityID, int id, char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
+
+	virtual void Update();
+	virtual void AiUpdate(std::vector<Entity *> *entityID);
 
 };
 
