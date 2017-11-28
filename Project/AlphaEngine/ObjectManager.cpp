@@ -30,7 +30,7 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bo
 			(*entityID)[i]->m_objectWasRemovedByID = true;
 
 			if(shouldDeallocate) {
-				delete (*entityID)[i];
+				//delete (*entityID)[i];
 				// UGLY SOLUTION SINCE I'M NOT GOING TO TRY TO LEARN SMART POINTERS
 				(*entityID)[i] = nullptr;
 			}
