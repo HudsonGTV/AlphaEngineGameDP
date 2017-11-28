@@ -37,6 +37,8 @@ void Game::Init(std::vector<Entity *> *entityID) {
 	entityID->push_back(entityPlayer);
 	entityID->push_back(entityBoss);
 
+	ObjectManager::removeEntityByID(entityID, 1);
+
 }
 
 void Game::Update(std::vector<Entity *> *entityID, double dt) {

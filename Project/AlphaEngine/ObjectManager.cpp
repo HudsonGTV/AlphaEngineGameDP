@@ -5,6 +5,11 @@ void ObjectManager::updateObject(Entity *obj) {
 
 	if(obj != nullptr && !obj->m_objectWasRemovedByID) {
 		obj->Update();
+	} else {
+		static bool problem = false;
+		if (!problem)
+			Console::out::println(std::string("Object was nullptr"), "Warning");
+		problem = true;
 	}
 
 }
@@ -13,6 +18,11 @@ void ObjectManager::updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *o
 
 	if(obj != nullptr && !obj->m_objectWasRemovedByID) {
 		obj->AiUpdate(entityID);
+	} else {
+		static bool problem = false;
+		if (!problem)
+			Console::out::println(std::string("Object was nullptr"), "Warning");
+		problem = true;
 	}
 
 }
@@ -30,8 +40,7 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bo
 			(*entityID)[i]->m_objectWasRemovedByID = true;
 
 			if(shouldDeallocate) {
-				//delete (*entityID)[i];
-				// UGLY SOLUTION SINCE I'M NOT GOING TO TRY TO LEARN SMART POINTERS
+				delete (*entityID)[i];
 				(*entityID)[i] = nullptr;
 			}
 

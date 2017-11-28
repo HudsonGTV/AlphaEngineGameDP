@@ -14,10 +14,6 @@ Bullet::Bullet(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBul
 
 }
 
-Bullet::~Bullet() {
-	//ObjectManager::removeEntityByID(std::vector<Entity *>(m_entityBullets), m_id);
-}
-
 void Bullet::Update() {
 
 	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);

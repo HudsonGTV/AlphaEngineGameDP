@@ -9,7 +9,7 @@ void Enemy::Update() {
 
 	if(!m_objectWasRemovedByID && !m_isDead) {
 
-		if(m_health <= 0.0f) {
+		if(m_health <= 0.0f && !m_objectWasRemovedByID) {
 			m_isDead = true;
 			m_objectWasRemovedByID = true;
 			ObjectManager::removeEntityByID(m_entityID, m_id);

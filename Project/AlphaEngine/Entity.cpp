@@ -47,8 +47,15 @@ Entity::~Entity() {
 	AEGfxMeshFree(m_debugMesh);
 	AEGfxTextureUnload(m_texture);
 
-	delete m_input;
-	delete m_collider;
+	if(m_input != nullptr) {
+		delete m_input;
+		m_input = nullptr;
+	}
+
+	if(m_collider != nullptr) {
+		delete m_collider;
+		m_collider = nullptr;
+	}
 
 }
 
@@ -88,6 +95,11 @@ void Entity::Update() {
 
 void Entity::Collide(Entity *other) {
 
+	if(other == nullptr) {
+		Console::out::println(std::string("BIG PROBLEM in \"Entity::Collide\""));
+		return;
+	}
+
 	if(m_name == "Enemy") {
 		if(other->m_name == "Bullet") {
 
@@ -95,6 +107,7 @@ void Entity::Collide(Entity *other) {
 
 			Console::out::println(std::string("Enemy Health: " + std::to_string(m_health)));
 
+			// DON'T DELETE BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN PLAYER.CPP
 			ObjectManager::removeEntityByID(m_entityID, other->m_id, false);
 
 			return;
