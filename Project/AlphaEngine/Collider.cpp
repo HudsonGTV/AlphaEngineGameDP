@@ -163,6 +163,10 @@ bool CollideCircleToCircle(Entity *circleEntity1, Entity *circleEntity2) {
 
 	float max = (circle1->GetWidth() + circle2->GetWidth()) / 2;
 	float dist = sqrt(
+		// Just a note from Jeffrey: This is EXTREMELY inefficient!
+		// It would be better to do this in two steps:
+		//   1. Calculate the subtraction
+		//   2. Do a simple multiplication (the pow() call is EXTREME overkill)
 		pow(circleEntity1->GetPositionX() - circleEntity2->GetPositionX(), 2) +
 		pow(circleEntity1->GetPositionY() - circleEntity2->GetPositionY(), 2)
 	);

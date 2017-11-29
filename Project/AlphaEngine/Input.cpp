@@ -14,34 +14,13 @@ InputManager::InputManager(std::vector<Entity *> *entityID, std::vector<Bullet *
 void InputManager::Update(Entity *entity, bool controllable, float speed, double dt) {
 
 	if(controllable) {
-
-		if ((AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) && (AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S'))) {
-			entity->SetVelocity(math::vec3(speed, -speed, 0.0f));
-		}
-		else if ((AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) && (AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W'))) {
-			entity->SetVelocity(math::vec3(speed, speed, 0.0f));
-		}
-		else if ((AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) && (AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S'))) {
-			entity->SetVelocity(math::vec3(-speed, -speed, 0.0f));
-		}
-		else if ((AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) && (AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W'))) {
-			entity->SetVelocity(math::vec3(-speed, speed, 0.0f));
-		}
-		else if(AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W')) {
-			entity->SetVelocity(math::vec3(0.0f, speed, 0.0f));
-		}
-		else if(AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S')) {
-			entity->SetVelocity(math::vec3(0.0f, -speed, 0.0f));
-		}
-		else if(AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) {
-			entity->SetVelocity(math::vec3(-speed, 0.0f, 0.0f));
-		}
-		else if(AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) {
-			entity->SetVelocity(math::vec3(speed, 0.0f, 0.0f));
-		}
-		else {
-			entity->SetVelocity(math::vec3(0.0f, 0.0f, 0.0f));
-		}
+		// The way you were doing this will not behave nicely when pressing opposite directions simultaneously
+		math::vec3 velocity;
+		if(AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W')) velocity.y += speed;
+		if(AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S')) velocity.y -= speed;
+		if(AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) velocity.x -= speed;
+		if(AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) velocity.x += speed;
+		entity->SetVelocity(velocity);
 		
 		
 		if (AEInputCheckCurr(' ') || AEInputCheckCurr(VK_LBUTTON)) {

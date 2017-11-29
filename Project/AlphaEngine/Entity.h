@@ -50,7 +50,7 @@ public:
 
 	std::string m_name = "Entity";
 
-	Entity(std::vector<Entity *> *entityID, int id, char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
+	Entity(std::vector<Entity *> *entityID, /* IDs should be automatic: int id, */ char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
 	~Entity();
 
 	void SetWorldPosition(math::vec3 pos);
@@ -75,7 +75,7 @@ public:
 class IEntityAi : public Entity {
 
 public:
-	IEntityAi(std::vector<Entity *> *entityID, int id, char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
+	IEntityAi(std::vector<Entity *> *entityID, /* IDs should be automatic: int id, */ char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
 
 	virtual void Update();
 	virtual void AiUpdate(std::vector<Entity *> *entityID);

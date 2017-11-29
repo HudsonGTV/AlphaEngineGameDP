@@ -1,10 +1,10 @@
 #include "Entity.h"
 #include "consoleio.h"
 
-Entity::Entity(std::vector<Entity *> *entityID, int id, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
+Entity::Entity(std::vector<Entity *> *entityID, /* IDs should be automatic: int id, */ char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
 
 	m_entityID = entityID;
-	m_id = id;
+	m_id = ObjectManager::giveUniqueID();
 
 	m_textureWidth = textureWidth;
 	m_textureHeight = textureHeight;

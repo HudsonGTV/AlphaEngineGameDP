@@ -16,15 +16,17 @@
 #endif
 
 // OBJECTS
-static Player *entityPlayer;
-static Enemy *entityBoss;
-static Entity *entityBullet;
+static int playerID;
+static int bossID;
 
 void Game::Init(std::vector<Entity *> *entityID) {
 
 	// CREATE OBJECTS HERE
-	entityPlayer = new Player(entityID, "../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
-	entityBoss = new Enemy(entityID, "../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 60.0f);
+	Player * entityPlayer = new Player(entityID, "../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
+	Enemy * entityBoss = new Enemy(entityID, "../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 60.0f);
+
+	playerID = entityPlayer->m_id;
+	bossID = entityBoss->m_id;
 
 	// SET WORLD POSITION HERE
 	entityPlayer->SetWorldPosition(math::vec3(-250.0f, 0.0f, 0.0f));
@@ -37,7 +39,7 @@ void Game::Init(std::vector<Entity *> *entityID) {
 	entityID->push_back(entityPlayer);
 	entityID->push_back(entityBoss);
 
-	ObjectManager::removeEntityByID(entityID, 1);
+	//ObjectManager::removeEntityByID(entityID, 1);
 
 }
 
@@ -47,10 +49,16 @@ void Game::Update(std::vector<Entity *> *entityID, double dt) {
 	Graphics::EnableAnimations();
 	
 	// UPDATE OBJECTS
-	ObjectManager::updateObject(entityBoss);
-	ObjectManager::updateObject(entityPlayer);
+	Player * entityPlayer = static_cast<Player *>(ObjectManager::getEntityByID(entityID, playerID));
+	Enemy * entityBoss = static_cast<Enemy *>(ObjectManager::getEntityByID(entityID, bossID));
+
+	if (entityPlayer)
+		ObjectManager::updateObject(entityPlayer);
+	if (entityBoss)
+		ObjectManager::updateObject(entityBoss);
 
 	// UPDATE AI
-	ObjectManager::updateObjectAi(entityID, entityBoss);
+	if (entityBoss)
+		ObjectManager::updateObjectAi(entityID, entityBoss);
 
 }

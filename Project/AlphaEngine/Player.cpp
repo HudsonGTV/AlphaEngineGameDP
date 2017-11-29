@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "GraphicsEngine.h"
 
-Player::Player(std::vector<Entity *> *entityID, char *texturePath, int frameCount, float width, float height) : Entity(entityID, 0, texturePath, frameCount, COLLIDER_BOX, width, height) {
+Player::Player(std::vector<Entity *> *entityID, char *texturePath, int frameCount, float width, float height) : Entity(entityID, /* IDs should be automatic: 0, */ texturePath, frameCount, COLLIDER_BOX, width, height) {
 	m_input = new InputManager(entityID, &m_entityBullets);
 	m_name = "Player";
 }

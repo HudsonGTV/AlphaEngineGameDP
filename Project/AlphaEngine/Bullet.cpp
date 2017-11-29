@@ -1,12 +1,10 @@
 #include "Bullet.h"
 #include "GraphicsEngine.h"
 
-Bullet::Bullet(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBullets, char *texturePath, int frameCount, math::vec3 position) : Entity(entityID, -1, texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
+Bullet::Bullet(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBullets, char *texturePath, int frameCount, math::vec3 position) : Entity(entityID, /* IDs should be automatic: -1, */ texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
 
 	m_entityBullets = entityBullets;
 	m_name = "Bullet";
-
-	ObjectManager::giveUniqueID(entityID, m_id);
 
 	entityID->push_back(this);
 

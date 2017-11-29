@@ -54,6 +54,21 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bo
 
 }
 
+// Add a file-level scope variable to the ObjectManager namespace
+namespace ObjectManager
+{
+	// Keeps track of the next ID to be used in giveUniqueID()
+	static int nextUniqueID = 0;
+	// You should restructure the function to:
+	int giveUniqueID() { return nextUniqueID++; }
+	// With an additional helper function in case you want it
+	int peekNextID() { return nextUniqueID; }
+}
+/*
+	You should not be reusing IDs, because then they are not UNIQUE
+	If you reuse IDs then storing objects by ID is invalid
+	The IDs of objects already destroyed will refer to new objects
+
 void ObjectManager::giveUniqueID(std::vector<Entity *> *entityID, int &id) {
 
 	for(int i = 0; i < entityID->size() + 1; ++i) {
@@ -78,6 +93,7 @@ void ObjectManager::giveUniqueID(std::vector<Entity *> *entityID, int &id) {
 	}
 
 }
+*/
 
 Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityID, int id) {
 
