@@ -14,6 +14,18 @@ void ObjectManager::updateObject(Entity *obj) {
 
 }
 
+void ObjectManager::updateObjects(std::vector<Entity *> *entityID) {
+
+	for(Entity *entity : *entityID) {
+
+		if(entity) {
+			ObjectManager::updateObject(entity);
+		}
+
+	}
+
+}
+
 void ObjectManager::updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *obj) {
 
 	if(obj != nullptr && !obj->m_objectWasRemovedByID) {
@@ -55,8 +67,7 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bo
 }
 
 // Add a file-level scope variable to the ObjectManager namespace
-namespace ObjectManager
-{
+namespace ObjectManager {
 	// Keeps track of the next ID to be used in giveUniqueID()
 	static int nextUniqueID = 0;
 	// You should restructure the function to:

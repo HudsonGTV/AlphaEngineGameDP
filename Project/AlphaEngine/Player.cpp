@@ -33,7 +33,7 @@ void Player::Update() {
 			break;
 		}
 
-		m_entityBullets[i]->Update();
+		//m_entityBullets[i]->Update();
 
 	}
 

@@ -8,6 +8,7 @@ class IEntityAi;
 namespace ObjectManager {
 
 	void updateObject(Entity *obj);
+	void updateObjects(std::vector<Entity *> *entityID);
 	void updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *obj);
 
 	void removeEntityByID(std::vector<Entity *> *entityID, int id, bool shouldDeallocate = true);
