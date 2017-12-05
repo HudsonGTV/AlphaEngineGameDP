@@ -85,10 +85,10 @@ void Application::Init(HINSTANCE instanceH, int show) {
 void Application::Loop(HINSTANCE instanceH) {
 
 	// DELTA TIME AND FPS STUFF
-	m_deltaTime = clock() - m_oldTime;
-	m_oldTime = clock();
+	m_deltaTime = AEFrameRateControllerGetFrameTime();
+	m_oldTime = m_deltaTime;
 
-	double fps = (1.0 / m_deltaTime) * 1000;
+	double fps = (1.0 / m_deltaTime)/* * 1000*/;
 
 	// OUTPUT FPS
 	OutputDebugStringA("FPS: ");

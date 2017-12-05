@@ -10,13 +10,13 @@ class Collider {
 protected:
 	float m_width;
 
-	virtual void BoxCollision(Entity *thisEntity, Entity *otherEntity);
-	virtual void CircleCollision(Entity *thisEntity, Entity *otherEntity);
+	virtual void BoxCollision(Entity *thisEntity, Entity *otherEntity, double dt);
+	virtual void CircleCollision(Entity *thisEntity, Entity *otherEntity, double dt);
 
-	void ResolveCollision(Entity *thisEntity, Entity *otherEntity);
+	void ResolveCollision(Entity *thisEntity, Entity *otherEntity, double dt);
 
 public:
-	void Update(std::vector<Entity *> *entities, int currentEntity);
+	void Update(std::vector<Entity *> *entities, int currentEntity, double dt);
 
 	float GetWidth() const;
 
@@ -27,8 +27,8 @@ class BoxCollider : public Collider {
 protected:
 	float m_height;
 
-	void BoxCollision(Entity *thisEntity, Entity *otherEntity) override;
-	void CircleCollision(Entity *thisEntity, Entity *otherEntity) override;
+	void BoxCollision(Entity *thisEntity, Entity *otherEntity, double dt) override;
+	void CircleCollision(Entity *thisEntity, Entity *otherEntity, double dt) override;
 
 public:
 	BoxCollider(float width, float height);
@@ -39,8 +39,8 @@ public:
 class CircleCollider : public Collider {
 
 protected:
-	void BoxCollision(Entity *thisEntity, Entity *otherEntity) override;
-	void CircleCollision(Entity *thisEntity, Entity *otherEntity) override;
+	void BoxCollision(Entity *thisEntity, Entity *otherEntity, double dt) override;
+	void CircleCollision(Entity *thisEntity, Entity *otherEntity, double dt) override;
 
 public:
 	CircleCollider(float width);

@@ -6,17 +6,17 @@
 #include <cmath>
 #include <cstdlib>
 
-void Collider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
+void Collider::BoxCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 	std::cout << "BoxCollision called on standard Collider object.\n";
 }
 
-void Collider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
+void Collider::CircleCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 	std::cout << "CircleCollision called on standard Collider object.\n";
 }
 
-void Collider::Update(std::vector<Entity *> *entities, int currentEntity) {
+void Collider::Update(std::vector<Entity *> *entities, int currentEntity, double dt) {
 	for (int i = currentEntity; i < entities->size(); ++i) {
-		ResolveCollision((*entities)[currentEntity], (*entities)[i]);
+		ResolveCollision((*entities)[currentEntity], (*entities)[i], dt);
 	}
 }
 
@@ -24,18 +24,18 @@ float Collider::GetWidth() const {
 	return m_width;
 }
 
-void BoxCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
+void BoxCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 
 	if(CollideBoxToBox(thisEntity, otherEntity)) {
-		thisEntity->Collide(otherEntity);
+		thisEntity->Collide(otherEntity, dt);
 	}
 
 }
 
-void BoxCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
+void BoxCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 
 	if(CollideBoxToCircle(thisEntity, otherEntity)) {
-		thisEntity->Collide(otherEntity);
+		thisEntity->Collide(otherEntity, dt);
 	}
 }
 
@@ -48,31 +48,31 @@ float BoxCollider::GetHeight() const {
 	return m_height;
 }
 
-void Collider::ResolveCollision(Entity *thisEntity, Entity *otherEntity) {
+void Collider::ResolveCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 
 	switch(otherEntity->GetColliderType()) {
 	case COLLIDER_BOX:
-		this->BoxCollision(thisEntity, otherEntity);
+		this->BoxCollision(thisEntity, otherEntity, dt);
 		break;
 	case COLLIDER_CIRCLE:
-		this->CircleCollision(thisEntity, otherEntity);
+		this->CircleCollision(thisEntity, otherEntity, dt);
 		break;
 	}
 
 }
 
-void CircleCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
+void CircleCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 
 	if(CollideBoxToCircle(otherEntity, thisEntity)) {
-		thisEntity->Collide(otherEntity);
+		thisEntity->Collide(otherEntity, dt);
 	}
 
 }
 
-void CircleCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
+void CircleCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 
 	if(CollideCircleToCircle(thisEntity, otherEntity)) {
-		thisEntity->Collide(otherEntity);
+		thisEntity->Collide(otherEntity, dt);
 	}
 
 }

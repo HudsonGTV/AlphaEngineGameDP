@@ -93,7 +93,7 @@ void Entity::Update() {
 
 }
 
-void Entity::Collide(Entity *other) {
+void Entity::Collide(Entity *other, double dt) {
 
 	if(other == nullptr) {
 		Console::out::println(std::string("Problem in \"Entity::Collide\": Other entity was nullptr."), "Error");
@@ -131,7 +131,7 @@ void Entity::Collide(Entity *other) {
 		} else if(other->m_name == "Enemy") {
 
 			//TODO: replace 0.016666666667 with delta time
-			SetHealth(m_health - 0.0166666666667 * 0.5);
+			SetHealth(m_health - dt * 0.5);
 
 			Console::out::println(std::string("Player Health: " + std::to_string(m_health)), "Debug");
 

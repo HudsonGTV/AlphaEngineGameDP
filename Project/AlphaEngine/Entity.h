@@ -59,7 +59,7 @@ public:
 	void SetHealth(float health);
 	
 	virtual void Update();
-	virtual void Collide(Entity *other);
+	virtual void Collide(Entity *other, double dt);
 
 	math::vec3 GetPosition() const;
 	math::vec3 GetVelocity() const;

@@ -48,7 +48,7 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityID, double dt) {
 	if(!m_objectWasRemovedByID && !m_isDead) {
 
 		//TODO: replace 0.0166666666667 with delta time
-		m_shootTimer -= 0.0166666666667;
+		m_shootTimer -= dt;
 
 		math::vec2 currPos(m_position.x, m_position.y);
 
