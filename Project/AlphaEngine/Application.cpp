@@ -68,12 +68,14 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	// RESET SYSTEM MODULES
 	AESysReset();
 
+	Console::out::println("Initializing...");
+
 	// INITIALIZE FUNCTIONS
 	m_graphics->Init(&m_entityID);
 	m_physics->Init(&m_entityID);
 	m_game->Init(&m_entityID);
 	
-	Console::out::println("Initialized!", "Info");
+	Console::out::println("Initialized!");
 
 	// LET USER KNOW THAT THEY MUST HAVE A VERY HIGH IQ TO UNDERSTAND FOO AND BARTY
 	//AESysPrintf("\nTo be fair, you have to have a very high IQ to understand Foo and Barty. The humour is extremely subtle, and without a \nsolid grasp of theoretical potatos most of the jokes will go over a typical viewer\'s head. There\'s also Foo\'s \nnihilistic outlook, which is deftly woven into his characterisation- his personal philosophy draws heavily from \nFoodnaya Volya literature, for instance. The fans understand this stuff; they have the intellectual capacity to truly \nappreciate the depths of these jokes, to realise that they're not just funny- they say something deep about LIFE. As a \nconsequence people who dislike Foo & Barty truly ARE idiots- of course they wouldn't appreciate, for instance, the \nhumour in Foo's existential catchphrase \"ReadAccessViolation,\" which itself is a cryptic reference to Turgenev's \nRussian epic Stacks and Overflows. I'm smirking right now just imagining one of those addlepated simpletons scratching \ntheir heads in confusion as Null Pointer's genius wit unfolds itself on their television screens. What fools.. how I \npity them. :D\n\nAnd yes, by the way, i DO have a Foo & Barty tattoo. And no, you cannot see it. It's for the ladies' eyes only - and \neven then they have to demonstrate that they're within 5 IQ points of my own (preferably lower) beforehand. Nothin \npersonnel kid ]-)\n\n\n");
@@ -115,12 +117,16 @@ void Application::Loop(HINSTANCE instanceH) {
 
 void Application::Uninit(HINSTANCE instanceH) {
 
+	Console::out::println("Uninitializing..");
+
 	// UNINIT
 	m_graphics->Uninit();
 
 	// DELETE UNLOADED CLASSES
 	delete m_game;
 	delete m_graphics;
+
+	Console::out::println("Uninitialized!");
 
 	AESysExit();
 

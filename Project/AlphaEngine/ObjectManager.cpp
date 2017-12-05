@@ -57,7 +57,7 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bo
 			}
 
 			entityID->erase(entityID->begin() + i);
-			Console::out::println(std::string("Entity with ID " + std::to_string(id) + " was killed successfully."), "Info");
+			Console::out::println(std::string("Entity with ID " + std::to_string(id) + " was killed successfully."));
 
 			break;
 
