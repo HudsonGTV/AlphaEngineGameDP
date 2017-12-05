@@ -13,10 +13,14 @@ void Player::Update() {
 	if(!m_objectWasRemovedByID && !m_isDead) {
 
 		if(m_health <= 0.0f && !m_objectWasRemovedByID) {
-			m_isDead = true;
-			m_objectWasRemovedByID = true;
-			ObjectManager::removeEntityByID(m_entityID, m_id);
-			return;
+			if(!m_isInvincible) {
+				m_isDead = true;
+				m_objectWasRemovedByID = true;
+				ObjectManager::removeEntityByID(m_entityID, m_id);
+				return;
+			} else {
+				m_health = 25.0f;
+			}
 		}
 
 		Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);

@@ -68,6 +68,8 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	// RESET SYSTEM MODULES
 	AESysReset();
 
+	system("title \"Console Filters(F1:Info | F2:Debug | F3:Warning | F4:Error)\"");
+
 	Console::out::println("Initializing...");
 
 	// INITIALIZE FUNCTIONS
@@ -117,7 +119,7 @@ void Application::Loop(HINSTANCE instanceH) {
 
 void Application::Uninit(HINSTANCE instanceH) {
 
-	Console::out::println("Uninitializing..");
+	Console::out::println("\033[0mUninitializing..");
 
 	// UNINIT
 	m_graphics->Uninit();
@@ -135,11 +137,24 @@ void Application::Uninit(HINSTANCE instanceH) {
 void Application::GlobalInputManager(double dt) {
 
 	if(AEInputCheckTriggered(VK_ESCAPE) || !AESysDoesWindowExist()) {
+		Console::out::println("User triggered exit. Queued uninitialization.");
 		isRunning = false;
 	}
 
-	if(AEInputCheckTriggered(VK_F2)) {
+	if(AEInputCheckReleased(VK_F1)) {
+		Console::out::toggleFilter(Console::Filters::Info);
+	}
+	
+	if(AEInputCheckReleased(VK_F2)) {
+		Console::out::toggleFilter(Console::Filters::Debug);
+	}
 
+	if(AEInputCheckReleased(VK_F3)) {
+		Console::out::toggleFilter(Console::Filters::Warning);
+	}
+
+	if(AEInputCheckReleased(VK_F4)) {
+		Console::out::toggleFilter(Console::Filters::Error);
 	}
 
 }

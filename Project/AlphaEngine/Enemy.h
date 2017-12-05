@@ -16,7 +16,7 @@ private:
 public:
 	Enemy(std::vector<Entity *> *entityID, char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
 
-	virtual void Update();
+	void Update() override;
 	virtual void AiUpdate(std::vector<Entity *> *entityID, double dt);
 
 };

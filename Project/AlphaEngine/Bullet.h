@@ -14,7 +14,7 @@ private:
 public:
 	Bullet(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBullets, char *texturePath, int frameCount, math::vec3 position);
 	
-	virtual void Update();
+	void Update() override;
 
 };
 

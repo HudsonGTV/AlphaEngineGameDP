@@ -75,6 +75,10 @@ void Entity::SetHealth(float health) {
 	m_health = health;
 }
 
+void Entity::SetInvincible(bool isInvincible) {
+	m_isInvincible = isInvincible;
+}
+
 void Entity::Update() {
 
 	if(!m_objectWasRemovedByID) {
@@ -148,6 +152,22 @@ void Entity::Collide(Entity *other, double dt) {
 
 }
 
+bool Entity::isInvincible() const {
+	return m_isInvincible;
+}
+
+float Entity::GetPositionX() const {
+	return m_position.x;
+}
+
+float Entity::GetPositionY() const {
+	return m_position.y;
+}
+
+float Entity::GetPositionZ() const {
+	return m_position.z;
+}
+
 math::vec3 Entity::GetPosition() const {
 	return m_position;
 }
@@ -162,16 +182,4 @@ Collider *Entity::GetCollider() const {
 
 ColliderType Entity::GetColliderType() const {
 	return m_ctype;
-}
-
-float Entity::GetPositionX() const {
-	return m_position.x;
-}
-
-float Entity::GetPositionY() const {
-	return m_position.y;
-}
-
-float Entity::GetPositionZ() const {
-	return m_position.z;
 }

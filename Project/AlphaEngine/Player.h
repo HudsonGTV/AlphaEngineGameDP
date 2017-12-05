@@ -13,7 +13,7 @@ private:
 public:
 	Player(std::vector<Entity *> *entityID, char *texturePath, int frameCount = 1, float width = 0, float height = 0);
 
-	virtual void Update();
+	void Update() override;
 
 };
 
