@@ -10,7 +10,6 @@ void Enemy::Update() {
 
 	if(!m_objectWasRemovedByID && !m_isDead) {
 		
-
 		if(m_health <= 0.0f && !m_objectWasRemovedByID) {
 			m_isDead = true;
 			m_objectWasRemovedByID = true;
@@ -29,7 +28,7 @@ void Enemy::Update() {
 		m_input->Update(this, false, 0.0f);
 
 		// THEY ARE ALREADY UPDATED AND ERASED! DO NOT DO THIS!
-		/*for (unsigned int i = 0; i < m_entityBullets.size(); ++i) {
+		for (unsigned int i = 0; i < m_entityBullets.size(); ++i) {
 
 			if (m_entityBullets[i]->m_objectWasRemovedByID == true) {
 				m_entityBullets.erase(m_entityBullets.begin() + i);
@@ -38,7 +37,7 @@ void Enemy::Update() {
 
 			//m_entityBullets[i]->Update();
 
-		}*/
+		}
 
 	}
 
