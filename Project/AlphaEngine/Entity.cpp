@@ -103,7 +103,7 @@ void Entity::Collide(Entity *other) {
 	if(m_name == "Enemy") {
 		if(other->m_name == "Bullet") {
 
-			SetHealth(m_health - 1);
+			SetHealth(m_health - 0.25);
 
 			Console::out::println(std::string("Enemy Health: " + std::to_string(m_health)));
 
@@ -117,7 +117,7 @@ void Entity::Collide(Entity *other) {
 	if (m_name == "Player") {
 		if (other->m_name == "EBullet") {
 
-			SetHealth(m_health - 1);
+			SetHealth(m_health - 2);
 
 			Console::out::println(std::string("Player Health: " + std::to_string(m_health)));
 
