@@ -114,7 +114,7 @@ void Entity::Collide(Entity *other) {
 
 		}
 	}
-	if (m_name == "Player") {
+	else if (m_name == "Player") {
 		if (other->m_name == "EBullet") {
 
 			SetHealth(m_health - 2);
@@ -127,6 +127,15 @@ void Entity::Collide(Entity *other) {
 			return;
 
 		}
+	}
+	else if (m_name != "Bullet" && m_name != "EBullet") {
+		if (other->m_name == "Bullet" || other->m_name == "EBullet") {
+
+			// DON'T DELETE BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN PLAYER.CPP
+			ObjectManager::removeEntityByID(m_entityID, other->m_id, false);
+
+		}
+
 	}
 
 }
