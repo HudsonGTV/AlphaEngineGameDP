@@ -11,7 +11,7 @@ private:
 
 	bool m_once = false;
 
-	double m_bulletSpeed = 3;
+	double m_bulletSpeed = 3.0;
 
 	std::vector<Bullet *> *m_entityBullets;
 	std::vector<Entity *> *m_entityID;

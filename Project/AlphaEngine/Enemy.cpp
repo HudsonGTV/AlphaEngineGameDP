@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "GraphicsEngine.h"
+#include "Bullet.h"
 
 Enemy::Enemy(std::vector<Entity *> *entityID, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) : IEntityAi(entityID, /* IDs should be automatic: 1, */ texturePath, frameCount, ctype, width, height, textureWidth, textureHeight) {
 	m_name = "Enemy";
@@ -8,6 +9,7 @@ Enemy::Enemy(std::vector<Entity *> *entityID, char *texturePath, int frameCount,
 void Enemy::Update() {
 
 	if(!m_objectWasRemovedByID && !m_isDead) {
+		
 
 		if(m_health <= 0.0f && !m_objectWasRemovedByID) {
 			m_isDead = true;
@@ -26,6 +28,18 @@ void Enemy::Update() {
 
 		m_input->Update(this, false, 0.0f);
 
+		// UPDATE BULLETS
+		for (unsigned int i = 0; i < m_entityBullets.size(); ++i) {
+
+			if (m_entityBullets[i]->m_objectWasRemovedByID == true) {
+				m_entityBullets.erase(m_entityBullets.begin() + i);
+				break;
+			}
+
+			//m_entityBullets[i]->Update();
+
+		}
+
 	}
 
 }
@@ -33,6 +47,9 @@ void Enemy::Update() {
 void Enemy::AiUpdate(std::vector<Entity *> *entityID) {
 
 	if(!m_objectWasRemovedByID && !m_isDead) {
+
+		//TODO: replace 0.0166666666667 with delta time
+		m_shootTimer -= 0.0166666666667;
 
 		math::vec2 currPos(m_position.x, m_position.y);
 
@@ -50,6 +67,19 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityID) {
 
 			SetVelocity(vel);
 
+			//shooting
+			if (m_shootTimer <= 0) {
+
+				m_shootTimer = 1;
+
+				//FIRE BULLET
+				m_entityBullets.push_back(new Bullet(m_entityID, &m_entityBullets, "../../assets/entity/bullet/Ebullet.png", 1, GetPosition()));
+
+				m_entityBullets.back()->m_name = "EBullet";
+				math::vec3 vel = math::vec3(cos(angle)*m_bulletSpeed, sin(angle)*m_bulletSpeed, 0);
+				m_entityBullets.back()->SetVelocity(vel);
+
+			}
 		}
 
 	}

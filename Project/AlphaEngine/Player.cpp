@@ -37,6 +37,13 @@ void Player::Update() {
 
 	}
 
+	if (m_health <= 0.0f && !m_objectWasRemovedByID) {
+		m_isDead = true;
+		m_objectWasRemovedByID = true;
+		ObjectManager::removeEntityByID(m_entityID, m_id);
+		return;
+	}
+
 	//OutputDebugStringA("Player Position: ");
 	//OutputDebugStringA(tempPos.c_str());
 	//OutputDebugStringA("\n");
