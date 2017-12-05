@@ -127,6 +127,16 @@ void Entity::Collide(Entity *other) {
 			return;
 
 		}
+		else if (other->m_name == "Enemy") {
+
+			//TODO: replace 0.016666666667 with delta time
+			SetHealth(m_health - 0.0166666666667 * 0.5);
+
+			Console::out::println(std::string("Player Health: " + std::to_string(m_health)));
+
+			return;
+
+		}
 	}
 	else if (m_name != "Bullet" && m_name != "EBullet") {
 		if (other->m_name == "Bullet" || other->m_name == "EBullet") {
