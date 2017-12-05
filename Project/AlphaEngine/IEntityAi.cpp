@@ -8,6 +8,6 @@ void IEntityAi::Update() {
 
 }
 
-void IEntityAi::AiUpdate(std::vector<Entity *> *entityID) {
+void IEntityAi::AiUpdate(std::vector<Entity *> *entityID, double dt) {
 
 }

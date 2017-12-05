@@ -78,7 +78,7 @@ public:
 	IEntityAi(std::vector<Entity *> *entityID, /* IDs should be automatic: int id, */ char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
 
 	virtual void Update();
-	virtual void AiUpdate(std::vector<Entity *> *entityID);
+	virtual void AiUpdate(std::vector<Entity *> *entityID, double dt);
 
 };
 

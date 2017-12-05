@@ -9,7 +9,7 @@ namespace ObjectManager {
 
 	void updateObject(Entity *obj);
 	void updateObjects(std::vector<Entity *> *entityID);
-	void updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *obj);
+	void updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *obj, double dt);
 
 	void removeEntityByID(std::vector<Entity *> *entityID, int id, bool shouldDeallocate = true);
 	// You should restructure the function to:
@@ -18,8 +18,8 @@ namespace ObjectManager {
 	int peekNextID();
 	//void giveUniqueID(std::vector<Entity *> *entityID, int &id);
 
-	Entity *getEntityByID(std::vector<Entity *> *entityID, int id);
-	Entity *getEntityByName(std::vector<Entity *> *entityID, std::string name);
+	Entity *getEntityByID(std::vector<Entity *> *entityID, int id, bool suppressWarnings = false);
+	Entity *getEntityByName(std::vector<Entity *> *entityID, std::string name, bool suppressWarnings = false);
 
 };
 

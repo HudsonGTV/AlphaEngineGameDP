@@ -50,12 +50,12 @@ void Game::Update(std::vector<Entity *> *entityID, double dt) {
 	Graphics::EnableAnimations();
 	
 	// GET AI OBJECTS
-	Enemy *entityBoss = static_cast<Enemy *>(ObjectManager::getEntityByID(entityID, bossID));
+	Enemy *entityBoss = static_cast<Enemy *>(ObjectManager::getEntityByID(entityID, bossID, true));
 
 	// UPDATE OBJECTS
 	ObjectManager::updateObjects(entityID);
 
 	// UPDATE AI
-	ObjectManager::updateObjectAi(entityID, entityBoss);
+	ObjectManager::updateObjectAi(entityID, entityBoss, dt);
 
 }

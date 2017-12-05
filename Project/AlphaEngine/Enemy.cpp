@@ -28,9 +28,9 @@ void Enemy::Update() {
 		m_input->Update(this, false, 0.0f);
 
 		// THEY ARE ALREADY UPDATED AND ERASED! DO NOT DO THIS!
-		for (unsigned int i = 0; i < m_entityBullets.size(); ++i) {
+		for(unsigned int i = 0; i < m_entityBullets.size(); ++i) {
 
-			if (m_entityBullets[i]->m_objectWasRemovedByID == true) {
+			if(m_entityBullets[i]->m_objectWasRemovedByID == true) {
 				m_entityBullets.erase(m_entityBullets.begin() + i);
 				break;
 			}
@@ -43,7 +43,7 @@ void Enemy::Update() {
 
 }
 
-void Enemy::AiUpdate(std::vector<Entity *> *entityID) {
+void Enemy::AiUpdate(std::vector<Entity *> *entityID, double dt) {
 
 	if(!m_objectWasRemovedByID && !m_isDead) {
 
@@ -52,7 +52,11 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityID) {
 
 		math::vec2 currPos(m_position.x, m_position.y);
 
-		Entity *player = ObjectManager::getEntityByName(entityID, "Player");
+		Entity *player = nullptr;
+
+		if(m_playerExists) {
+			player = ObjectManager::getEntityByName(entityID, "Player");
+		}
 
 		// GET PLAYER DIRECTION
 		if(player != nullptr) {
@@ -67,7 +71,7 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityID) {
 			SetVelocity(vel);
 
 			// SHOOTING
-			if (m_shootTimer <= 0.0) {
+			if(m_shootTimer <= 0.0) {
 
 				m_shootTimer = 0.5;
 
@@ -80,6 +84,10 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityID) {
 				m_entityBullets.back()->SetVelocity(vel);
 
 			}
+
+		} else {
+			m_playerExists = false;
+			SetVelocity(math::vec3(0.0f, 0.0f, 0.0f));
 		}
 
 	}

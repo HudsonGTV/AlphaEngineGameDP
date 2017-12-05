@@ -96,16 +96,17 @@ void Entity::Update() {
 void Entity::Collide(Entity *other) {
 
 	if(other == nullptr) {
-		Console::out::println(std::string("BIG PROBLEM in \"Entity::Collide\""));
+		Console::out::println(std::string("Problem in \"Entity::Collide\": Other entity was nullptr."), "Error");
 		return;
 	}
 
 	if(m_name == "Enemy") {
+
 		if(other->m_name == "Bullet") {
 
 			SetHealth(m_health - 0.25);
 
-			Console::out::println(std::string("Enemy Health: " + std::to_string(m_health)));
+			Console::out::println(std::string("Enemy Health: " + std::to_string(m_health)), "Debug");
 
 			// DON'T DELETE BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN PLAYER.CPP
 			ObjectManager::removeEntityByID(m_entityID, other->m_id, false);
@@ -113,39 +114,36 @@ void Entity::Collide(Entity *other) {
 			return;
 
 		}
-	}
-	else if (m_name == "Player") {
-		if (other->m_name == "EBullet") {
 
-			SetHealth(m_health - 2);
+	} else if(m_name == "Player") {
 
-			Console::out::println(std::string("Player Health: " + std::to_string(m_health)));
+		if(other->m_name == "EBullet") {
 
-			// DON'T DELETE BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN PLAYER.CPP
+			SetHealth(m_health - 1);
+
+			Console::out::println(std::string("Player Health: " + std::to_string(m_health)), "Debug");
+
+			// DON'T DELETE ENEMY BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN PLAYER.CPP
 			ObjectManager::removeEntityByID(m_entityID, other->m_id, false);
 
 			return;
 
-		}
-		else if (other->m_name == "Enemy") {
+		} else if(other->m_name == "Enemy") {
 
 			//TODO: replace 0.016666666667 with delta time
 			SetHealth(m_health - 0.0166666666667 * 0.5);
 
-			Console::out::println(std::string("Player Health: " + std::to_string(m_health)));
+			Console::out::println(std::string("Player Health: " + std::to_string(m_health)), "Debug");
 
 			return;
 
 		}
-	}
-	else if (m_name != "Bullet" && m_name != "EBullet") {
-		if (other->m_name == "Bullet" || other->m_name == "EBullet") {
 
+	} else if(m_name != "Bullet" && m_name != "EBullet") {
+		if(other->m_name == "Bullet" || other->m_name == "EBullet") {
 			// DON'T DELETE BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN PLAYER.CPP
 			ObjectManager::removeEntityByID(m_entityID, other->m_id, false);
-
 		}
-
 	}
 
 }

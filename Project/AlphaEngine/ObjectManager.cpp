@@ -8,7 +8,7 @@ void ObjectManager::updateObject(Entity *obj) {
 	} else {
 		static bool problem = false;
 		if (!problem)
-			Console::out::println(std::string("Object was nullptr"), "Warning");
+			Console::out::println(std::string("Could not update object. Object was nullptr."), "Warning");
 		problem = true;
 	}
 
@@ -26,14 +26,14 @@ void ObjectManager::updateObjects(std::vector<Entity *> *entityID) {
 
 }
 
-void ObjectManager::updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *obj) {
+void ObjectManager::updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *obj, double dt) {
 
 	if(obj != nullptr && !obj->m_objectWasRemovedByID) {
-		obj->AiUpdate(entityID);
+		obj->AiUpdate(entityID, dt);
 	} else {
 		static bool problem = false;
 		if (!problem)
-			Console::out::println(std::string("Object was nullptr"), "Warning");
+			Console::out::println(std::string("Could not update object AI. Object was nullptr."), "Warning");
 		problem = true;
 	}
 
@@ -57,7 +57,7 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bo
 			}
 
 			entityID->erase(entityID->begin() + i);
-			Console::out::println(std::string("Entity with ID " + std::to_string(id) + " was killed successfully."));
+			Console::out::println(std::string("Entity with ID " + std::to_string(id) + " was killed successfully."), "Info");
 
 			break;
 
@@ -66,47 +66,7 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bo
 
 }
 
-// Add a file-level scope variable to the ObjectManager namespace
-namespace ObjectManager {
-	// Keeps track of the next ID to be used in giveUniqueID()
-	static int nextUniqueID = 0;
-	// You should restructure the function to:
-	int giveUniqueID() { return nextUniqueID++; }
-	// With an additional helper function in case you want it
-	int peekNextID() { return nextUniqueID; }
-}
-/*
-	You should not be reusing IDs, because then they are not UNIQUE
-	If you reuse IDs then storing objects by ID is invalid
-	The IDs of objects already destroyed will refer to new objects
-
-void ObjectManager::giveUniqueID(std::vector<Entity *> *entityID, int &id) {
-
-	for(int i = 0; i < entityID->size() + 1; ++i) {
-
-		for(int j = 0; j < entityID->size(); ++j) {
-			if((*entityID)[j]->m_id != i) {
-				id = i;
-			} else {
-				id = -1;
-				break;
-			}
-		}
-
-		if(id != -1) {
-			return;
-		}
-
-	}
-
-	if(id == -1) {
-		id = entityID->size() + 1;
-	}
-
-}
-*/
-
-Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityID, int id) {
+Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityID, int id, bool suppressWarnings) {
 
 	for(int i = 0; i < entityID->size(); ++i) {
 		if((*entityID)[i]->m_id == id) {
@@ -114,13 +74,15 @@ Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityID, int id) {
 		}
 	}
 
-	Console::out::println(std::string("Could not find entity with ID " + std::to_string(id) + ". It does not exist in the specified vector."), "Warning");
+	if(!suppressWarnings) {
+		Console::out::println(std::string("Could not find entity with ID " + std::to_string(id) + ". It does not exist in the specified vector."), "Warning");
+	}
 
 	return nullptr;
 
 }
 
-Entity * ObjectManager::getEntityByName(std::vector<Entity*>* entityID, std::string name) {
+Entity *ObjectManager::getEntityByName(std::vector<Entity *> *entityID, std::string name, bool suppressWarnings) {
 	
 	for(int i = 0; i < entityID->size(); ++i) {
 		if((*entityID)[i]->m_name == name) {
@@ -128,8 +90,58 @@ Entity * ObjectManager::getEntityByName(std::vector<Entity*>* entityID, std::str
 		}
 	}
 
-	Console::out::println(std::string("Could not find entity with name " + name + ". It does not exist in the specified vector."), "Warning");
+	if(!suppressWarnings) {
+		Console::out::println(std::string("Could not find entity with name " + name + ". It does not exist in the specified vector."), "Warning");
+	}
 
 	return nullptr;
 
 }
+
+// Add a file-level scope variable to the ObjectManager namespace
+namespace ObjectManager {
+
+	// Keeps track of the next ID to be used in giveUniqueID()
+	static int nextUniqueID = 0;
+
+	// You should restructure the function to:
+	int giveUniqueID() {
+		return nextUniqueID++;
+	}
+
+	// With an additional helper function in case you want it
+	int peekNextID() {
+		return nextUniqueID;
+	}
+
+}
+/*
+You should not be reusing IDs, because then they are not UNIQUE
+If you reuse IDs then storing objects by ID is invalid
+The IDs of objects already destroyed will refer to new objects
+
+void ObjectManager::giveUniqueID(std::vector<Entity *> *entityID, int &id) {
+
+for(int i = 0; i < entityID->size() + 1; ++i) {
+
+for(int j = 0; j < entityID->size(); ++j) {
+if((*entityID)[j]->m_id != i) {
+id = i;
+} else {
+id = -1;
+break;
+}
+}
+
+if(id != -1) {
+return;
+}
+
+}
+
+if(id == -1) {
+id = entityID->size() + 1;
+}
+
+}
+*/

@@ -24,6 +24,13 @@ void Console::out::print(std::string str, std::string tag) {
 
 void Console::out::println(std::string str, std::string tag) {
 
+	bool isRWarning = false;
+
+	if(tag == "RWarning") {
+		isRWarning = true;
+		tag = "Warning";
+	}
+
 	std::string finalStr = currentDateTime() + " [" + tag + "] " + str + "\n";
 
 	AESysPrintf(finalStr.c_str());
