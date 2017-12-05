@@ -6,7 +6,7 @@
 class Enemy : public IEntityAi {
 private:
 
-	double m_shootTimer = 1;
+	double m_shootTimer = 0.5;
 
 	std::vector<Bullet *> m_entityBullets;
 

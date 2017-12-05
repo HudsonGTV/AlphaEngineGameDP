@@ -70,11 +70,12 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityID) {
 			//shooting
 			if (m_shootTimer <= 0) {
 
-				m_shootTimer = 1;
+				m_shootTimer = 0.5;
 
 				//FIRE BULLET
 				m_entityBullets.push_back(new Bullet(m_entityID, &m_entityBullets, "../../assets/entity/bullet/Ebullet.png", 1, GetPosition()));
 
+				//set bullet name and velocity
 				m_entityBullets.back()->m_name = "EBullet";
 				math::vec3 vel = math::vec3(cos(angle)*m_bulletSpeed, sin(angle)*m_bulletSpeed, 0);
 				m_entityBullets.back()->SetVelocity(vel);
