@@ -18,12 +18,13 @@
 // OBJECTS
 static int playerID;
 static int bossID;
+static float BossSize = 100.0f;
 
 void Game::Init(std::vector<Entity *> *entityID) {
 
 	// CREATE OBJECTS HERE
 	Player *entityPlayer = new Player(entityID, "../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
-	Enemy *entityBoss = new Enemy(entityID, "../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 60.0f);
+	Enemy *entityBoss = new Enemy(entityID, "../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, BossSize, BossSize, BossSize, BossSize);
 
 	playerID = entityPlayer->m_id;
 	bossID = entityBoss->m_id;
