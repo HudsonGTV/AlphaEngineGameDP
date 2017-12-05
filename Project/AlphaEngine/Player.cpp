@@ -25,8 +25,8 @@ void Player::Update() {
 	// DEBUG STRING OUTPUT
 	std::string tempPos = std::to_string(m_position.x) + ", " + std::to_string(m_position.y);
 
-	// UPDATE BULLETS
-	for(unsigned int i = 0; i < m_entityBullets.size(); ++i) {
+	// THEY ARE ALREADY UPDATED AND ERASED! DO NOT DO THIS!
+	/*for(unsigned int i = 0; i < m_entityBullets.size(); ++i) {
 
 		if(m_entityBullets[i]->m_objectWasRemovedByID == true) {
 			m_entityBullets.erase(m_entityBullets.begin() + i);
@@ -35,7 +35,7 @@ void Player::Update() {
 
 		//m_entityBullets[i]->Update();
 
-	}
+	}*/
 
 	if (m_health <= 0.0f && !m_objectWasRemovedByID) {
 		m_isDead = true;
