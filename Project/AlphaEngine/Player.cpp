@@ -19,8 +19,6 @@ void Player::Update() {
 			return;
 		}
 
-		//AESysPrintf("Player ID: %i", m_id);
-
 		Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
 
 		if(ENABLE_DEBUG_LINES) {
