@@ -68,7 +68,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	// RESET SYSTEM MODULES
 	AESysReset();
 
-	system("title \"Console Filters(F1:Info | F2:Debug | F3:Warning | F4:Error)\"");
+	system("title Console Filters F1 = Info  F2 = Debug  F3 = Warning  F4 = Error");
 
 	Console::out::println("Initializing...");
 
