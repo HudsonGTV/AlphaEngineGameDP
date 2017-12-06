@@ -151,9 +151,17 @@ void Entity::Collide(Entity *other, double dt) {
 
 		} else if(other->m_name == "Enemy") {
 
-			SetHealth(m_health - dt * 0.5);
+			m_healthCooldown -= dt;
 
-			Console::out::println("Player Health: " + Console::value(std::to_string(m_health)), "Debug");
+			if(m_healthCooldown <= 0.0f) {
+
+				SetHealth(m_health - 1.0f);
+
+				Console::out::println("Player Health: " + Console::value(std::to_string(m_health)), "Debug");
+
+				m_healthCooldown = 1.0f;
+
+			}
 
 			return;
 

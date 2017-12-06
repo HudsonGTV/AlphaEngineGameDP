@@ -82,7 +82,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	// INITIALIZE MICROAGGRESION
 	Console::out::println("Pausing for no reason... Waiting is a very important aspect of the game and is meant to give players a sense of pride and accomplishment when the game finally does load. ($12.99/month to bypass this wait)");
 
-	Sleep(10000);
+	//Sleep(10000);
 	
 	// ALERT PLAYER THAT EVERYTHING WAS INITIALIZED
 	Console::out::println("Initialized!");

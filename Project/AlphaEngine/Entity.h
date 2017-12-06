@@ -16,6 +16,9 @@
 
 class Entity {
 
+private:
+	float m_healthCooldown = 1.0f;
+
 protected:
 	bool m_isDead = false;
 	bool m_isInvincible = false;
