@@ -8,7 +8,7 @@ void ObjectManager::updateObject(Entity *obj) {
 	} else {
 		static bool problem = false;
 		if (!problem)
-			Console::out::println(std::string("Could not update object. Object was nullptr."), "Warning");
+			Console::out::println("Could not update object. Object was nullptr.", "Warning");
 		problem = true;
 	}
 
@@ -33,7 +33,7 @@ void ObjectManager::updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *o
 	} else {
 		static bool problem = false;
 		if (!problem)
-			Console::out::println(std::string("Could not update object AI. Object was nullptr."), "Warning");
+			Console::out::println("Could not update object AI. Object was nullptr.", "Warning");
 		problem = true;
 	}
 
@@ -42,7 +42,7 @@ void ObjectManager::updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *o
 void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bool shouldDeallocate) {
 
 	if(entityID == nullptr) {
-		Console::out::println(std::string("Could not remove entity with ID " + std::to_string(id) + ". It does not exist in the specified vector."), "Warning");
+		Console::out::println("Could not remove entity with ID " + Console::value(std::to_string(id)) + ". It does not exist in the specified vector.", "Warning");
 		return;
 	}
 
@@ -57,7 +57,7 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bo
 			}
 
 			entityID->erase(entityID->begin() + i);
-			Console::out::println(std::string("Entity with ID " + std::to_string(id) + " was killed successfully."));
+			Console::out::println("Entity with ID " + Console::value(std::to_string(id)) + " was killed successfully.");
 
 			break;
 
@@ -75,7 +75,7 @@ Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityID, int id, bo
 	}
 
 	if(!suppressWarnings) {
-		Console::out::println(std::string("Could not find entity with ID " + std::to_string(id) + ". It does not exist in the specified vector."), "Warning");
+		Console::out::println("Could not find entity with ID " + Console::value(std::to_string(id)) + ". It does not exist in the specified vector.", "Warning");
 	}
 
 	return nullptr;
@@ -91,7 +91,7 @@ Entity *ObjectManager::getEntityByName(std::vector<Entity *> *entityID, std::str
 	}
 
 	if(!suppressWarnings) {
-		Console::out::println(std::string("Could not find entity with name " + name + ". It does not exist in the specified vector."), "Warning");
+		Console::out::println("Could not find entity with name " + Console::value(name) + ". It does not exist in the specified vector.", "Warning");
 	}
 
 	return nullptr;

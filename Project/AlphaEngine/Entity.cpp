@@ -100,7 +100,7 @@ void Entity::Update() {
 void Entity::Collide(Entity *other, double dt) {
 
 	if(other == nullptr) {
-		Console::out::println(std::string("Problem in \"Entity::Collide\": Other entity was nullptr."), "Error");
+		Console::out::println("Problem in \"" + Console::value("Entity::Collide") + "\": Other entity was nullptr.", "Error");
 		return;
 	}
 
@@ -110,7 +110,7 @@ void Entity::Collide(Entity *other, double dt) {
 
 			SetHealth(m_health - 0.25);
 
-			Console::out::println(std::string("Enemy Health: " + std::to_string(m_health)), "Debug");
+			Console::out::println("Enemy Health: " + Console::value(std::to_string(m_health)), "Debug");
 
 			// DON'T DELETE BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN PLAYER.CPP
 			ObjectManager::removeEntityByID(m_entityID, other->m_id, false);
@@ -125,7 +125,7 @@ void Entity::Collide(Entity *other, double dt) {
 
 			SetHealth(m_health - 1);
 
-			Console::out::println(std::string("Player Health: " + std::to_string(m_health)), "Debug");
+			Console::out::println("Player Health: " + Console::value(std::to_string(m_health)), "Debug");
 
 			// DON'T DELETE ENEMY BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN PLAYER.CPP
 			ObjectManager::removeEntityByID(m_entityID, other->m_id, false);
@@ -137,7 +137,7 @@ void Entity::Collide(Entity *other, double dt) {
 			//TODO: replace 0.016666666667 with delta time
 			SetHealth(m_health - dt * 0.5);
 
-			Console::out::println(std::string("Player Health: " + std::to_string(m_health)), "Debug");
+			Console::out::println("Player Health: " + Console::value(std::to_string(m_health)), "Debug");
 
 			return;
 

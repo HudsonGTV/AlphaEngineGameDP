@@ -26,7 +26,7 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 
 		if(AEInputCheckReleased('G')) {
 			entity->SetInvincible(!entity->isInvincible());
-			Console::out::println(std::string("God Mode: " + std::to_string(entity->isInvincible())));
+			Console::out::println("God Mode: " + Console::value(std::to_string(entity->isInvincible())));
 		}
 		
 		if(AEInputCheckCurr(' ') || AEInputCheckCurr(VK_LBUTTON)) {

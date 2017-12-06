@@ -13,8 +13,11 @@ namespace Console {
 		Info,
 		Debug,
 		Warning,
-		Error
+		Error,
+		Misc
 	};
+
+	std::string value(std::string str);
 
 	namespace out {
 

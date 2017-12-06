@@ -119,7 +119,7 @@ void Application::Loop(HINSTANCE instanceH) {
 
 void Application::Uninit(HINSTANCE instanceH) {
 
-	Console::out::println("\033[0mUninitializing..");
+	Console::out::println("Uninitializing...");
 
 	// UNINIT
 	m_graphics->Uninit();
@@ -130,6 +130,7 @@ void Application::Uninit(HINSTANCE instanceH) {
 
 	Console::out::println("Uninitialized!");
 
+	AESysPrintf(TSC_NORMAL);
 	AESysExit();
 
 }
@@ -137,7 +138,7 @@ void Application::Uninit(HINSTANCE instanceH) {
 void Application::GlobalInputManager(double dt) {
 
 	if(AEInputCheckTriggered(VK_ESCAPE) || !AESysDoesWindowExist()) {
-		Console::out::println("User triggered exit. Queued uninitialization.");
+		Console::out::println("User triggered exit. Queuing uninitialization.");
 		isRunning = false;
 	}
 

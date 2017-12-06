@@ -191,6 +191,9 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
+    <ClInclude Include="TextStyle.h">
+      <Filter>Header Files\Application\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="AlphaEngine.rc">
