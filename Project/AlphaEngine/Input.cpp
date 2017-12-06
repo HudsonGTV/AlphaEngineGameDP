@@ -15,13 +15,17 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 
 	if(controllable) {
 
-		// MOVEMENT
+		// CONTROLLABLE ENTITY'S VELOCITY
 		math::vec3 velocity;
-		if(AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W')) velocity.y += speed;
-		if(AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S')) velocity.y -= speed;
-		if(AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) velocity.x -= speed;
-		if(AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) velocity.x += speed;
 
+		/* MOVEMENT */
+
+		if(AEInputCheckCurr(VK_UP)		|| AEInputCheckCurr('W')) velocity.y += speed;
+		if(AEInputCheckCurr(VK_DOWN)	|| AEInputCheckCurr('S')) velocity.y -= speed;
+		if(AEInputCheckCurr(VK_LEFT)	|| AEInputCheckCurr('A')) velocity.x -= speed;
+		if(AEInputCheckCurr(VK_RIGHT)	|| AEInputCheckCurr('D')) velocity.x += speed;
+
+		// SET CONTROLLABLE ENTITY'S VELOCITY
 		entity->SetVelocity(velocity);
 
 		if(AEInputCheckReleased('G')) {
@@ -33,7 +37,8 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 			
 			if(!m_once) {
 
-				// SHOOTING
+				/* SHOOTING */
+
 				// GET MOUSE POS
 				s32 mX = 0;
 				s32 mY = 0;

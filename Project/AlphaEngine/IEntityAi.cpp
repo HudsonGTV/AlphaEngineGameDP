@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-IEntityAi::IEntityAi(std::vector<Entity *> *entityID, /* IDs should be automatic: int id, */ char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) : Entity(entityID, /* IDs should be automatic: 1, */ texturePath, frameCount, ctype, width, height, textureWidth, textureHeight) {
+IEntityAi::IEntityAi(std::vector<Entity *> *entityID, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) : Entity(entityID, /* IDs should be automatic: 1, */ texturePath, frameCount, ctype, width, height, textureWidth, textureHeight) {
 
 }
 

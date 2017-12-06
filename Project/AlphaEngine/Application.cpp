@@ -5,7 +5,7 @@
 
 Application::Application(int winWidth, int winHeight, int refreshRate) {
 
-	// SET PASSED IN WINDOW PROPERTIES ARGUMENTS
+	// SET PASSED-IN WINDOW PROPERTIES ARGUMENTS
 	m_windowWidth = winWidth;
 	m_windowHeight = winHeight;
 	m_refreshRate = refreshRate;
@@ -68,6 +68,8 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	// RESET SYSTEM MODULES
 	AESysReset();
 
+	// CLEAR UNIMPORTANT STUFF AND SET TITLE OF CONSOLE WINDOW
+	system("cls");
 	system("title Console Filters: F1 = Info  F2 = Debug  F3 = Warning  F4 = Error");
 
 	Console::out::println("Initializing...");
@@ -77,10 +79,12 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	m_physics->Init(&m_entityID);
 	m_game->Init(&m_entityID);
 
+	// INITIALIZE MICROAGGRESION
 	Console::out::println("Pausing for no reason... Waiting is a very important aspect of the game and is meant to give players a sense of pride and accomplishment when the game finally does load. ($12.99/month to bypass this wait)");
 
 	Sleep(10000);
 	
+	// ALERT PLAYER THAT EVERYTHING WAS INITIALIZED
 	Console::out::println("Initialized!");
 
 	// LET USER KNOW THAT THEY MUST HAVE A VERY HIGH IQ TO UNDERSTAND FOO AND BARTY
@@ -94,6 +98,7 @@ void Application::Loop(HINSTANCE instanceH) {
 	m_deltaTime = AEFrameRateControllerGetFrameTime();
 	m_oldTime = m_deltaTime;
 
+	// FRAMES PER SECOND
 	double fps = (1.0 / m_deltaTime)/* * 1000*/;
 
 	// OUTPUT FPS
@@ -108,7 +113,6 @@ void Application::Loop(HINSTANCE instanceH) {
 	AEInputUpdate();
 
 	// GLOBAL INPUT
-	// CHECK IF FORCING THE APPLICATION TO QUIT
 	GlobalInputManager(m_deltaTime);
 
 	// RENDER/UPDATE FUNCTIONS
@@ -132,8 +136,10 @@ void Application::Uninit(HINSTANCE instanceH) {
 	delete m_game;
 	delete m_graphics;
 
+	// ALERT USER THAT EVERYTHING WAS UNINITIALIZED
 	Console::out::println("Uninitialized!");
 
+	// RESET CONSOLE COLORS AND EXIT
 	AESysPrintf(TSC_NORMAL);
 	AESysExit();
 
@@ -141,10 +147,13 @@ void Application::Uninit(HINSTANCE instanceH) {
 
 void Application::GlobalInputManager(double dt) {
 
+	// EXIT KEYBIND
 	if(AEInputCheckTriggered(VK_ESCAPE) || !AESysDoesWindowExist()) {
 		Console::out::println("User triggered exit. Queuing uninitialization.");
 		isRunning = false;
 	}
+
+	/* FILTER KEYBINDS */
 
 	if(AEInputCheckReleased(VK_F1)) {
 		Console::out::toggleFilter(Console::Filters::Info);
