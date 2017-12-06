@@ -100,7 +100,7 @@ void Entity::Update() {
 void Entity::Collide(Entity *other, double dt) {
 
 	if(other == nullptr) {
-		Console::out::println("Problem in \"" + Console::value("Entity::Collide") + "\": Other entity was nullptr.", "Error");
+		Console::out::println("in " + Console::value("Entity::Collide") + ": Other entity was nullptr.", "Error");
 		return;
 	}
 
