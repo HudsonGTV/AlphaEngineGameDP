@@ -76,6 +76,10 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	m_graphics->Init(&m_entityID);
 	m_physics->Init(&m_entityID);
 	m_game->Init(&m_entityID);
+
+	Console::out::println("Pausing for no reason... Waiting is a very important aspect of the game and is meant to give players a sense of pride and accomplishment when the game finally does load. ($12.99/month to bypass this wait)");
+
+	Sleep(10000);
 	
 	Console::out::println("Initialized!");
 
