@@ -63,7 +63,7 @@ void Entity::SetWorldPosition(math::vec3 pos) {
 	m_position = pos;
 }
 
-void Entity::SetPosition(math::vec3 pos) { //TODO: multiply by delta time
+void Entity::SetPosition(math::vec3 pos) {
 	m_position += pos;
 }
 
