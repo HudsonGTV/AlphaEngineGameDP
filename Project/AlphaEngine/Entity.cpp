@@ -204,13 +204,13 @@ void Entity::Collide(Entity *other, double dt) {
 		if(other->GetName() == "WallT") {
 			if(GetColliderType() == COLLIDER_BOX) {
 				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMaxY() - dynamic_cast<BoxCollider *>(GetCollider())->GetHeight() / 2.0f, GetPositionZ()));
-			} else {
+			} else if(GetColliderType() != COLLIDER_NONE) {
 				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMaxY() - GetCollider()->GetWidth() / 2.0f, GetPositionZ()));
 			}
 		} else if(other->GetName() == "WallB") {
 			if(GetColliderType() == COLLIDER_BOX) {
 				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMinY() + dynamic_cast<BoxCollider *>(GetCollider())->GetHeight() / 2.0f, GetPositionZ()));
-			} else {
+			} else if(GetColliderType() != COLLIDER_NONE) {
 				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMinY() + GetCollider()->GetWidth() / 2.0f, GetPositionZ()));
 			}
 		} else if(other->GetName() == "WallL") {
