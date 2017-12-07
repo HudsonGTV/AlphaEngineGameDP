@@ -11,6 +11,7 @@ namespace math {
 
 		vec3();
 		vec3(const float &x, const float &y, const float &z);
+		vec3(const float &x);
 
 		vec3 &add(const vec3 &other);
 		vec3 &subtract(const vec3 &other);

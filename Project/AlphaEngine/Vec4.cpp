@@ -16,6 +16,12 @@ namespace math {
 		this->w = w;
 	}
 
+	vec4::vec4(const float &x) {
+		this->x = x;
+		this->y = x;
+		this->z = x;
+		this->w = x;
+	}
 
 	vec4 &vec4::add(const vec4 &other) {
 
