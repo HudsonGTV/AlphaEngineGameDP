@@ -72,7 +72,9 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	system("cls");
 	system("title Console Filters: F1 = Info  F2 = Debug  F3 = Warning  F4 = Error");
 
-	Console::out::println("Initializing...");
+	std::string hideCursor = TSC_HIDECURSOR;
+
+	Console::out::println(hideCursor + "Initializing...");
 
 	// INITIALIZE FUNCTIONS
 	m_graphics->Init(&m_entityList);
@@ -98,7 +100,7 @@ void Application::Loop(HINSTANCE instanceH) {
 	m_deltaTime = AEFrameRateControllerGetFrameTime();
 
 	// FRAMES PER SECOND
-	double fps = (1.0 / m_deltaTime)/* * 1000*/;
+	double fps = (1.0 / m_deltaTime);
 
 	// OUTPUT FPS
 	OutputDebugStringA("FPS: ");
@@ -139,6 +141,7 @@ void Application::Uninit(HINSTANCE instanceH) {
 	Console::out::println("Uninitialized!");
 
 	// RESET CONSOLE COLORS AND EXIT
+	AESysPrintf(TSC_SHOWCURSOR);
 	AESysPrintf(TSC_NORMAL);
 	AESysExit();
 
