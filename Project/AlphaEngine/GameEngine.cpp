@@ -25,10 +25,10 @@ void Game::Init(std::vector<Entity *> *entityList) {
 	Player *entityPlayer = new Player(entityList, "../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
 	Enemy *entityBoss = new Enemy(entityList, "../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 100.0f, 100.0f, 100.0f, 100.0f);
 
-	Entity *entityWallT = new Entity(entityList, "", 1, COLLIDER_BOX, AEGfxGetWinMaxX() * 2.0f, 50.0f, 0.0f, 0.0f);
-	Entity *entityWallB = new Entity(entityList, "", 1, COLLIDER_BOX, AEGfxGetWinMaxX() * 2.0f, 50.0f, 0.0f, 0.0f);
-	Entity *entityWallL = new Entity(entityList, "", 1, COLLIDER_BOX, 50.0f, AEGfxGetWinMaxX() * 2.0f, 0.0f, 0.0f);
-	Entity *entityWallR = new Entity(entityList, "", 1, COLLIDER_BOX, 50.0f, AEGfxGetWinMaxX() * 2.0f, 0.0f, 0.0f);
+	Entity *entityWallT = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, AEGfxGetWinMaxX() * 2.0f, 50.0f, 0.0f, 0.0f);
+	Entity *entityWallB = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, AEGfxGetWinMaxX() * 2.0f, 50.0f, 0.0f, 0.0f);
+	Entity *entityWallL = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, 50.0f, AEGfxGetWinMaxX() * 2.0f, 0.0f, 0.0f);
+	Entity *entityWallR = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, 50.0f, AEGfxGetWinMaxX() * 2.0f, 0.0f, 0.0f);
 
 	// STORE ID
 	idPlayer = entityPlayer->GetID();

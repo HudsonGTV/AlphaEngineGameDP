@@ -136,11 +136,15 @@ void Entity::Collide(Entity *other, double dt) {
 
 	/* COLLISION CHECKS */
 
+	if(GetGroup() == "GroupWall") {
+		return;
+	}
+
 	if(m_name == "Enemy") {
 
 		if(other->GetName() == "Bullet") {
 
-			SetHealth(m_health - 0.25);
+			SetHealth(m_health - 0.25f);
 
 			if(!isInvincible()) {
 				Console::out::println("Enemy Health: " + Console::value(std::to_string(m_health)), "Debug");
@@ -157,7 +161,7 @@ void Entity::Collide(Entity *other, double dt) {
 
 		if(other->GetName() == "EBullet") {
 
-			SetHealth(m_health - 1);
+			SetHealth(m_health - 1.0f);
 
 			if(!isInvincible()) {
 				Console::out::println("Player Health: " + Console::value(std::to_string(m_health)), "Debug");
@@ -198,13 +202,21 @@ void Entity::Collide(Entity *other, double dt) {
 	if(m_name != "Bullet" && m_name != "EBullet" && other->GetGroup() == "GroupWall") {
 
 		if(other->GetName() == "WallT") {
-			SetPosition(math::vec3(0.0f, -5.0f, 0.0f));
+			if(GetColliderType() == COLLIDER_BOX) {
+				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMaxY() - dynamic_cast<BoxCollider *>(GetCollider())->GetHeight() / 2.0f, GetPositionZ()));
+			} else {
+				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMaxY() - GetCollider()->GetWidth() / 2.0f, GetPositionZ()));
+			}
 		} else if(other->GetName() == "WallB") {
-			SetPosition(math::vec3(0.0f, 5.0f, 0.0f));
+			if(GetColliderType() == COLLIDER_BOX) {
+				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMinY() + dynamic_cast<BoxCollider *>(GetCollider())->GetHeight() / 2.0f, GetPositionZ()));
+			} else {
+				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMinY() + GetCollider()->GetWidth() / 2.0f, GetPositionZ()));
+			}
 		} else if(other->GetName() == "WallL") {
-			SetPosition(math::vec3(5.0f, 0.0f, 0.0f));
+			SetWorldPosition(math::vec3(AEGfxGetWinMinX() + GetCollider()->GetWidth() / 2.0f, GetPositionY(), GetPositionZ()));
 		} else if(other->GetName() == "WallR") {
-			SetPosition(math::vec3(-5.0f, 0.0f, 0.0f));
+			SetWorldPosition(math::vec3(AEGfxGetWinMaxX() - GetCollider()->GetWidth() / 2.0f, GetPositionY(), GetPositionZ()));
 		}
 
 	}

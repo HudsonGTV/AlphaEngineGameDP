@@ -18,8 +18,6 @@ void Player::Update() {
 				m_objectWasRemovedByID = true;
 				ObjectManager::removeEntityByID(m_entityList, m_id);
 				return;
-			} else {
-				m_health = 25.0f;
 			}
 		}
 
