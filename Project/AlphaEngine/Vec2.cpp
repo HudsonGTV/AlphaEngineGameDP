@@ -12,6 +12,11 @@ namespace math {
 		this->y = y;
 	}
 
+	vec2::vec2(const float &x) {
+		this->x = x;
+		this->y = x;
+	}
+
 
 	vec2 &vec2::add(const vec2 &other) {
 

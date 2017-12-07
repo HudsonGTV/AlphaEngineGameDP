@@ -14,6 +14,11 @@ namespace math {
 		this->z = z;
 	}
 
+	vec3::vec3(const float &x) {
+		this->x = x;
+		this->y = x;
+		this->z = x;
+	}
 
 	vec3 &vec3::add(const vec3 &other) {
 
