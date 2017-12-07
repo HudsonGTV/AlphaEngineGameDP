@@ -55,7 +55,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	sysInitInfo.mMaxFrameRate = m_refreshRate;
 	sysInitInfo.mpWinCallBack = NULL;
 	sysInitInfo.mClassStyle = CS_HREDRAW | CS_VREDRAW;
-	sysInitInfo.mWindowStyle = WS_OVERLAPPEDWINDOW & ~(WS_MAXIMIZEBOX);
+	sysInitInfo.mWindowStyle = WS_OVERLAPPEDWINDOW & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
 	sysInitInfo.mWindowHandle = NULL /*hwnd*/;
 	sysInitInfo.mHandleWindowMessages = 1;
 
@@ -96,7 +96,6 @@ void Application::Loop(HINSTANCE instanceH) {
 
 	// DELTA TIME AND FPS STUFF
 	m_deltaTime = AEFrameRateControllerGetFrameTime();
-	m_oldTime = m_deltaTime;
 
 	// FRAMES PER SECOND
 	double fps = (1.0 / m_deltaTime)/* * 1000*/;

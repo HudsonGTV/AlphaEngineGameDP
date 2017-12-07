@@ -22,7 +22,6 @@ private:
 	int m_windowHeight = 600;
 	int m_refreshRate = 144;
 
-	double m_oldTime = 0.0;
 	double m_newTime = 0.0;
 	double m_deltaTime = 0.0;
 

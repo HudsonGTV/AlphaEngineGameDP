@@ -7,7 +7,7 @@ void ObjectManager::updateObject(Entity *obj) {
 		obj->Update();
 	} else {
 		static bool problem = false;
-		if (!problem)
+		if(!problem)
 			Console::out::println("Could not update object. Object was nullptr.", "Warning");
 		problem = true;
 	}
@@ -17,11 +17,9 @@ void ObjectManager::updateObject(Entity *obj) {
 void ObjectManager::updateObjects(std::vector<Entity *> *entityList) {
 
 	for(Entity *entity : *entityList) {
-
 		if(entity) {
 			ObjectManager::updateObject(entity);
 		}
-
 	}
 
 }

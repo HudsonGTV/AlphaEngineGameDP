@@ -78,7 +78,8 @@ void Entity::SetPosition(math::vec3 pos) {
 }
 
 void Entity::SetVelocity(math::vec3 vel) {
-	m_velocity = vel;
+	double dt = AEFrameRateControllerGetFrameTime();
+	m_velocity = vel * math::vec3(dt * 60.0, dt * 60.0, dt * 60.0);
 }
 
 void Entity::SetHealth(float health) {
