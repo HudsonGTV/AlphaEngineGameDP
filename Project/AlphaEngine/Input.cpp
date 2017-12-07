@@ -1,11 +1,13 @@
 #include "Input.h"
 #include "Bullet.h"
+#include "out.h"
 
 InputManager::InputManager() {
 
 }
 
-InputManager::InputManager(std::vector<Bullet *> *entityBullets) {
+InputManager::InputManager(std::vector<Entity *> *entityList, std::vector<Bullet *> *entityBullets) {
+	m_entityList = entityList;
 	m_entityBullets = entityBullets;
 }
 
@@ -13,40 +15,31 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 
 	if(controllable) {
 
-		if ((AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) && (AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S'))) {
-			entity->SetVelocity(math::vec3(speed, -speed, 0.0f));
-		}
-		else if ((AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) && (AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W'))) {
-			entity->SetVelocity(math::vec3(speed, speed, 0.0f));
-		}
-		else if ((AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) && (AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S'))) {
-			entity->SetVelocity(math::vec3(-speed, -speed, 0.0f));
-		}
-		else if ((AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) && (AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W'))) {
-			entity->SetVelocity(math::vec3(-speed, speed, 0.0f));
-		}
-		else if(AEInputCheckCurr(VK_UP) || AEInputCheckCurr('W')) {
-			entity->SetVelocity(math::vec3(0.0f, speed, 0.0f));
-		}
-		else if(AEInputCheckCurr(VK_DOWN) || AEInputCheckCurr('S')) {
-			entity->SetVelocity(math::vec3(0.0f, -speed, 0.0f));
-		}
-		else if(AEInputCheckCurr(VK_LEFT) || AEInputCheckCurr('A')) {
-			entity->SetVelocity(math::vec3(-speed, 0.0f, 0.0f));
-		}
-		else if(AEInputCheckCurr(VK_RIGHT) || AEInputCheckCurr('D')) {
-			entity->SetVelocity(math::vec3(speed, 0.0f, 0.0f));
-		}
-		else {
-			entity->SetVelocity(math::vec3(0.0f, 0.0f, 0.0f));
+		// CONTROLLABLE ENTITY'S VELOCITY
+		math::vec3 velocity;
+
+		/* MOVEMENT */
+
+		if(AEInputCheckCurr(VK_UP)		|| AEInputCheckCurr('W')) velocity.y += speed;
+		if(AEInputCheckCurr(VK_DOWN)	|| AEInputCheckCurr('S')) velocity.y -= speed;
+		if(AEInputCheckCurr(VK_LEFT)	|| AEInputCheckCurr('A')) velocity.x -= speed;
+		if(AEInputCheckCurr(VK_RIGHT)	|| AEInputCheckCurr('D')) velocity.x += speed;
+
+		// SET CONTROLLABLE ENTITY'S VELOCITY
+		entity->SetVelocity(velocity);
+
+		if(AEInputCheckReleased('G')) {
+			entity->SetInvincible(!entity->isInvincible());
+			Console::out::println("God Mode: " + Console::value(std::to_string(entity->isInvincible())));
 		}
 		
-		
-		if (AEInputCheckCurr(' ') || AEInputCheckCurr(VK_LBUTTON)) {
+		if(AEInputCheckCurr(' ') || AEInputCheckCurr(VK_LBUTTON)) {
 			
-			if (!m_once) {
-				//SHOOTING
-				//get mouse pos
+			if(!m_once) {
+
+				/* SHOOTING */
+
+				// GET MOUSE POS
 				s32 mX = 0;
 				s32 mY = 0;
 				AEInputGetCursorPosition(&mX, &mY);
@@ -55,20 +48,17 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 				mY = mY - AEGfxGetWinMaxY();
 
 				math::vec2 mousePos(mX, -mY);
-				AESysPrintf("%d", mX);
-				AESysPrintf(", %d", mY);
-				AESysPrintf("\n");
 
-				//FIRE BULLET
-				m_entityBullets->push_back(new Bullet("../../assets/entity/bullet/bullet.png", 1, entity->GetPosition()));
+				// FIRE BULLET
+				m_entityBullets->push_back(new Bullet(m_entityList, m_entityBullets, "../../assets/entity/bullet/bullet.png", 1, entity->GetPosition()));
 
-				//get bullet direction
+				// GET BULLET DIRECTION
 				math::vec2 bulletPos(entity->GetPosition().x, entity->GetPosition().y);
 				math::vec2 vec = mousePos - bulletPos;
 				double angle = atan2(vec.y, vec.x);
 
-				//set bullet velocity to bullet direction * bullet speed
-				math::vec3 vel = math::vec3(cos(angle)*m_bulletSpeed, sin(angle)*m_bulletSpeed, 0);
+				// SET BULLET VELOCITY TO BULLET DIRECTION * BULLET SPEED
+				math::vec3 vel = math::vec3(cos(angle)*m_bulletSpeed, sin(angle)*m_bulletSpeed, 0.0f);
 				m_entityBullets->back()->SetVelocity(vel);
 
 			}
@@ -78,6 +68,7 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 		} else {
 			m_once = false;
 		}
+
 	}
 
 }

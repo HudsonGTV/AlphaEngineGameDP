@@ -70,6 +70,15 @@
     <Filter Include="Header Files\Physics">
       <UniqueIdentifier>{63ce90a2-28bb-4937-8afb-9c75af512276}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Application\IO">
+      <UniqueIdentifier>{52ce2f2e-b03d-4f33-a775-825e5b901fef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Application\IO">
+      <UniqueIdentifier>{3deb5fd9-6130-4ff6-ade5-8df35d4b3288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object\Entity\Interface">
+      <UniqueIdentifier>{680e9722-95c3-4183-abe1-30e1ffcfa5e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -117,6 +126,15 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Object\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="out.cpp">
+      <Filter>Source Files\Application\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="IEntityAi.cpp">
+      <Filter>Source Files\Object\Entity\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -163,6 +181,18 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Object\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="out.h">
+      <Filter>Header Files\Application\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="consoleio.h">
+      <Filter>Header Files\Application\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TextStyle.h">
+      <Filter>Header Files\Application\IO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

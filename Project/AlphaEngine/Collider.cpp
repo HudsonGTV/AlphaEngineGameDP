@@ -6,17 +6,17 @@
 #include <cmath>
 #include <cstdlib>
 
-void Collider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
+void Collider::BoxCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 	std::cout << "BoxCollision called on standard Collider object.\n";
 }
 
-void Collider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
+void Collider::CircleCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 	std::cout << "CircleCollision called on standard Collider object.\n";
 }
 
-void Collider::Update(Entity **entities, int entityNum, int currentEntity) {
-	for (int i = currentEntity; i < entityNum; ++i) {
-		ResolveCollision(entities[currentEntity], entities[i]);
+void Collider::Update(std::vector<Entity *> *entities, int currentEntity, double dt) {
+	for (int i = currentEntity; i < entities->size(); ++i) {
+		ResolveCollision((*entities)[currentEntity], (*entities)[i], dt);
 	}
 }
 
@@ -24,42 +24,18 @@ float Collider::GetWidth() const {
 	return m_width;
 }
 
-void BoxCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
+void BoxCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 
 	if(CollideBoxToBox(thisEntity, otherEntity)) {
-
-		OutputDebugStringA("Box collision at ");
-
-		std::string tempPos = std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA(" and ");
-
-		tempPos = std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA("\n");
-
+		thisEntity->Collide(otherEntity, dt);
 	}
 
 }
 
-void BoxCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
+void BoxCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 
 	if(CollideBoxToCircle(thisEntity, otherEntity)) {
-
-		OutputDebugStringA("Box-Circle collision at ");
-
-		std::string tempPos = std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA(" and ");
-
-		tempPos = std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA("\n");
-
+		thisEntity->Collide(otherEntity, dt);
 	}
 }
 
@@ -72,54 +48,31 @@ float BoxCollider::GetHeight() const {
 	return m_height;
 }
 
-void Collider::ResolveCollision(Entity *thisEntity, Entity *otherEntity) {
+void Collider::ResolveCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 
 	switch(otherEntity->GetColliderType()) {
 	case COLLIDER_BOX:
-		this->BoxCollision(thisEntity, otherEntity);
+		this->BoxCollision(thisEntity, otherEntity, dt);
 		break;
 	case COLLIDER_CIRCLE:
-		this->CircleCollision(thisEntity, otherEntity);
+		this->CircleCollision(thisEntity, otherEntity, dt);
 		break;
 	}
 
 }
 
-void CircleCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity) {
+void CircleCollider::BoxCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 
 	if(CollideBoxToCircle(otherEntity, thisEntity)) {
-
-		OutputDebugStringA("Box-Circle collision at ");
-
-		std::string tempPos = std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA(" and ");
-
-		tempPos = std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA("\n");
+		thisEntity->Collide(otherEntity, dt);
 	}
 
 }
 
-void CircleCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity) {
+void CircleCollider::CircleCollision(Entity *thisEntity, Entity *otherEntity, double dt) {
 
 	if(CollideCircleToCircle(thisEntity, otherEntity)) {
-
-		OutputDebugStringA("Circle collision at ");
-
-		std::string tempPos = std::to_string(thisEntity->GetPosition().x) + ", " + std::to_string(thisEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA(" and ");
-
-		tempPos = std::to_string(otherEntity->GetPosition().x) + ", " + std::to_string(otherEntity->GetPosition().y);
-
-		OutputDebugStringA(tempPos.c_str());
-		OutputDebugStringA("\n");
-
+		thisEntity->Collide(otherEntity, dt);
 	}
 
 }
@@ -210,6 +163,10 @@ bool CollideCircleToCircle(Entity *circleEntity1, Entity *circleEntity2) {
 
 	float max = (circle1->GetWidth() + circle2->GetWidth()) / 2;
 	float dist = sqrt(
+		// Just a note from Jeffrey: This is EXTREMELY inefficient!
+		// It would be better to do this in two steps:
+		//   1. Calculate the subtraction
+		//   2. Do a simple multiplication (the pow() call is EXTREME overkill)
 		pow(circleEntity1->GetPositionX() - circleEntity2->GetPositionX(), 2) +
 		pow(circleEntity1->GetPositionY() - circleEntity2->GetPositionY(), 2)
 	);

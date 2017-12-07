@@ -2,26 +2,20 @@
 #define BULLET_H
 
 #include <vector>
+
 #include "Math.h"
 #include "Entity.h"
 
 class Bullet : public Entity {
 
 private:
-
-	int m_BulletID;
-
+	std::vector<Bullet *> *m_entityBullets;
 
 public:
-
-	Bullet(char *texturePath, int frameCount, math::vec3 position);
-	~Bullet();
-
-	void Destory(int index, std::vector<Bullet *> *entityBullets);
+	Bullet(std::vector<Entity *> *entityList, std::vector<Bullet *> *entityBullets, char *texturePath, int frameCount, math::vec3 position);
 	
-	void Update();
+	void Update() override;
 
 };
 
 #endif
-

@@ -3,19 +3,21 @@
 
 #include "Entity.h"
 
-class Enemy : public Entity {
+class Enemy : public IEntityAi {
 
 private:
-	float m_health = 20.0f;
+	double m_shootTimer = 0.5;
+	double m_bulletSpeed = 6.5;
+
+	bool m_playerExists = true;
+
+	std::vector<Bullet *> m_entityBullets;
 
 public:
-	Enemy(char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
+	Enemy(std::vector<Entity *> *entityList, char *texturePath, int frameCount = 1, ColliderType ctype = COLLIDER_NONE, float width = 0.0f, float height = 0.0f, float textureWidth = 60.0f, float textureHeight = 60.0f);
 
-	void SetHealth(float health);
-	void Update();
-	void AiUpdate(Entity *entityID[ENTITY_COUNT]);
-
-	float GetHealth() const;
+	void Update() override;
+	virtual void AiUpdate(std::vector<Entity *> *entityList, double dt);
 
 };
 

@@ -7,11 +7,10 @@
 class PhysicsEngine {
 
 private:
-	Entity **m_entities;
-	int m_entcount;
+	std::vector<Entity *> *m_entities;
 
 public:
-	void Init(Entity **entityID, int count);
+	void Init(std::vector<Entity *> *entityList);
 	void Update(double dt);
 
 };

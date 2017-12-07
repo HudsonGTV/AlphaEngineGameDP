@@ -30,7 +30,7 @@ private:
 	PhysicsEngine *m_physics;
 	GraphicsEngine *m_graphics;
 
-	Entity *m_entityID[ENTITY_COUNT];
+	std::vector<Entity *> m_entityList;
 	
 public:
 	int isRunning = true;
@@ -40,6 +40,8 @@ public:
 	void Init(HINSTANCE instanceH, int show);
 	void Loop(HINSTANCE instanceH);
 	void Uninit(HINSTANCE instanceH);
+
+	void GlobalInputManager(double dt);
 
 };
 

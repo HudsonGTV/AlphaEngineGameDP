@@ -1,12 +1,15 @@
 #include "Bullet.h"
 #include "GraphicsEngine.h"
 
-Bullet::Bullet(char *texturePath, int frameCount, math::vec3 position) : Entity(texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
-	SetWorldPosition(position);
-}
+Bullet::Bullet(std::vector<Entity *> *entityList, std::vector<Bullet *> *entityBullets, char *texturePath, int frameCount, math::vec3 position) : Entity(entityList, /* IDs should be automatic: -1, */ texturePath, frameCount, COLLIDER_BOX, 10.0f, 10.0f, 10.0f, 10.0f) {
 
-Bullet::~Bullet() {
-	
+	m_entityBullets = entityBullets;
+	m_name = "Bullet";
+
+	entityList->push_back(this);
+
+	SetWorldPosition(position);
+
 }
 
 void Bullet::Update() {
@@ -20,12 +23,5 @@ void Bullet::Update() {
 	SetPosition(m_velocity);
 
 	m_input->Update(this, false, 0.0f);
-
-}
-
-void Bullet::Destory(int index, std::vector<Bullet *> *entityBullets) {
-
-	entityBullets->erase(entityBullets->begin() + index);
-	delete this;
 
 }

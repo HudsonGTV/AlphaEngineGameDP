@@ -16,39 +16,80 @@
 #endif
 
 // OBJECTS
-static Player *entityPlayer;
-static Enemy *entityBoss;
-static Entity *entityBullet;
+static EntityID idPlayer;
+static EntityID idBoss;
 
-void Game::Init(Entity *entityID[ENTITY_COUNT]) {
+void Game::Init(std::vector<Entity *> *entityList) {
 
 	// CREATE OBJECTS HERE
-	entityPlayer = new Player("../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
-	entityBoss = new Enemy("../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 60.0f);
-	entityBullet = new Entity("", 1, COLLIDER_CIRCLE, 20.0f);
+	Player *entityPlayer = new Player(entityList, "../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
+	Enemy *entityBoss = new Enemy(entityList, "../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 100.0f, 100.0f, 100.0f, 100.0f);
 
-	// SET PROPERTIES HERE
+	Entity *entityWallT = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, AEGfxGetWinMaxX() * 2.0f, 50.0f, 0.0f, 0.0f);
+	Entity *entityWallB = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, AEGfxGetWinMaxX() * 2.0f, 50.0f, 0.0f, 0.0f);
+	Entity *entityWallL = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, 50.0f, AEGfxGetWinMaxX() * 2.0f, 0.0f, 0.0f);
+	Entity *entityWallR = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, 50.0f, AEGfxGetWinMaxX() * 2.0f, 0.0f, 0.0f);
+
+	// STORE ID
+	idPlayer = entityPlayer->GetID();
+	idBoss = entityBoss->GetID();
+
+	// SET NAME
+	entityWallT->SetName("WallT");
+	entityWallB->SetName("WallB");
+	entityWallL->SetName("WallL");
+	entityWallR->SetName("WallR");
+
+	// SET GROUP
+	entityPlayer->SetGroup("GroupEntity");
+	entityBoss->SetGroup("GroupEntity");
+
+	entityWallT->SetGroup("GroupWall");
+	entityWallB->SetGroup("GroupWall");
+	entityWallL->SetGroup("GroupWall");
+	entityWallR->SetGroup("GroupWall");
+
+	// SET WORLD POSITION HERE
 	entityPlayer->SetWorldPosition(math::vec3(-250.0f, 0.0f, 0.0f));
 	entityBoss->SetWorldPosition(math::vec3(250.0f, 0.0f, 0.0f));
-	entityBullet->SetWorldPosition(math::vec3(0.0f, 0.0f, 0.0f));
 
-	// ADD TO ARRAY
-	entityID[ID_PLAYER] = entityPlayer;
-	entityID[ID_BOSS] = entityBoss;
-	entityID[ID_BULLET] = entityBullet;
+	entityWallT->SetWorldPosition(math::vec3(0.0f, AEGfxGetWinMaxY() + 24.0f, 0.0f));
+	entityWallB->SetWorldPosition(math::vec3(0.0f, AEGfxGetWinMinY() - 24.0f, 0.0f));
+	entityWallL->SetWorldPosition(math::vec3(AEGfxGetWinMinX() - 24.0f, 0.0f, 0.0f));
+	entityWallR->SetWorldPosition(math::vec3(AEGfxGetWinMaxX() + 24.0f, 0.0f, 0.0f));
+
+	// SET HEALTH HERE
+	entityPlayer->SetHealth(20.0f);
+	entityBoss->SetHealth(20.0f);
+
+	entityWallT->SetInvincible(true);
+	entityWallB->SetInvincible(true);
+	entityWallL->SetInvincible(true);
+	entityWallR->SetInvincible(true);
+
+	// STORE IN VECTOR
+	entityList->push_back(entityPlayer);
+	entityList->push_back(entityBoss);
+
+	entityList->push_back(entityWallT);
+	entityList->push_back(entityWallB);
+	entityList->push_back(entityWallL);
+	entityList->push_back(entityWallR);
 
 }
 
-void Game::Update(Entity *entityID[ENTITY_COUNT], double dt) {
+void Game::Update(std::vector<Entity *> *entityList, double dt) {
 
 	// ENABLE ANIMATIONS
 	Graphics::EnableAnimations();
 	
+	// GET AI OBJECTS
+	Enemy *entityBoss = static_cast<Enemy *>(ObjectManager::getEntityByID(entityList, idBoss, true));
+
 	// UPDATE OBJECTS
-	entityBoss->Update();
-	entityPlayer->Update();
+	ObjectManager::updateObjects(entityList);
 
 	// UPDATE AI
-	entityBoss->AiUpdate(&entityID[ID_PLAYER]);
+	ObjectManager::updateObjectAi(entityList, entityBoss, dt);
 
 }

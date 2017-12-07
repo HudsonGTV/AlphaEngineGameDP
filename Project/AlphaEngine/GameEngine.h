@@ -6,8 +6,8 @@
 class Game {
 
 public:
-	void Init(Entity *entityID[ENTITY_COUNT]);
-	void Update(Entity *entityID[ENTITY_COUNT], double dt);
+	void Init(std::vector<Entity *> *entityList);
+	void Update(std::vector<Entity *> *entityList, double dt);
 
 };
 

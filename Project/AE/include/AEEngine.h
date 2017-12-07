@@ -18,7 +18,7 @@
 #include <string.h>
 #include <assert.h>
 
-#include  "AEExport.h"
+#include "AEExport.h"
 
 #if(1 == EXPORT_WINDOWS)
 
