@@ -1,10 +1,10 @@
 #include "Entity.h"
 #include "consoleio.h"
 
-Entity::Entity(std::vector<Entity *> *entityID, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
+Entity::Entity(std::vector<Entity *> *entityList, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) {
 
 	// STORE POINTER TO VECTOR OF ENTITY POINTERS
-	m_entityID = entityID;
+	m_entityList = entityList;
 
 	// GIVE UNIQUE ID TO OBJECT
 	m_id = ObjectManager::giveUniqueID();
@@ -82,11 +82,26 @@ void Entity::SetVelocity(math::vec3 vel) {
 }
 
 void Entity::SetHealth(float health) {
-	m_health = health;
+	if(!m_isInvincible) {
+		m_health = health;
+	} else {
+		Console::out::println(
+			"Cannot set health of Entity with name " + Console::value(m_name) + " to " + Console::value(std::to_string(health)) + ". It is invincible.",
+			"Debug"
+		);
+	}
 }
 
 void Entity::SetInvincible(bool isInvincible) {
 	m_isInvincible = isInvincible;
+}
+
+void Entity::SetName(std::string name) {
+	m_name = name;
+}
+
+void Entity::SetGroup(std::string group) {
+	m_group = group;
 }
 
 void Entity::Update() {
@@ -123,14 +138,16 @@ void Entity::Collide(Entity *other, double dt) {
 
 	if(m_name == "Enemy") {
 
-		if(other->m_name == "Bullet") {
+		if(other->GetName() == "Bullet") {
 
 			SetHealth(m_health - 0.25);
 
-			Console::out::println("Enemy Health: " + Console::value(std::to_string(m_health)), "Debug");
+			if(!isInvincible()) {
+				Console::out::println("Enemy Health: " + Console::value(std::to_string(m_health)), "Debug");
+			}
 
 			// DON'T DELETE BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN ENEMY.CPP
-			ObjectManager::removeEntityByID(m_entityID, other->m_id, false);
+			ObjectManager::removeEntityByID(m_entityList, other->m_id, false);
 
 			return;
 
@@ -138,18 +155,20 @@ void Entity::Collide(Entity *other, double dt) {
 
 	} else if(m_name == "Player") {
 
-		if(other->m_name == "EBullet") {
+		if(other->GetName() == "EBullet") {
 
 			SetHealth(m_health - 1);
 
-			Console::out::println("Player Health: " + Console::value(std::to_string(m_health)), "Debug");
+			if(!isInvincible()) {
+				Console::out::println("Player Health: " + Console::value(std::to_string(m_health)), "Debug");
+			}
 
 			// DON'T DELETE ENEMY BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN PLAYER.CPP
-			ObjectManager::removeEntityByID(m_entityID, other->m_id, false);
+			ObjectManager::removeEntityByID(m_entityList, other->m_id, false);
 
 			return;
 
-		} else if(other->m_name == "Enemy") {
+		} else if(other->GetName() == "Enemy") {
 
 			m_healthCooldown -= dt;
 
@@ -157,7 +176,9 @@ void Entity::Collide(Entity *other, double dt) {
 
 				SetHealth(m_health - 1.0f);
 
-				Console::out::println("Player Health: " + Console::value(std::to_string(m_health)), "Debug");
+				if(!isInvincible()) {
+					Console::out::println("Player Health: " + Console::value(std::to_string(m_health)), "Debug");
+				}
 
 				m_healthCooldown = 1.0f;
 
@@ -168,10 +189,24 @@ void Entity::Collide(Entity *other, double dt) {
 		}
 
 	} else if(m_name != "Bullet" && m_name != "EBullet") {
-		if(other->m_name == "Bullet" || other->m_name == "EBullet") {
+		if(other->GetName() == "Bullet" || other->GetName() == "EBullet") {
 			// DON'T DELETE BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE DELETED IN PLAYER.CPP
-			ObjectManager::removeEntityByID(m_entityID, other->m_id, false);
+			ObjectManager::removeEntityByID(m_entityList, other->m_id, false);
 		}
+	}
+	
+	if(m_name != "Bullet" && m_name != "EBullet" && other->GetGroup() == "GroupWall") {
+
+		if(other->GetName() == "WallT") {
+			SetPosition(math::vec3(0.0f, -5.0f, 0.0f));
+		} else if(other->GetName() == "WallB") {
+			SetPosition(math::vec3(0.0f, 5.0f, 0.0f));
+		} else if(other->GetName() == "WallL") {
+			SetPosition(math::vec3(5.0f, 0.0f, 0.0f));
+		} else if(other->GetName() == "WallR") {
+			SetPosition(math::vec3(-5.0f, 0.0f, 0.0f));
+		}
+
 	}
 
 }
@@ -190,6 +225,18 @@ float Entity::GetPositionY() const {
 
 float Entity::GetPositionZ() const {
 	return m_position.z;
+}
+
+int Entity::GetID() const {
+	return m_id;
+}
+
+std::string Entity::GetName() const {
+	return m_name;
+}
+
+std::string Entity::GetGroup() const {
+	return m_group;
 }
 
 math::vec3 Entity::GetPosition() const {

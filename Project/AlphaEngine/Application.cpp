@@ -55,7 +55,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	sysInitInfo.mMaxFrameRate = m_refreshRate;
 	sysInitInfo.mpWinCallBack = NULL;
 	sysInitInfo.mClassStyle = CS_HREDRAW | CS_VREDRAW;
-	sysInitInfo.mWindowStyle = WS_OVERLAPPEDWINDOW;
+	sysInitInfo.mWindowStyle = WS_OVERLAPPEDWINDOW & ~(WS_MAXIMIZEBOX);
 	sysInitInfo.mWindowHandle = NULL /*hwnd*/;
 	sysInitInfo.mHandleWindowMessages = 1;
 
@@ -75,12 +75,12 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	Console::out::println("Initializing...");
 
 	// INITIALIZE FUNCTIONS
-	m_graphics->Init(&m_entityID);
-	m_physics->Init(&m_entityID);
-	m_game->Init(&m_entityID);
+	m_graphics->Init(&m_entityList);
+	m_physics->Init(&m_entityList);
+	m_game->Init(&m_entityList);
 
 	// INITIALIZE MICROAGGRESION
-	Console::out::println("Pausing for no reason... Waiting is a very important aspect of the game and is meant to give players a sense of pride and accomplishment when the game finally does load. ($12.99/month to bypass this wait)");
+	//Console::out::println("Pausing for no reason... Waiting is a very important aspect of the game and is meant to give players a sense of pride and accomplishment when the game finally does load. ($12.99/month to bypass this wait)");
 
 	//Sleep(10000);
 	
@@ -116,9 +116,9 @@ void Application::Loop(HINSTANCE instanceH) {
 	GlobalInputManager(m_deltaTime);
 
 	// RENDER/UPDATE FUNCTIONS
-	m_game->Update(&m_entityID, m_deltaTime);
+	m_game->Update(&m_entityList, m_deltaTime);
 	m_physics->Update(m_deltaTime);
-	m_graphics->Render(&m_entityID, m_deltaTime);
+	m_graphics->Render(&m_entityList, m_deltaTime);
 
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S END
 	AESysFrameEnd();

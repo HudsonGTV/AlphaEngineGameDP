@@ -30,7 +30,7 @@ private:
 	PhysicsEngine *m_physics;
 	GraphicsEngine *m_graphics;
 
-	std::vector<Entity *> m_entityID;
+	std::vector<Entity *> m_entityList;
 	
 public:
 	int isRunning = true;

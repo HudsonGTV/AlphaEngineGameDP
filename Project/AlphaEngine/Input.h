@@ -14,12 +14,12 @@ private:
 	double m_bulletSpeed = 3.0;
 
 	std::vector<Bullet *> *m_entityBullets;
-	std::vector<Entity *> *m_entityID;
+	std::vector<Entity *> *m_entityList;
 
 public:
 
 	InputManager();
-	InputManager(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBullets);
+	InputManager(std::vector<Entity *> *entityList, std::vector<Bullet *> *entityBullets);
 
 	void Update(Entity *entity, bool controllable, float speed = 1.0f, double dt = 1.0);
 

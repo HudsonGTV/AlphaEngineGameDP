@@ -1,8 +1,8 @@
 #include "PhysicsEngine.h"
 #include "Collider.h"
 
-void PhysicsEngine::Init(std::vector<Entity *> *entityID) {
-	m_entities = entityID;
+void PhysicsEngine::Init(std::vector<Entity *> *entityList) {
+	m_entities = entityList;
 }
 
 void PhysicsEngine::Update(double dt) {

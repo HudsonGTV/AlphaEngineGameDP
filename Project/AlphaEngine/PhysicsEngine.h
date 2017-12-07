@@ -10,7 +10,7 @@ private:
 	std::vector<Entity *> *m_entities;
 
 public:
-	void Init(std::vector<Entity *> *entityID);
+	void Init(std::vector<Entity *> *entityList);
 	void Update(double dt);
 
 };

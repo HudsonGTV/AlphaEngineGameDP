@@ -14,9 +14,9 @@ void ObjectManager::updateObject(Entity *obj) {
 
 }
 
-void ObjectManager::updateObjects(std::vector<Entity *> *entityID) {
+void ObjectManager::updateObjects(std::vector<Entity *> *entityList) {
 
-	for(Entity *entity : *entityID) {
+	for(Entity *entity : *entityList) {
 
 		if(entity) {
 			ObjectManager::updateObject(entity);
@@ -26,10 +26,10 @@ void ObjectManager::updateObjects(std::vector<Entity *> *entityID) {
 
 }
 
-void ObjectManager::updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *obj, double dt) {
+void ObjectManager::updateObjectAi(std::vector<Entity *> *entityList, IEntityAi *obj, double dt) {
 
 	if(obj != nullptr && !obj->m_objectWasRemovedByID) {
-		obj->AiUpdate(entityID, dt);
+		obj->AiUpdate(entityList, dt);
 	} else {
 		static bool problem = false;
 		if (!problem)
@@ -39,24 +39,24 @@ void ObjectManager::updateObjectAi(std::vector<Entity *> *entityID, IEntityAi *o
 
 }
 
-void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bool shouldDeallocate) {
+void ObjectManager::removeEntityByID(std::vector<Entity *> *entityList, int id, bool shouldDeallocate) {
 
-	if(entityID == nullptr) {
+	if(entityList == nullptr) {
 		Console::out::println("Could not remove entity with ID " + Console::value(std::to_string(id)) + ". It does not exist in the specified vector.", "Warning");
 		return;
 	}
 
-	for(int i = 0; i < entityID->size(); ++i) {
-		if((*entityID)[i]->m_id == id) {
+	for(int i = 0; i < entityList->size(); ++i) {
+		if((*entityList)[i]->GetID() == id) {
 
-			(*entityID)[i]->m_objectWasRemovedByID = true;
+			(*entityList)[i]->m_objectWasRemovedByID = true;
 
 			if(shouldDeallocate) {
-				delete (*entityID)[i];
-				(*entityID)[i] = nullptr;
+				delete (*entityList)[i];
+				(*entityList)[i] = nullptr;
 			}
 
-			entityID->erase(entityID->begin() + i);
+			entityList->erase(entityList->begin() + i);
 			Console::out::println("Entity with ID " + Console::value(std::to_string(id)) + " was killed successfully.");
 
 			break;
@@ -66,11 +66,11 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityID, int id, bo
 
 }
 
-Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityID, int id, bool suppressWarnings) {
+Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityList, int id, bool suppressWarnings) {
 
-	for(int i = 0; i < entityID->size(); ++i) {
-		if((*entityID)[i]->m_id == id) {
-			return (*entityID)[i];
+	for(int i = 0; i < entityList->size(); ++i) {
+		if((*entityList)[i]->GetID() == id) {
+			return (*entityList)[i];
 		}
 	}
 
@@ -82,11 +82,11 @@ Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityID, int id, bo
 
 }
 
-Entity *ObjectManager::getEntityByName(std::vector<Entity *> *entityID, std::string name, bool suppressWarnings) {
+Entity *ObjectManager::getEntityByName(std::vector<Entity *> *entityList, std::string name, bool suppressWarnings) {
 	
-	for(int i = 0; i < entityID->size(); ++i) {
-		if((*entityID)[i]->m_name == name) {
-			return (*entityID)[i];
+	for(int i = 0; i < entityList->size(); ++i) {
+		if((*entityList)[i]->GetName() == name) {
+			return (*entityList)[i];
 		}
 	}
 
@@ -120,12 +120,12 @@ You should not be reusing IDs, because then they are not UNIQUE
 If you reuse IDs then storing objects by ID is invalid
 The IDs of objects already destroyed will refer to new objects
 
-void ObjectManager::giveUniqueID(std::vector<Entity *> *entityID, int &id) {
+void ObjectManager::giveUniqueID(std::vector<Entity *> *entityList, int &id) {
 
-for(int i = 0; i < entityID->size() + 1; ++i) {
+for(int i = 0; i < entityList->size() + 1; ++i) {
 
-for(int j = 0; j < entityID->size(); ++j) {
-if((*entityID)[j]->m_id != i) {
+for(int j = 0; j < entityList->size(); ++j) {
+if((*entityList)[j]->m_id != i) {
 id = i;
 } else {
 id = -1;
@@ -140,7 +140,7 @@ return;
 }
 
 if(id == -1) {
-id = entityID->size() + 1;
+id = entityList->size() + 1;
 }
 
 }

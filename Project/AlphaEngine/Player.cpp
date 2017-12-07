@@ -3,8 +3,8 @@
 #include "Player.h"
 #include "GraphicsEngine.h"
 
-Player::Player(std::vector<Entity *> *entityID, char *texturePath, int frameCount, float width, float height) : Entity(entityID, /* IDs should be automatic: 0, */ texturePath, frameCount, COLLIDER_BOX, width, height) {
-	m_input = new InputManager(entityID, &m_entityBullets);
+Player::Player(std::vector<Entity *> *entityList, char *texturePath, int frameCount, float width, float height) : Entity(entityList, /* IDs should be automatic: 0, */ texturePath, frameCount, COLLIDER_BOX, width, height) {
+	m_input = new InputManager(entityList, &m_entityBullets);
 	m_name = "Player";
 }
 
@@ -16,7 +16,7 @@ void Player::Update() {
 			if(!m_isInvincible) {
 				m_isDead = true;
 				m_objectWasRemovedByID = true;
-				ObjectManager::removeEntityByID(m_entityID, m_id);
+				ObjectManager::removeEntityByID(m_entityList, m_id);
 				return;
 			} else {
 				m_health = 25.0f;

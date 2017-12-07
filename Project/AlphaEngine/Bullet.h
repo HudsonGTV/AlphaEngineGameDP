@@ -12,7 +12,7 @@ private:
 	std::vector<Bullet *> *m_entityBullets;
 
 public:
-	Bullet(std::vector<Entity *> *entityID, std::vector<Bullet *> *entityBullets, char *texturePath, int frameCount, math::vec3 position);
+	Bullet(std::vector<Entity *> *entityList, std::vector<Bullet *> *entityBullets, char *texturePath, int frameCount, math::vec3 position);
 	
 	void Update() override;
 

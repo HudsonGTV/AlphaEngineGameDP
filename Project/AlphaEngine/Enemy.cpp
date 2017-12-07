@@ -2,7 +2,7 @@
 #include "GraphicsEngine.h"
 #include "Bullet.h"
 
-Enemy::Enemy(std::vector<Entity *> *entityID, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) : IEntityAi(entityID, /* IDs should be automatic: 1, */ texturePath, frameCount, ctype, width, height, textureWidth, textureHeight) {
+Enemy::Enemy(std::vector<Entity *> *entityList, char *texturePath, int frameCount, ColliderType ctype, float width, float height, float textureWidth, float textureHeight) : IEntityAi(entityList, /* IDs should be automatic: 1, */ texturePath, frameCount, ctype, width, height, textureWidth, textureHeight) {
 	m_name = "Enemy";
 }
 
@@ -13,7 +13,7 @@ void Enemy::Update() {
 		if(m_health <= 0.0f && !m_objectWasRemovedByID) {
 			m_isDead = true;
 			m_objectWasRemovedByID = true;
-			ObjectManager::removeEntityByID(m_entityID, m_id);
+			ObjectManager::removeEntityByID(m_entityList, m_id);
 			return;
 		}
 
@@ -40,7 +40,7 @@ void Enemy::Update() {
 
 }
 
-void Enemy::AiUpdate(std::vector<Entity *> *entityID, double dt) {
+void Enemy::AiUpdate(std::vector<Entity *> *entityList, double dt) {
 
 	if(!m_objectWasRemovedByID && !m_isDead) {
 
@@ -51,7 +51,7 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityID, double dt) {
 		Entity *player = nullptr;
 
 		if(m_playerExists) {
-			player = ObjectManager::getEntityByName(entityID, "Player");
+			player = ObjectManager::getEntityByName(entityList, "Player");
 		}
 
 		// GET PLAYER DIRECTION
@@ -72,10 +72,10 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityID, double dt) {
 				m_shootTimer = 0.5;
 
 				// FIRE BULLET
-				m_entityBullets.push_back(new Bullet(m_entityID, &m_entityBullets, "../../assets/entity/bullet/Ebullet.png", 1, GetPosition()));
+				m_entityBullets.push_back(new Bullet(m_entityList, &m_entityBullets, "../../assets/entity/bullet/Ebullet.png", 1, GetPosition()));
 
 				// SET BULLET NAME AND VELOCITY
-				m_entityBullets.back()->m_name = "EBullet";
+				m_entityBullets.back()->SetName("EBullet");
 				math::vec3 vel = math::vec3(cos(angle)*m_bulletSpeed, sin(angle)*m_bulletSpeed, 0);
 				m_entityBullets.back()->SetVelocity(vel);
 
