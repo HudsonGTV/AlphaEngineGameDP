@@ -27,12 +27,13 @@ std::string currentDateTime() {
 std::string tagStyle(std::string tag) {
 
 	std::string whiteColor = TSC_WHITE;
+	std::string nTag = tag.substr(0, tag.find("$ignoreFilter"));
 
-	if(tag == "Info")							return whiteColor + " [" + TSC_INFO		+ "Info"	+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
-	if(tag == "Debug")							return whiteColor + " [" + TSC_DEBUG	+ "Debug"	+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
-	if(tag == "Warning" || tag == "RWarning")	return whiteColor + " [" + TSC_WARNING	+ "Warning"	+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
-	if(tag == "Error")							return whiteColor + " [" + TSC_ERROR	+ "Error"	+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
-	if(tag == "Filter")							return whiteColor + " [" + TSC_MAGENTA	+ "Filter"	+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
+	if(nTag == "Info")							return whiteColor + " [" + TSC_INFO		+ "Info"	+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
+	if(nTag == "Debug")							return whiteColor + " [" + TSC_DEBUG	+ "Debug"	+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
+	if(nTag == "Warning" || nTag == "RWarning")	return whiteColor + " [" + TSC_WARNING	+ "Warning"	+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
+	if(nTag == "Error")							return whiteColor + " [" + TSC_ERROR	+ "Error"	+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
+	if(nTag == "Filter")						return whiteColor + " [" + TSC_MAGENTA	+ "Filter"	+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
 	else										return whiteColor + " [" + TSC_WHITE	+ tag		+ TSC_NORMAL + TSC_WHITE + "] " + TSC_NORMAL;
 
 }

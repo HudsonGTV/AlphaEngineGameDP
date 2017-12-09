@@ -46,18 +46,18 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	AESysInitInfo sysInitInfo;
 
 	// SET SYSTEM PROPERTIES
-	sysInitInfo.mCreateWindow = 1;
-	sysInitInfo.mAppInstance = instanceH;
-	sysInitInfo.mShow = show;
-	sysInitInfo.mWinWidth = m_windowWidth;
-	sysInitInfo.mWinHeight = m_windowHeight;
-	sysInitInfo.mCreateConsole = 1;
-	sysInitInfo.mMaxFrameRate = m_refreshRate;
-	sysInitInfo.mpWinCallBack = NULL;
-	sysInitInfo.mClassStyle = CS_HREDRAW | CS_VREDRAW;
-	sysInitInfo.mWindowStyle = WS_OVERLAPPEDWINDOW & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
-	sysInitInfo.mWindowHandle = NULL /*hwnd*/;
-	sysInitInfo.mHandleWindowMessages = 1;
+	sysInitInfo.mCreateWindow			= true;
+	sysInitInfo.mAppInstance			= instanceH;
+	sysInitInfo.mShow					= show;
+	sysInitInfo.mWinWidth				= m_windowWidth;
+	sysInitInfo.mWinHeight				= m_windowHeight;
+	sysInitInfo.mCreateConsole			= 1;
+	sysInitInfo.mMaxFrameRate			= m_refreshRate;
+	sysInitInfo.mpWinCallBack			= NULL;
+	sysInitInfo.mClassStyle				= CS_HREDRAW | CS_VREDRAW;
+	sysInitInfo.mWindowStyle			= WS_OVERLAPPEDWINDOW & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
+	sysInitInfo.mWindowHandle			= NULL /*hwnd*/;
+	sysInitInfo.mHandleWindowMessages	= 1;
 
 	// APPLY SYSTEM PROPERTIES
 	AESysInit(&sysInitInfo);
@@ -70,11 +70,11 @@ void Application::Init(HINSTANCE instanceH, int show) {
 
 	// CLEAR UNIMPORTANT STUFF AND SET TITLE OF CONSOLE WINDOW
 	system("cls");
-	system("title Console Filters: F1 = Info  F2 = Debug  F3 = Warning  F4 = Error");
+	system("title Console - F1: Help");
 
-	std::string hideCursor = TSC_HIDECURSOR;
+	AESysPrintf(TSC_HIDECURSOR);
 
-	Console::out::println(hideCursor + "Initializing...");
+	Console::out::println("Initializing...");
 
 	// INITIALIZE FUNCTIONS
 	m_graphics->Init(&m_entityList);
@@ -155,21 +155,32 @@ void Application::GlobalInputManager(double dt) {
 		isRunning = false;
 	}
 
+	// SHOW HELP
+	if(AEInputCheckReleased(VK_F1)) {
+		std::string colorWhite = TSC_WHITE;
+		Console::out::println("Help:", "Info$ignoreFilter");
+		AESysPrintf(std::string(colorWhite + "	F1 - Show Help\n").c_str());
+		AESysPrintf(std::string(colorWhite + "	F2 - Toggle Info Filter\n").c_str());
+		AESysPrintf(std::string(colorWhite + "	F3 - Toggle Debug Filter\n").c_str());
+		AESysPrintf(std::string(colorWhite + "	F4 - Toggle Warning Filter\n").c_str());
+		AESysPrintf(std::string(colorWhite + "	F5 - Toggle Error Filter\n").c_str());
+	}
+
 	/* FILTER KEYBINDS */
 
-	if(AEInputCheckReleased(VK_F1)) {
+	if(AEInputCheckReleased(VK_F2)) {
 		Console::out::toggleFilter(Console::Filters::Info);
 	}
 	
-	if(AEInputCheckReleased(VK_F2)) {
+	if(AEInputCheckReleased(VK_F3)) {
 		Console::out::toggleFilter(Console::Filters::Debug);
 	}
 
-	if(AEInputCheckReleased(VK_F3)) {
+	if(AEInputCheckReleased(VK_F4)) {
 		Console::out::toggleFilter(Console::Filters::Warning);
 	}
 
-	if(AEInputCheckReleased(VK_F4)) {
+	if(AEInputCheckReleased(VK_F5)) {
 		Console::out::toggleFilter(Console::Filters::Error);
 	}
 
