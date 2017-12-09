@@ -157,13 +157,17 @@ void Application::GlobalInputManager(double dt) {
 
 	// SHOW HELP
 	if(AEInputCheckReleased(VK_F1)) {
+
 		std::string colorWhite = TSC_WHITE;
+
 		Console::out::println("Help:", "Info$ignoreFilter");
+
 		AESysPrintf(std::string(colorWhite + "	F1 - Show Help\n"				).c_str());
 		AESysPrintf(std::string(colorWhite + "	F2 - Toggle Info Filter\n"		).c_str());
 		AESysPrintf(std::string(colorWhite + "	F3 - Toggle Debug Filter\n"		).c_str());
 		AESysPrintf(std::string(colorWhite + "	F4 - Toggle Warning Filter\n"	).c_str());
 		AESysPrintf(std::string(colorWhite + "	F5 - Toggle Error Filter\n"		).c_str());
+
 	}
 
 	/* FILTER KEYBINDS */
