@@ -8,6 +8,9 @@
 class Player : public Entity {
 
 private:
+	AEGfxVertexList *m_meshDead;
+	AEGfxTexture *m_textureDead;
+
 	std::vector<Bullet *> m_entityBullets;
 
 public:

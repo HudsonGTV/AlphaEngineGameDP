@@ -55,7 +55,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	sysInitInfo.mMaxFrameRate			= m_refreshRate;
 	sysInitInfo.mpWinCallBack			= NULL;
 	sysInitInfo.mClassStyle				= CS_HREDRAW | CS_VREDRAW;
-	sysInitInfo.mWindowStyle			= WS_OVERLAPPEDWINDOW & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
+	sysInitInfo.mWindowStyle			= WS_OVERLAPPEDWINDOW /*& ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME)*/;
 	sysInitInfo.mWindowHandle			= NULL /*hwnd*/;
 	sysInitInfo.mHandleWindowMessages	= 1;
 

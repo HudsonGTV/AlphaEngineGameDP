@@ -24,6 +24,12 @@ void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 
 void GraphicsEngine::PreRender(std::vector<Entity *> *entityList, double dt) {
 
+	/* ROCKS */
+	Graphics::DrawMesh(math::vec2(-600.0f, 450.0f), &meshRock, &textureRock, 0.0f, 6, false, 4);
+	Graphics::DrawMesh(math::vec2(-400.0f, 450.0f), &meshRock, &textureRock, 0.0f, 6, false, 4);
+	Graphics::DrawMesh(math::vec2(-350.0f, 450.0f), &meshRock, &textureRock, 0.0f, 6, false, 5);
+	Graphics::DrawMesh(math::vec2(-100.0f, 450.0f), &meshRock, &textureRock, 0.0f, 6, false, 5);
+
 }
 
 void GraphicsEngine::Render(std::vector<Entity *> *entityList, double dt) {
@@ -32,28 +38,30 @@ void GraphicsEngine::Render(std::vector<Entity *> *entityList, double dt) {
 
 void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 
-	// TERRAIN
-	Graphics::DrawMesh(math::vec2(-700, 500.0f), &meshRock, &textureRock, 0.0f, 6, false, 0);
-	Graphics::DrawMesh(math::vec2(700, 500.0f), &meshRock, &textureRock, 0.0f, 6, false, 2);
+	/* TERRAIN */
+
+	// TOP CORNERS
+	Graphics::DrawMesh(math::vec2(-700.0f, 500.0f), &meshRock, &textureRock, 0.0f, 6, false, 0);
+	Graphics::DrawMesh(math::vec2(700.0f, 500.0f), &meshRock, &textureRock, 0.0f, 6, false, 2);
 
 	// TOP
-	for(int i = -650; i <= 650; i += 50) {
+	for(float i = -650.0f; i <= 650.0f; i += 50.0f) {
 		Graphics::DrawMesh(math::vec2(i, 500.0f), &meshRock, &textureRock, 0.0f, 6, false, 1);
 	}
 
 	// BOTTOM
-	for(int i = -700; i <= 700; i += 50) {
+	for(float i = -700.0f; i <= 700.0f; i += 50.0f) {
 		Graphics::DrawMesh(math::vec2(i, -500.0f), &meshRock, &textureRock, 0.0f, 6, false, 1);
 	}
 
 	// LEFT
-	for(int i = -450; i <= 450; i += 50) {
-		Graphics::DrawMesh(math::vec2(-700, i), &meshRock, &textureRock, 0.0f, 6, false, 0);
+	for(float i = -450.0f; i <= 450.0f; i += 50.0f) {
+		Graphics::DrawMesh(math::vec2(-700.0f, i), &meshRock, &textureRock, 0.0f, 6, false, 0);
 	}
 
 	// RIGHT
-	for(int i = -450; i <= 450; i += 50) {
-		Graphics::DrawMesh(math::vec2(700, i), &meshRock, &textureRock, 0.0f, 6, false, 0);
+	for(float i = -450.0f; i <= 450.0f; i += 50.0f) {
+		Graphics::DrawMesh(math::vec2(700.0f, i), &meshRock, &textureRock, 0.0f, 6, false, 0);
 	}
 
 }

@@ -25,8 +25,8 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 		if(AEInputCheckCurr(VK_LEFT)	|| AEInputCheckCurr('A')) velocity.x -= speed;
 		if(AEInputCheckCurr(VK_RIGHT)	|| AEInputCheckCurr('D')) velocity.x += speed;
 		if(AEInputCheckCurr(VK_SHIFT)) {
-			velocity.x *= 2.0f;
-			velocity.y *= 2.0f;
+			velocity.x *= 2.5f;
+			velocity.y *= 2.5f;
 		}
 
 		// SET CONTROLLABLE ENTITY'S VELOCITY

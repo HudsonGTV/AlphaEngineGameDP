@@ -57,28 +57,35 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityList, double dt) {
 		// GET PLAYER DIRECTION
 		if(player != nullptr) {
 
-			math::vec2 playerPos(player->GetPosition().x, player->GetPosition().y);
-			math::vec2 vec = playerPos - currPos;
+			if(player->GetGroup() != "GroupEntityDead") {
 
-			float angle = atan2(vec.y, vec.x);
+				math::vec2 playerPos(player->GetPosition().x, player->GetPosition().y);
+				math::vec2 vec = playerPos - currPos;
 
-			math::vec3 vel = math::vec3(cos(angle) * 0.75f, sin(angle) * 0.75f, 0.0f);
+				float angle = atan2(vec.y, vec.x);
 
-			SetVelocity(vel);
+				math::vec3 vel = math::vec3(cos(angle) * 0.75f, sin(angle) * 0.75f, 0.0f);
 
-			// SHOOTING
-			if(m_shootTimer <= 0.0) {
+				SetVelocity(vel);
 
-				m_shootTimer = 0.5;
+				// SHOOTING
+				if(m_shootTimer <= 0.0) {
 
-				// FIRE BULLET
-				m_entityBullets.push_back(new Bullet(m_entityList, &m_entityBullets, "entity/bullet/Ebullet.png", 1, GetPosition()));
+					m_shootTimer = 0.5;
 
-				// SET BULLET NAME AND VELOCITY
-				m_entityBullets.back()->SetName("EBullet");
-				math::vec3 vel = math::vec3(cos(angle)*m_bulletSpeed, sin(angle)*m_bulletSpeed, 0);
-				m_entityBullets.back()->SetVelocity(vel);
+					// FIRE BULLET
+					m_entityBullets.push_back(new Bullet(m_entityList, &m_entityBullets, "entity/bullet/Ebullet.png", 1, GetPosition()));
 
+					// SET BULLET NAME AND VELOCITY
+					m_entityBullets.back()->SetName("EBullet");
+					math::vec3 vel = math::vec3(cos(angle)*m_bulletSpeed, sin(angle)*m_bulletSpeed, 0);
+					m_entityBullets.back()->SetVelocity(vel);
+
+				}
+
+			} else {
+				m_playerExists = false;
+				SetVelocity(math::vec3(0.0f, 0.0f, 0.0f));
 			}
 
 		} else {
