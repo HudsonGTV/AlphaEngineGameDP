@@ -14,10 +14,10 @@ Bullet::Bullet(std::vector<Entity *> *entityList, std::vector<Bullet *> *entityB
 
 void Bullet::Update() {
 
-	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
+	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_zOrder, m_frameCount);
 
 	if(ENABLE_DEBUG_LINES) {
-		Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 1, 5.0f);
+		Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 5.0f);
 	}
 
 	SetPosition(m_velocity);

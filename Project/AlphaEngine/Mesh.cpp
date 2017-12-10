@@ -9,7 +9,7 @@ static double timeCounter = 0;
 static clock_t thisTime = clock();
 static clock_t lastTime = thisTime;
 
-void Graphics::CreateMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, char *texturePath, int frameCount, math::vec2 size) {
+void Graphics::CreateMesh(AEGfxVertexList **mesh, AEGfxTexture **texture, std::string texturePath, int frameCount, math::vec2 size) {
 
 	AEGfxMeshStart();
 
@@ -25,26 +25,65 @@ void Graphics::CreateMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture *
 		-size.x / 2, size.y / 2, 0xFFFF0000, 0.0f, 0.0f
 	);
 
-	*mesh = AEGfxMeshEnd();
+	texturePath = std::string("../../assets/texture/" + texturePath);
 
-	*texture = AEGfxTextureLoad(texturePath);
+	*mesh = AEGfxMeshEnd();
+	*texture = AEGfxTextureLoad(texturePath.c_str());
 
 }
 
-void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, int frameCount, float zOrder) {
+void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, int currFrame) {
 
-	if(frameCount > 6) {
-		frameCount = 6;
+	if(frameCount > 7) {
+		frameCount = 7;
 	}
 
-	float textureFrame[6] {
-		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount
+	if(frameCount == 0) {
+		frameCount = 1;
+	}
+
+	float textureFrame[7] {
+		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount, 6.0f / frameCount
 	};
 
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetTextureMode(AE_GFX_TM_PRECISE);
 
 	AEGfxSetFullTransformWithZOrder(entity->GetPositionX(), entity->GetPositionY(), entity->GetPositionZ() + zOrder, 0.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
+	if(loopAnimation) {
+		AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
+	} else {
+		AEGfxTextureSet(*texture, currFrame, 0.0f);
+	}
+	AEGfxSetTransparency(1.0f);
+
+	AEGfxMeshDraw(*mesh, AE_GFX_MDM_TRIANGLES);
+
+}
+
+void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, int currFrame) {
+
+	if(frameCount > 7) {
+		frameCount = 7;
+	}
+
+	if(frameCount == 0) {
+		frameCount = 1;
+	}
+
+	float textureFrame[7]{
+		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount, 6.0f / frameCount
+	};
+
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetTextureMode(AE_GFX_TM_PRECISE);
+
+	AEGfxSetFullTransformWithZOrder(pos.x, pos.y, zOrder, 0.0f, 1.0f, 1.0f);
+	if(loopAnimation) {
+		AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
+	} else {
+		AEGfxTextureSet(*texture, currFrame, 0.0f);
+	}
 	AEGfxSetTransparency(1.0f);
 
 	AEGfxMeshDraw(*mesh, AE_GFX_MDM_TRIANGLES);
@@ -62,7 +101,7 @@ void Graphics::EnableAnimations(float speed) {
 		++frameNum;
 	}
 
-	if(frameNum > 5) {
+	if(frameNum > 6) {
 		frameNum = 0;
 	}
 

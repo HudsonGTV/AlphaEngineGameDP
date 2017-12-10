@@ -28,17 +28,17 @@ Entity::Entity(std::vector<Entity *> *entityList, char *texturePath, int frameCo
 	}
 
 	// CREATE OBJECT MESH
-	Graphics::CreateMesh(this, &m_mesh, &m_texture, m_texturePath, m_frameCount, math::vec2(m_textureWidth, m_textureHeight));
+	Graphics::CreateMesh(&m_mesh, &m_texture, m_texturePath, m_frameCount, math::vec2(m_textureWidth, m_textureHeight));
 
 	/* DRAW DEBUG LINES IF ENABLED */
 
 	if(ENABLE_DEBUG_LINES) {
 		switch(ctype) {
 		case COLLIDER_BOX:
-			Graphics::CreateMesh(this, &m_debugMesh, &m_debugTexture, "../../assets/dbug/box.png", 1, math::vec2(width, height));
+			Graphics::CreateMesh(&m_debugMesh, &m_debugTexture, "dbug/box.png", 1, math::vec2(width, height));
 			break;
 		case COLLIDER_CIRCLE:
-			Graphics::CreateMesh(this, &m_debugMesh, &m_debugTexture, "../../assets/dbug/circle.png", 1, math::vec2(width, width));
+			Graphics::CreateMesh(&m_debugMesh, &m_debugTexture, "dbug/circle.png", 1, math::vec2(width, width));
 			break;
 		default:
 			break;
@@ -110,11 +110,11 @@ void Entity::Update() {
 	if(!m_objectWasRemovedByID) {
 
 		// DRAW MESH
-		Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
+		Graphics::DrawMesh(this, &m_mesh, &m_texture, m_zOrder, m_frameCount);
 
 		// DRAW DEBUG LINES IF ENABLED
 		if(ENABLE_DEBUG_LINES) {
-			Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 1, 5.0f);
+			Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 5.0f, 1);
 		}
 
 		// SET RELATIVE POSITION
@@ -138,7 +138,14 @@ void Entity::Collide(Entity *other, double dt) {
 	/* COLLISION CHECKS */
 
 	if(GetGroup() == "GroupWall") {
+
+		if(other->GetName() == "Bullet" || other->GetName() == "EBullet") {
+			// DON'T DELETE BULLETS HERE! QUEUE THEIR DELETION INSTEAD! THEY ARE AUTO DELETED IN ENEMY.CPP
+			ObjectManager::removeEntityByID(m_entityList, other->m_id, false);
+		}
+
 		return;
+
 	}
 
 	if(m_name == "Enemy") {
@@ -204,20 +211,20 @@ void Entity::Collide(Entity *other, double dt) {
 
 		if(other->GetName() == "WallT") {
 			if(GetColliderType() == COLLIDER_BOX) {
-				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMaxY() - dynamic_cast<BoxCollider *>(GetCollider())->GetHeight() / 2.0f, GetPositionZ()));
+				SetWorldPosition(math::vec3(GetPositionX(), 475.0f - dynamic_cast<BoxCollider *>(GetCollider())->GetHeight() / 2.0f, GetPositionZ()));
 			} else if(GetColliderType() != COLLIDER_NONE) {
-				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMaxY() - GetCollider()->GetWidth() / 2.0f, GetPositionZ()));
+				SetWorldPosition(math::vec3(GetPositionX(), 475.0f - GetCollider()->GetWidth() / 2.0f, GetPositionZ()));
 			}
 		} else if(other->GetName() == "WallB") {
 			if(GetColliderType() == COLLIDER_BOX) {
-				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMinY() + dynamic_cast<BoxCollider *>(GetCollider())->GetHeight() / 2.0f, GetPositionZ()));
+				SetWorldPosition(math::vec3(GetPositionX(), -475.0f + dynamic_cast<BoxCollider *>(GetCollider())->GetHeight() / 2.0f, GetPositionZ()));
 			} else if(GetColliderType() != COLLIDER_NONE) {
-				SetWorldPosition(math::vec3(GetPositionX(), AEGfxGetWinMinY() + GetCollider()->GetWidth() / 2.0f, GetPositionZ()));
+				SetWorldPosition(math::vec3(GetPositionX(), -475.0f + GetCollider()->GetWidth() / 2.0f, GetPositionZ()));
 			}
 		} else if(other->GetName() == "WallL") {
-			SetWorldPosition(math::vec3(AEGfxGetWinMinX() + GetCollider()->GetWidth() / 2.0f, GetPositionY(), GetPositionZ()));
+			SetWorldPosition(math::vec3(-675.0f + GetCollider()->GetWidth() / 2.0f, GetPositionY(), GetPositionZ()));
 		} else if(other->GetName() == "WallR") {
-			SetWorldPosition(math::vec3(AEGfxGetWinMaxX() - GetCollider()->GetWidth() / 2.0f, GetPositionY(), GetPositionZ()));
+			SetWorldPosition(math::vec3(675.0f - GetCollider()->GetWidth() / 2.0f, GetPositionY(), GetPositionZ()));
 		}
 
 	}

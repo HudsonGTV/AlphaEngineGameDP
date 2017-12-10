@@ -12,6 +12,9 @@ void Player::Update() {
 
 	if(!m_objectWasRemovedByID && !m_isDead) {
 
+		// CAMERA POSITION
+		AEGfxSetCamPosition(GetPositionX(), GetPositionY());
+
 		if(m_health <= 0.0f && !m_objectWasRemovedByID) {
 			if(!m_isInvincible) {
 				m_isDead = true;
@@ -21,10 +24,10 @@ void Player::Update() {
 			}
 		}
 
-		Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
+		Graphics::DrawMesh(this, &m_mesh, &m_texture, m_zOrder, m_frameCount);
 
 		if(ENABLE_DEBUG_LINES) {
-			Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture);
+			Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 5.0f);
 		}
 
 		m_input->Update(this, true, 1.5f);

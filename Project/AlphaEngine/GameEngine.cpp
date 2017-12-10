@@ -22,13 +22,13 @@ static EntityID idBoss;
 void Game::Init(std::vector<Entity *> *entityList) {
 
 	// CREATE OBJECTS HERE
-	Player *entityPlayer = new Player(entityList, "../../assets/entity/player/player.png", 3, 60.0f, 60.0f);
-	Enemy *entityBoss = new Enemy(entityList, "../../assets/entity/boss/boss.png", 2, COLLIDER_CIRCLE, 100.0f, 100.0f, 100.0f, 100.0f);
+	Player *entityPlayer = new Player(entityList, "entity/player/player.png", 3, 60.0f, 60.0f);
+	Enemy *entityBoss = new Enemy(entityList, "entity/boss/boss.png", 2, COLLIDER_CIRCLE, 100.0f, 100.0f, 100.0f, 100.0f);
 
-	Entity *entityWallT = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, AEGfxGetWinMaxX() * 2.0f, 50.0f, 0.0f, 0.0f);
-	Entity *entityWallB = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, AEGfxGetWinMaxX() * 2.0f, 50.0f, 0.0f, 0.0f);
-	Entity *entityWallL = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, 50.0f, AEGfxGetWinMaxX() * 2.0f, 0.0f, 0.0f);
-	Entity *entityWallR = new Entity(entityList, "../../assets/entity/wall/border.png", 1, COLLIDER_BOX, 50.0f, AEGfxGetWinMaxX() * 2.0f, 0.0f, 0.0f);
+	Entity *entityWallT = new Entity(entityList, "entity/wall/border.png", 1, COLLIDER_BOX, 1400.0f, 50.0f, 0.0f, 0.0f);
+	Entity *entityWallB = new Entity(entityList, "entity/wall/border.png", 1, COLLIDER_BOX, 1400.0f, 50.0f, 0.0f, 0.0f);
+	Entity *entityWallL = new Entity(entityList, "entity/wall/border.png", 1, COLLIDER_BOX, 50.0f, 1000.0f, 0.0f, 0.0f);
+	Entity *entityWallR = new Entity(entityList, "entity/wall/border.png", 1, COLLIDER_BOX, 50.0f, 1000.0f, 0.0f, 0.0f);
 
 	// STORE ID
 	idPlayer = entityPlayer->GetID();
@@ -53,10 +53,10 @@ void Game::Init(std::vector<Entity *> *entityList) {
 	entityPlayer->SetWorldPosition(math::vec3(-250.0f, 0.0f, 0.0f));
 	entityBoss->SetWorldPosition(math::vec3(250.0f, 0.0f, 0.0f));
 
-	entityWallT->SetWorldPosition(math::vec3(0.0f, AEGfxGetWinMaxY() + 24.0f, 0.0f));
-	entityWallB->SetWorldPosition(math::vec3(0.0f, AEGfxGetWinMinY() - 24.0f, 0.0f));
-	entityWallL->SetWorldPosition(math::vec3(AEGfxGetWinMinX() - 24.0f, 0.0f, 0.0f));
-	entityWallR->SetWorldPosition(math::vec3(AEGfxGetWinMaxX() + 24.0f, 0.0f, 0.0f));
+	entityWallT->SetWorldPosition(math::vec3(0.0f, 500.0f, 0.0f));
+	entityWallB->SetWorldPosition(math::vec3(0.0f, -500.0f, 0.0f));
+	entityWallL->SetWorldPosition(math::vec3(-700.0f, 0.0f, 0.0f));
+	entityWallR->SetWorldPosition(math::vec3(700.0f, 0.0f, 0.0f));
 
 	// SET HEALTH HERE
 	entityPlayer->SetHealth(20.0f);

@@ -42,15 +42,18 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 				// GET MOUSE POS
 				s32 mX = 0;
 				s32 mY = 0;
+				float nmX = 0.0f;
+				float nmY = 0.0f;
 				AEInputGetCursorPosition(&mX, &mY);
+				AEGfxConvertScreenCoordinatesToWorld(mX, mY, &nmX, &nmY);
 				
-				mX = mX - AEGfxGetWinMaxX();
-				mY = mY - AEGfxGetWinMaxY();
+				//nmX = nmX - AEGfxGetWinMaxX();
+				//nmY = nmY - AEGfxGetWinMaxY();
 
-				math::vec2 mousePos(mX, -mY);
+				math::vec2 mousePos(nmX, nmY);
 
 				// FIRE BULLET
-				m_entityBullets->push_back(new Bullet(m_entityList, m_entityBullets, "../../assets/entity/bullet/bullet.png", 1, entity->GetPosition()));
+				m_entityBullets->push_back(new Bullet(m_entityList, m_entityBullets, "entity/bullet/bullet.png", 1, entity->GetPosition()));
 
 				// GET BULLET DIRECTION
 				math::vec2 bulletPos(entity->GetPosition().x, entity->GetPosition().y);

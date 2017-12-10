@@ -117,9 +117,11 @@ void Application::Loop(HINSTANCE instanceH) {
 	GlobalInputManager(m_deltaTime);
 
 	// RENDER/UPDATE FUNCTIONS
+	m_graphics->PreRender(&m_entityList, m_deltaTime);
 	m_game->Update(&m_entityList, m_deltaTime);
-	m_physics->Update(m_deltaTime);
 	m_graphics->Render(&m_entityList, m_deltaTime);
+	m_physics->Update(m_deltaTime);
+	m_graphics->PostRender(&m_entityList, m_deltaTime);
 
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S END
 	AESysFrameEnd();

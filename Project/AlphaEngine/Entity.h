@@ -22,13 +22,14 @@ private:
 	float m_healthCooldown = 1.0f;
 
 protected:
-	char *m_texturePath = "../../assets/";
+	char *m_texturePath = "misc/missing.png";
 
 	bool m_isDead = false;
 	bool m_isInvincible = false;
 
 	float m_textureWidth = 60.0f;
 	float m_textureHeight = 60.0f;
+	float m_zOrder = 1.0f;
 	float m_health = 25.0f;
 
 	int m_frameCount = 1;

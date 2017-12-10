@@ -17,10 +17,10 @@ void Enemy::Update() {
 			return;
 		}
 
-		Graphics::DrawMesh(this, &m_mesh, &m_texture, m_frameCount);
+		Graphics::DrawMesh(this, &m_mesh, &m_texture, m_zOrder, m_frameCount);
 
 		if(ENABLE_DEBUG_LINES) {
-			Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 1, 5.0f);
+			Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 5.0f);
 		}
 
 		SetPosition(m_velocity);
@@ -72,7 +72,7 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityList, double dt) {
 				m_shootTimer = 0.5;
 
 				// FIRE BULLET
-				m_entityBullets.push_back(new Bullet(m_entityList, &m_entityBullets, "../../assets/entity/bullet/Ebullet.png", 1, GetPosition()));
+				m_entityBullets.push_back(new Bullet(m_entityList, &m_entityBullets, "entity/bullet/Ebullet.png", 1, GetPosition()));
 
 				// SET BULLET NAME AND VELOCITY
 				m_entityBullets.back()->SetName("EBullet");
