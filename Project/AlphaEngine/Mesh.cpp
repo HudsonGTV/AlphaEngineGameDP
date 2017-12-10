@@ -32,10 +32,11 @@ void Graphics::CreateMesh(AEGfxVertexList **mesh, AEGfxTexture **texture, std::s
 
 }
 
-void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, int currFrame) {
+void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, unsigned int currFrame) {
 
-	if(frameCount > 7) {
+	if(frameCount > 7 || currFrame > 7) {
 		frameCount = 7;
+		currFrame = 7;
 	}
 
 	if(frameCount == 0) {
@@ -53,7 +54,7 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 	if(loopAnimation) {
 		AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
 	} else {
-		AEGfxTextureSet(*texture, currFrame, 0.0f);
+		AEGfxTextureSet(*texture, textureFrame[currFrame], 0.0f);
 	}
 	AEGfxSetTransparency(1.0f);
 
@@ -61,10 +62,11 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 
 }
 
-void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, int currFrame) {
+void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, unsigned int currFrame) {
 
-	if(frameCount > 7) {
+	if(frameCount > 7 || currFrame > 7) {
 		frameCount = 7;
+		currFrame = 7;
 	}
 
 	if(frameCount == 0) {
@@ -82,7 +84,7 @@ void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **t
 	if(loopAnimation) {
 		AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
 	} else {
-		AEGfxTextureSet(*texture, currFrame, 0.0f);
+		AEGfxTextureSet(*texture, textureFrame[currFrame], 0.0f);
 	}
 	AEGfxSetTransparency(1.0f);
 
