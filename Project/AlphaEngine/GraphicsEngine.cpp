@@ -7,15 +7,17 @@
 
 // MESHES
 static AEGfxVertexList *meshRock;
+static AEGfxVertexList *meshHP;
 
 // TEXTURES
 static AEGfxTexture *textureRock;
-
+static AEGfxTexture *textureHP;
 
 void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 
 	// CREATE MESHES
-	Graphics::CreateMesh(&meshRock, &textureRock, "terrain/terrain.png", 6, math::vec2(50.0f, 50.0f));
+	Graphics::CreateMesh(&meshRock, &textureRock, "terrain/terrain.png", 6, math::vec2(50.0f));
+	Graphics::CreateMesh(&meshHP, &textureHP, "font/number.png", 10, math::vec2(50.0f));
 
 	AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
@@ -64,20 +66,41 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 		Graphics::DrawMesh(math::vec2(700.0f, i), &meshRock, &textureRock, 0.0f, 6, false, 0);
 	}
 
+	// HEALTH
+	Entity *tmpPlayer = ObjectManager::getEntityByName(entityList, "Player");
+
+	if(tmpPlayer != nullptr) {
+
+		float hp = tmpPlayer->GetHealth();
+		unsigned int hpOnesPlace = (unsigned int)round(hp) % 10U;
+		unsigned int hpTensPlace = (unsigned int)round(hp) / 10U;
+
+		float sX = 0.0f;
+		float sY = 0.0f;
+
+		AEGfxConvertScreenCoordinatesToWorld(0.0f, 0.0f, &sX, & sY);
+
+		if(hp >= 0.0f) {
+			if(hpTensPlace != 0) {
+				Graphics::DrawMesh(math::vec2((sX + AEGfxGetWinMinX()) / 2 + 25.0f, (sY + AEGfxGetWinMaxY()) / 2 - 35.0f), &meshHP, &textureHP, 1.0f, 10, false, hpTensPlace);
+				Graphics::DrawMesh(math::vec2((sX + AEGfxGetWinMinX()) / 2 + 65.0f, (sY + AEGfxGetWinMaxY()) / 2 - 35.0f), &meshHP, &textureHP, 1.0f, 10, false, hpOnesPlace);
+			} else {
+				Graphics::DrawMesh(math::vec2((sX + AEGfxGetWinMinX()) / 2 + 25.0f, (sY + AEGfxGetWinMaxY()) / 2 - 35.0f), &meshHP, &textureHP, 1.0f, 10, false, hpOnesPlace);
+			}
+		}
+
+	}
+
 }
 
 void GraphicsEngine::Uninit() {
 
 	// FREE MESHES
-	//AEGfxMeshFree(meshPlayer);
-	//AEGfxMeshFree(meshBoss);
-	//AEGfxMeshFree(meshBullet);
-	//AEGfxMeshFree(meshMine);
+	AEGfxMeshFree(meshRock);
+	AEGfxMeshFree(meshHP);
 
 	// FREE TEXTURES
-	//AEGfxTextureUnload(texturePlayer);
-	//AEGfxTextureUnload(textureBoss);
-	//AEGfxTextureUnload(textureBullet);
-	//AEGfxTextureUnload(textureMine);
+	AEGfxTextureUnload(textureRock);
+	AEGfxTextureUnload(textureHP);
 
 }

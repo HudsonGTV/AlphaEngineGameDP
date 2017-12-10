@@ -247,6 +247,10 @@ float Entity::GetPositionZ() const {
 	return m_position.z;
 }
 
+float Entity::GetHealth() const {
+	return m_health;
+}
+
 int Entity::GetID() const {
 	return m_id;
 }

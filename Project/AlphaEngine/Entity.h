@@ -75,6 +75,7 @@ public:
 	float GetPositionX() const;
 	float GetPositionY() const;
 	float GetPositionZ() const;
+	float GetHealth() const;
 
 	int GetID() const;
 

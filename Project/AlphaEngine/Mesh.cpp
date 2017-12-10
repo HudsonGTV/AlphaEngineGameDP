@@ -34,17 +34,17 @@ void Graphics::CreateMesh(AEGfxVertexList **mesh, AEGfxTexture **texture, std::s
 
 void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, unsigned int currFrame) {
 
-	if(frameCount > 7 || currFrame > 7) {
-		frameCount = 7;
-		currFrame = 7;
+	if(frameCount > 10 || currFrame > 10) {
+		frameCount = 10;
+		currFrame = 10;
 	}
 
 	if(frameCount == 0) {
 		frameCount = 1;
 	}
 
-	float textureFrame[7] {
-		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount, 6.0f / frameCount
+	float textureFrame[10] {
+		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount, 6.0f / frameCount, 7.0f / frameCount, 8.0f / frameCount, 9.0f / frameCount
 	};
 
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -64,17 +64,17 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 
 void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, unsigned int currFrame) {
 
-	if(frameCount > 7 || currFrame > 7) {
-		frameCount = 7;
-		currFrame = 7;
+	if(frameCount > 10 || currFrame > 10) {
+		frameCount = 10;
+		currFrame = 10;
 	}
 
 	if(frameCount == 0) {
 		frameCount = 1;
 	}
 
-	float textureFrame[7]{
-		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount, 6.0f / frameCount
+	float textureFrame[10]{
+		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount, 6.0f / frameCount, 7.0f / frameCount, 8.0f / frameCount, 9.0f / frameCount
 	};
 
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -103,7 +103,7 @@ void Graphics::EnableAnimations(float speed) {
 		++frameNum;
 	}
 
-	if(frameNum > 6) {
+	if(frameNum > 9) {
 		frameNum = 0;
 	}
 
