@@ -7,17 +7,17 @@
 
 // MESHES
 static AEGfxVertexList *meshRock;
-static AEGfxVertexList *meshHP;
+static AEGfxVertexList *meshNum;
 
 // TEXTURES
 static AEGfxTexture *textureRock;
-static AEGfxTexture *textureHP;
+static AEGfxTexture *textureNum;
 
 void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 
 	// CREATE MESHES
 	Graphics::CreateMesh(&meshRock, &textureRock, "terrain/terrain.png", 6, math::vec2(50.0f));
-	Graphics::CreateMesh(&meshHP, &textureHP, "font/number.png", 10, math::vec2(50.0f));
+	Graphics::CreateMesh(&meshNum, &textureNum, "font/number.png", 10, math::vec2(30.0f));
 
 	AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
@@ -71,25 +71,24 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 
 	if(tmpPlayer != nullptr) {
 
-		float hp = tmpPlayer->GetHealth();
-		unsigned int hpOnesPlace = (unsigned int)round(hp) % 10U;
-		unsigned int hpTensPlace = (unsigned int)round(hp) / 10U;
+		float nmX = 0.0f;
+		float nmY = 0.0f;
 
-		float sX = 0.0f;
-		float sY = 0.0f;
+		Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_BOTTOM_LEFT);
 
-		AEGfxConvertScreenCoordinatesToWorld(0.0f, 0.0f, &sX, & sY);
-
-		if(hp >= 0.0f) {
-			if(hpTensPlace != 0) {
-				Graphics::DrawMesh(math::vec2((sX + AEGfxGetWinMinX()) / 2 + 25.0f, (sY + AEGfxGetWinMaxY()) / 2 - 35.0f), &meshHP, &textureHP, 1.0f, 10, false, hpTensPlace);
-				Graphics::DrawMesh(math::vec2((sX + AEGfxGetWinMinX()) / 2 + 65.0f, (sY + AEGfxGetWinMaxY()) / 2 - 35.0f), &meshHP, &textureHP, 1.0f, 10, false, hpOnesPlace);
-			} else {
-				Graphics::DrawMesh(math::vec2((sX + AEGfxGetWinMinX()) / 2 + 25.0f, (sY + AEGfxGetWinMaxY()) / 2 - 35.0f), &meshHP, &textureHP, 1.0f, 10, false, hpOnesPlace);
-			}
-		}
+		Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY + 30.0f), (unsigned int)round(tmpPlayer->GetHealth()), &meshNum, &textureNum);
 
 	}
+
+	// FPS
+	double fps = (1.0 / dt);
+
+	float nmX = 0.0f;
+	float nmY = 0.0f;
+
+	Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_TOP_LEFT);
+
+	Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY - 30.0f), (unsigned int)round(fps), &meshNum, &textureNum);
 
 }
 
@@ -97,10 +96,10 @@ void GraphicsEngine::Uninit() {
 
 	// FREE MESHES
 	AEGfxMeshFree(meshRock);
-	AEGfxMeshFree(meshHP);
+	AEGfxMeshFree(meshNum);
 
 	// FREE TEXTURES
 	AEGfxTextureUnload(textureRock);
-	AEGfxTextureUnload(textureHP);
+	AEGfxTextureUnload(textureNum);
 
 }

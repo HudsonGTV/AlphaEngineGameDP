@@ -33,12 +33,12 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	winClass.lpszClassName = "appWCDGame";
 	winClass.hIconSm = LoadIcon(instanceH, IDI_APPLICATION);
 
-	HWND hwnd = CreateWindowEx(
+	m_hwnd = CreateWindowEx(
 		WS_EX_CLIENTEDGE,
 		"appWCDGame",
 		"Title",
 		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 640, 480,
+		CW_USEDEFAULT, CW_USEDEFAULT, m_windowWidth, m_windowHeight,
 		NULL, NULL, instanceH, NULL
 	);*/
 
@@ -56,7 +56,7 @@ void Application::Init(HINSTANCE instanceH, int show) {
 	sysInitInfo.mpWinCallBack			= NULL;
 	sysInitInfo.mClassStyle				= CS_HREDRAW | CS_VREDRAW;
 	sysInitInfo.mWindowStyle			= WS_OVERLAPPEDWINDOW /*& ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME)*/;
-	sysInitInfo.mWindowHandle			= NULL /*hwnd*/;
+	sysInitInfo.mWindowHandle			= NULL;
 	sysInitInfo.mHandleWindowMessages	= 1;
 
 	// APPLY SYSTEM PROPERTIES

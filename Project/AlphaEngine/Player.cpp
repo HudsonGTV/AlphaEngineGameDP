@@ -20,9 +20,13 @@ void Player::Update() {
 	float nmX = 0.0f;
 	float nmY = 0.0f;
 	AEInputGetCursorPosition(&mX, &mY);
-	AEGfxConvertScreenCoordinatesToWorld(mX, mY, &nmX, &nmY);
+	//AEGfxConvertScreenCoordinatesToWorld(mX, mY, &nmX, &nmY);
+	float cX = (AEGfxGetWinMaxX() - AEGfxGetWinMinX()) / 2;
+	float cY = (AEGfxGetWinMaxY() - AEGfxGetWinMinY()) / 2;
+	nmX = -mX - cX - AEGfxGetWinMinX() + AEGfxGetWinMaxX();
+	nmY = -mY - cY - AEGfxGetWinMinY() + AEGfxGetWinMaxY();
 
-	AEGfxSetCamPosition(GetPositionX() + nmX / 14, GetPositionY() + nmY / 14);
+	AEGfxSetCamPosition(GetPositionX() - nmX / 14, GetPositionY() + nmY / 14);
 
 	if(!m_objectWasRemovedByID && !m_isDead) {
 
