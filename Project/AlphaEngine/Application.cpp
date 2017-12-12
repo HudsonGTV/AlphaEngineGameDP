@@ -138,6 +138,7 @@ void Application::Uninit(HINSTANCE instanceH) {
 	// DELETE UNLOADED CLASSES
 	delete m_game;
 	delete m_graphics;
+	delete m_physics;
 
 	// ALERT USER THAT EVERYTHING WAS UNINITIALIZED
 	Console::out::println("Uninitialized!");

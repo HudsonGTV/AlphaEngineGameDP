@@ -32,7 +32,7 @@ void Graphics::CreateMesh(AEGfxVertexList **mesh, AEGfxTexture **texture, std::s
 
 }
 
-void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, unsigned int currFrame, float opacity) {
+void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, unsigned int currFrame, float opacity, math::vec2 scale) {
 
 	if(frameCount > 10 || currFrame > 10) {
 		frameCount = 10;
@@ -50,7 +50,7 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetTextureMode(AE_GFX_TM_PRECISE);
 
-	AEGfxSetFullTransformWithZOrder(entity->GetPositionX(), entity->GetPositionY(), entity->GetPositionZ() + zOrder, 0.0f, 1.0f, 1.0f);
+	AEGfxSetFullTransformWithZOrder(entity->GetPositionX(), entity->GetPositionY(), entity->GetPositionZ() + zOrder, 0.0f, scale.x, scale.y);
 
 	if(loopAnimation) {
 		AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
@@ -64,7 +64,7 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 
 }
 
-void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, unsigned int currFrame, float opacity) {
+void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, unsigned int currFrame, float opacity, math::vec2 scale) {
 
 	if(frameCount > 10 || currFrame > 10) {
 		frameCount = 10;
@@ -82,7 +82,7 @@ void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **t
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetTextureMode(AE_GFX_TM_PRECISE);
 
-	AEGfxSetFullTransformWithZOrder(pos.x, pos.y, zOrder, 0.0f, 1.0f, 1.0f);
+	AEGfxSetFullTransformWithZOrder(pos.x, pos.y, zOrder, 0.0f, scale.x, scale.y);
 
 	if(loopAnimation) {
 		AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);

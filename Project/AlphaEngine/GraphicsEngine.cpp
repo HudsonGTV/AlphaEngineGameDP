@@ -6,31 +6,36 @@
 #include <stdbool.h>
 
 // MESHES
-static AEGfxVertexList *meshRock;
+static AEGfxVertexList *meshTerrain;
 static AEGfxVertexList *meshNum;
 
 // TEXTURES
-static AEGfxTexture *textureRock;
+static AEGfxTexture *textureTerrain;
 static AEGfxTexture *textureNum;
 
 void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 
 	// CREATE MESHES
-	Graphics::CreateMesh(&meshRock, &textureRock, "terrain/terrain.png", 6, math::vec2(50.0f));
+	Graphics::CreateMesh(&meshTerrain, &textureTerrain, "terrain/terrain.png", 7, math::vec2(50.0f));
 	Graphics::CreateMesh(&meshNum, &textureNum, "font/number.png", 10, math::vec2(30.0f));
 
-	AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);
+	//AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);
+	AEGfxSetBackgroundColor(0.44f, 0.24f, 0.09f);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 }
 
 void GraphicsEngine::PreRender(std::vector<Entity *> *entityList, double dt) {
 
+	/* BACKGROUND COLOR */
+	Graphics::DrawMesh(math::vec2(0.0f), &meshTerrain, &textureTerrain, 0.0f, 7, false, 6, 1.0f, math::vec2(29.0f, 20.0f));
+
 	/* ROCKS */
-	Graphics::DrawMesh(math::vec2(-600.0f, 450.0f), &meshRock, &textureRock, 0.0f, 6, false, 4);
-	Graphics::DrawMesh(math::vec2(-400.0f, 450.0f), &meshRock, &textureRock, 0.0f, 6, false, 4);
-	Graphics::DrawMesh(math::vec2(-350.0f, 450.0f), &meshRock, &textureRock, 0.0f, 6, false, 5);
-	Graphics::DrawMesh(math::vec2(-100.0f, 450.0f), &meshRock, &textureRock, 0.0f, 6, false, 5);
+	for(int i = -450; i < 450; i += 50) {
+
+
+
+	}
 
 }
 
@@ -43,27 +48,27 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 	/* TERRAIN */
 
 	// TOP CORNERS
-	Graphics::DrawMesh(math::vec2(-700.0f, 500.0f), &meshRock, &textureRock, 0.0f, 6, false, 0);
-	Graphics::DrawMesh(math::vec2(700.0f, 500.0f), &meshRock, &textureRock, 0.0f, 6, false, 2);
+	Graphics::DrawMesh(math::vec2(-650.0f, 500.0f), &meshTerrain, &textureTerrain, 0.0f, 7, false, 0);
+	Graphics::DrawMesh(math::vec2(650.0f, 500.0f), &meshTerrain, &textureTerrain, 0.0f, 7, false, 2);
 
 	// TOP
-	for(float i = -650.0f; i <= 650.0f; i += 50.0f) {
-		Graphics::DrawMesh(math::vec2(i, 500.0f), &meshRock, &textureRock, 0.0f, 6, false, 1);
+	for(float i = -600.0f; i <= 600.0f; i += 50.0f) {
+		Graphics::DrawMesh(math::vec2(i, 500.0f), &meshTerrain, &textureTerrain, 0.0f, 7, false, 1);
 	}
 
 	// BOTTOM
 	for(float i = -700.0f; i <= 700.0f; i += 50.0f) {
-		Graphics::DrawMesh(math::vec2(i, -500.0f), &meshRock, &textureRock, 0.0f, 6, false, 1);
+		Graphics::DrawMesh(math::vec2(i, -500.0f), &meshTerrain, &textureTerrain, 0.0f, 7, false, 3);
 	}
 
 	// LEFT
-	for(float i = -450.0f; i <= 450.0f; i += 50.0f) {
-		Graphics::DrawMesh(math::vec2(-700.0f, i), &meshRock, &textureRock, 0.0f, 6, false, 0);
+	for(float i = -500.0f; i <= 500.0f; i += 50.0f) {
+		Graphics::DrawMesh(math::vec2(-700.0f, i), &meshTerrain, &textureTerrain, 0.0f, 7, false, 3);
 	}
 
 	// RIGHT
-	for(float i = -450.0f; i <= 450.0f; i += 50.0f) {
-		Graphics::DrawMesh(math::vec2(700.0f, i), &meshRock, &textureRock, 0.0f, 6, false, 0);
+	for(float i = -500.0f; i <= 500.0f; i += 50.0f) {
+		Graphics::DrawMesh(math::vec2(700.0f, i), &meshTerrain, &textureTerrain, 0.0f, 7, false, 3);
 	}
 
 	// HEALTH
@@ -95,11 +100,11 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 void GraphicsEngine::Uninit() {
 
 	// FREE MESHES
-	AEGfxMeshFree(meshRock);
+	AEGfxMeshFree(meshTerrain);
 	AEGfxMeshFree(meshNum);
 
 	// FREE TEXTURES
-	AEGfxTextureUnload(textureRock);
+	AEGfxTextureUnload(textureTerrain);
 	AEGfxTextureUnload(textureNum);
 
 }

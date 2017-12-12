@@ -12,8 +12,8 @@ namespace Graphics {
 	};
 
 	void CreateMesh(AEGfxVertexList **mesh, AEGfxTexture **texture, std::string texturePath, int frameCount = 1, math::vec2 size = math::vec2(60.0f, 60.0f));
-	void DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder = 1.0f, int frameCount = 1, bool loopAnimation = true, unsigned int currFrame = 0, float opacity = 1.0f);
-	void DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder = 1.0f, int frameCount = 1, bool loopAnimation = true, unsigned int currFrame = 0, float opacity = 1.0f);
+	void DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder = 1.0f, int frameCount = 1, bool loopAnimation = true, unsigned int currFrame = 0, float opacity = 1.0f, math::vec2 scale = math::vec2(1.0f));
+	void DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder = 1.0f, int frameCount = 1, bool loopAnimation = true, unsigned int currFrame = 0, float opacity = 1.0f, math::vec2 scale = math::vec2(1.0f));
 	void DrawCounter(math::vec2 pos, unsigned int number, AEGfxVertexList **mesh, AEGfxTexture **texture);
 	void EnableAnimations(float speed = 0.25f);
 	void WorldToScreen(float &x, float &y, ScreenCorner corner = SC_TOP_LEFT);

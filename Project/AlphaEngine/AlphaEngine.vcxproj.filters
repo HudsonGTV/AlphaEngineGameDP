@@ -135,6 +135,9 @@
     <ClCompile Include="IEntityAi.cpp">
       <Filter>Source Files\Object\Entity\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="TextStyle.h">
       <Filter>Header Files\Application\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
