@@ -13,11 +13,26 @@ static AEGfxVertexList *meshNum;
 static AEGfxTexture *textureTerrain;
 static AEGfxTexture *textureNum;
 
+// TERRAIN
+static std::vector<math::vec3 *> objectList;
+
 void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
+
+	srand(time(NULL));
 
 	// CREATE MESHES
 	Graphics::CreateMesh(&meshTerrain, &textureTerrain, "terrain/terrain.png", 7, math::vec2(50.0f));
 	Graphics::CreateMesh(&meshNum, &textureNum, "font/number.png", 10, math::vec2(30.0f));
+
+	for(int i = 0; i < 40; ++i) {
+
+		int positionX = ((rand() % (12 - -12)) + -12) * 50;
+		int positionY = ((rand() % (9 - -9)) + -9) * 50;
+		int randType = (rand() % (5 - 4)) + 4;
+
+		objectList.push_back(new math::vec3(positionX, positionY, randType));
+
+	}
 
 	//AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);
 	AEGfxSetBackgroundColor(0.44f, 0.24f, 0.09f);
@@ -31,10 +46,10 @@ void GraphicsEngine::PreRender(std::vector<Entity *> *entityList, double dt) {
 	Graphics::DrawMesh(math::vec2(0.0f), &meshTerrain, &textureTerrain, 0.0f, 7, false, 6, 1.0f, math::vec2(29.0f, 20.0f));
 
 	/* ROCKS */
-	for(int i = -450; i < 450; i += 50) {
-
-
-
+	for(math::vec3 *objPos : objectList) {
+		if(objPos) {
+			Graphics::DrawMesh(math::vec2(objPos->x, objPos->y), &meshTerrain, &textureTerrain, 1.0f, 7, false, objPos->z);
+		}
 	}
 
 }
