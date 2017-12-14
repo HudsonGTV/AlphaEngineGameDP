@@ -24,7 +24,7 @@ void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 	Graphics::CreateMesh(&meshTerrain, &textureTerrain, "terrain/terrain.png", 7, math::vec2(50.0f));
 	Graphics::CreateMesh(&meshNum, &textureNum, "font/number.png", 10, math::vec2(30.0f));
 
-	for(int i = 0; i < 40; ++i) {
+	for(int i = 0; i < 25; ++i) {
 
 		int positionX = ((rand() % (12 - -12)) + -12) * 50;
 		int positionY = ((rand() % (9 - -9)) + -9) * 50;
