@@ -116,12 +116,19 @@ void Application::Loop(HINSTANCE instanceH) {
 	// GLOBAL INPUT
 	GlobalInputManager(m_deltaTime);
 
+	// ENABLE ANIMATIONS
+	Graphics::EnableAnimations(0.1f);
+
 	// RENDER/UPDATE FUNCTIONS
-	m_graphics->PreRender(&m_entityList, m_deltaTime);
-	m_game->Update(&m_entityList, m_deltaTime);
-	m_graphics->Render(&m_entityList, m_deltaTime);
-	m_physics->Update(m_deltaTime);
-	m_graphics->PostRender(&m_entityList, m_deltaTime);
+	if(!m_isPaused) {
+		m_graphics->PreRender(&m_entityList, m_deltaTime);
+		m_game->Update(&m_entityList, m_deltaTime);
+		m_graphics->Render(&m_entityList, m_deltaTime);
+		m_physics->Update(m_deltaTime);
+		m_graphics->PostRender(&m_entityList, m_deltaTime);
+	} else {
+		// TODO: RENDER PAUSE SCREEN
+	}
 
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S END
 	AESysFrameEnd();
@@ -153,9 +160,15 @@ void Application::Uninit(HINSTANCE instanceH) {
 void Application::GlobalInputManager(double dt) {
 
 	// EXIT KEYBIND
-	if(AEInputCheckTriggered(VK_ESCAPE) || !AESysDoesWindowExist()) {
+	if(AEInputCheckReleased(VK_END) || !AESysDoesWindowExist()) {
 		Console::out::println("User triggered exit. Queuing uninitialization.");
 		isRunning = false;
+	}
+
+	// PAUSE KEYBIND
+	if(AEInputCheckReleased(VK_ESCAPE)) {
+		m_isPaused = !m_isPaused;
+		Console::out::println("isPaused: " + Console::value(std::to_string(m_isPaused)), "Info");
 	}
 
 	// SHOW HELP

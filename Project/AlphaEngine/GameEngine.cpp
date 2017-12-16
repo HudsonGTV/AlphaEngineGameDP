@@ -79,9 +79,6 @@ void Game::Init(std::vector<Entity *> *entityList) {
 }
 
 void Game::Update(std::vector<Entity *> *entityList, double dt) {
-
-	// ENABLE ANIMATIONS
-	Graphics::EnableAnimations(0.1f);
 	
 	// GET AI OBJECTS
 	Enemy *entityBoss = static_cast<Enemy *>(ObjectManager::getEntityByID(entityList, idBoss, true));

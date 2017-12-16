@@ -18,6 +18,8 @@
 class Application {
 
 private:
+	bool m_isPaused = false;
+
 	int m_windowWidth = 800;
 	int m_windowHeight = 600;
 	int m_refreshRate = 144;
