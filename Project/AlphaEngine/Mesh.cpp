@@ -34,18 +34,18 @@ void Graphics::CreateMesh(AEGfxVertexList **mesh, AEGfxTexture **texture, std::s
 
 void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, unsigned int currFrame, float opacity, math::vec2 scale) {
 
-	if(frameCount > 10 || currFrame > 10) {
+	/*if(frameCount > 10 || currFrame > 10) {
 		frameCount = 10;
 		currFrame = 10;
 	}
 
 	if(frameCount == 0) {
 		frameCount = 1;
-	}
+	}*/
 
-	float textureFrame[10] {
+	/*float textureFrame[10] {
 		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount, 6.0f / frameCount, 7.0f / frameCount, 8.0f / frameCount, 9.0f / frameCount
-	};
+	};*/
 
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetTextureMode(AE_GFX_TM_PRECISE);
@@ -53,9 +53,11 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 	AEGfxSetFullTransformWithZOrder(entity->GetPositionX(), entity->GetPositionY(), entity->GetPositionZ() + zOrder, 0.0f, scale.x, scale.y);
 
 	if(loopAnimation) {
-		AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
+		//AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
+		AEGfxTextureSet(*texture, (float)frameNum / (float)frameCount, 0.0f);
 	} else {
-		AEGfxTextureSet(*texture, textureFrame[currFrame], 0.0f);
+		//AEGfxTextureSet(*texture, textureFrame[currFrame], 0.0f);
+		AEGfxTextureSet(*texture, (float)currFrame / (float)frameCount, 0.0f);
 	}
 
 	AEGfxSetTransparency(1.0f);
@@ -66,18 +68,18 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 
 void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder, int frameCount, bool loopAnimation, unsigned int currFrame, float opacity, math::vec2 scale) {
 
-	if(frameCount > 10 || currFrame > 10) {
+	/*if(frameCount > 10 || currFrame > 10) {
 		frameCount = 10;
 		currFrame = 10;
 	}
 
 	if(frameCount == 0) {
 		frameCount = 1;
-	}
+	}*/
 
-	float textureFrame[10]{
+	/*float textureFrame[10]{
 		0.0f, 1.0f / frameCount, 2.0f / frameCount, 3.0f / frameCount, 4.0f / frameCount, 5.0f / frameCount, 6.0f / frameCount, 7.0f / frameCount, 8.0f / frameCount, 9.0f / frameCount
-	};
+	};*/
 
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetTextureMode(AE_GFX_TM_PRECISE);
@@ -85,9 +87,11 @@ void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **t
 	AEGfxSetFullTransformWithZOrder(pos.x, pos.y, zOrder, 0.0f, scale.x, scale.y);
 
 	if(loopAnimation) {
-		AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
+		//AEGfxTextureSet(*texture, textureFrame[frameNum], 0.0f);
+		AEGfxTextureSet(*texture, (float)frameNum / (float)frameCount, 0.0f);
 	} else {
-		AEGfxTextureSet(*texture, textureFrame[currFrame], 0.0f);
+		//AEGfxTextureSet(*texture, textureFrame[currFrame], 0.0f);
+		AEGfxTextureSet(*texture, (float)currFrame / (float)frameCount, 0.0f);
 	}
 
 	AEGfxSetTransparency(1.0f);
@@ -123,7 +127,11 @@ void Graphics::EnableAnimations(float speed) {
 		++frameNum;
 	}
 
-	if(frameNum > 9) {
+	/*if(frameNum > 9) {
+		frameNum = 0;
+	}*/
+
+	if(frameNum > 60) {
 		frameNum = 0;
 	}
 
