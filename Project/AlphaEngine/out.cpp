@@ -2,7 +2,7 @@
 
 namespace FilterValues {
 	static bool showInfoMsg = true;
-	static bool showDebugMsg = true;
+	static bool showDebugMsg = false;
 	static bool showWarningMsg = true;
 	static bool showErrorMsg = true;
 	static bool showMiscMsg = true;
@@ -53,6 +53,29 @@ bool shouldPrintMsg(std::string tag) {
 
 std::string Console::value(std::string str) {
 	return TSC_VALUE + str + TSC_NORMAL + TSC_WHITE;
+}
+
+bool Console::out::filterStatus(Filters filterID) {
+	switch(filterID) {
+		case Filters::Info:
+			return FilterValues::showInfoMsg;
+			break;
+		case Filters::Debug:
+			return FilterValues::showDebugMsg;
+			break;
+		case Filters::Warning:
+			return FilterValues::showWarningMsg;
+			break;
+		case Filters::Error:
+			return FilterValues::showErrorMsg;
+			break;
+		case Filters::Misc:
+			return FilterValues::showMiscMsg;
+			break;
+		default:
+			return false;
+			break;
+	}
 }
 
 void Console::out::toggleFilter(Filters filterID) {

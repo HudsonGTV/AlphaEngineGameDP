@@ -2,6 +2,7 @@
 #include "AEEngine.h"
 #include "Math.h"
 #include "Text.h"
+#include "consoleio.h"
 
 #include <time.h>
 #include <stdbool.h>
@@ -20,7 +21,9 @@ static AEGfxTexture *textureNumberW;
 
 // TEXT
 static Text *textFPS;
+static Text *textHP;
 static Text *textPaused;
+static Text *textDebug;
 
 // TERRAIN
 static std::vector<math::vec3 *> objectList;
@@ -31,19 +34,25 @@ void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 
 	// CREATE MESHES
 	Graphics::CreateMesh(&meshTerrain, &textureTerrain, "terrain/terrain.png", 7, math::vec2(50.0f));
-	Graphics::CreateMesh(&meshNumbers, &textureNumbers, "font/number.png", 10, math::vec2(30.0f));
-	Graphics::CreateMesh(&meshNumbers, &textureNumberR, "font/numberRed.png", 10, math::vec2(30.0f));
-	Graphics::CreateMesh(&meshNumbers, &textureNumberW, "font/numberWarning.png", 10, math::vec2(30.0f));
+	Graphics::CreateMesh(&meshNumbers, &textureNumbers, "font/number.png", 10, math::vec2(20.0f));
+	Graphics::CreateMesh(&meshNumbers, &textureNumberR, "font/numberRed.png", 10, math::vec2(20.0f));
+	Graphics::CreateMesh(&meshNumbers, &textureNumberW, "font/numberWarning.png", 10, math::vec2(20.0f));
 
 	// CREATE TEXT
-	textFPS = new Text(math::vec2(0.0f), " FPS");
+	textFPS = new Text(math::vec2(0.0f), " FPS", 20);
+	textHP = new Text(math::vec2(0.0f), "HP: ", 20);
 	textPaused = new Text(math::vec2(0.0f), "Game Paused", 60);
+	textDebug = new Text(math::vec2(0.0f), "Enemy HP: \n\nDebug Mode", 20);
 
 	textFPS->SetTextAlignment(TEXT_LEFT);
+	textHP->SetTextAlignment(TEXT_LEFT);
 	textPaused->SetTextAlignment(TEXT_CENTER);
+	textDebug->SetTextAlignment(TEXT_LEFT);
 
 	textFPS->SetOpacity(0.5f);
+	textHP->SetOpacity(0.5f);
 	textPaused->SetOpacity(1.0f);
+	textDebug->SetOpacity(1.0f);
 
 	GenerateTerrain();
 
@@ -109,20 +118,37 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 
 		Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_BOTTOM_LEFT);
 
-		Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY + 30.0f), (unsigned int)round(tmpPlayer->GetHealth()), &meshNumbers, &textureNumberR);
+		textHP->Render(math::vec2(nmX + 20.0f, nmY + 20.0f));
+
+		Graphics::DrawCounter(math::vec2(nmX + 80.0f, nmY + 20.0f), (unsigned int)round(tmpPlayer->GetHealth()), &meshNumbers, &textureNumberR);
 
 	}
 
-	// FPS
-	double fps = (1.0 / dt);
+	if(Console::out::filterStatus(Console::Filters::Debug)) {
 
-	float nmX = 0.0f;
-	float nmY = 0.0f;
+		double fps = (1.0 / dt);
 
-	Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_TOP_LEFT);
+		float nmX = 0.0f;
+		float nmY = 0.0f;
 
-	Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY - 30.0f), (unsigned int)round(fps), &meshNumbers, &textureNumbers, 30, &textureNumberW);
-	textFPS->Render(math::vec2(nmX + 75.0f, nmY - 30.0f));
+		Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_TOP_LEFT);
+
+		// FPS
+		Graphics::DrawCounter(math::vec2(nmX + 20.0f, nmY - 20.0f), (unsigned int)round(fps), &meshNumbers, &textureNumbers, 30, &textureNumberW);
+		textFPS->Render(math::vec2(nmX + 65.0f, nmY - 20.0f));
+
+		// DEBUG
+		textDebug->Render(math::vec2(nmX + 20.0f, nmY - 50.0f));
+
+		Entity *tmpEnemy = ObjectManager::getEntityByName(entityList, "Enemy");
+
+		if(tmpEnemy != nullptr) {
+			Graphics::DrawCounter(math::vec2(nmX + 200.0f, nmY - 50.0f), (unsigned int)round(tmpEnemy->GetHealth()), &meshNumbers, &textureNumbers);
+		} else {
+			Graphics::DrawCounter(math::vec2(nmX + 200.0f, nmY - 50.0f), 0U, &meshNumbers, &textureNumbers);
+		}
+
+	}
 
 }
 

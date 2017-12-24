@@ -21,6 +21,7 @@ namespace Console {
 
 	namespace out {
 
+		bool filterStatus(Filters filterID);
 		void toggleFilter(Filters filterID);
 		void print(std::string str, std::string tag = "Info");
 		void println(std::string str, std::string tag = "Info");

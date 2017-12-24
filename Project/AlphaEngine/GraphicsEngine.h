@@ -6,6 +6,8 @@
 // HACK: UNDEFINE DRAWTEXT FROM THE WINDOWS LIBRARY
 #undef DrawText
 
+#define TEXT_ASCII_COUNT 54
+
 namespace Graphics {
 
 	enum ScreenCorner {

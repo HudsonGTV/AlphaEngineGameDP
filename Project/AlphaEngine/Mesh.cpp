@@ -123,19 +123,32 @@ void Graphics::DrawCounter(math::vec2 pos, unsigned int number, AEGfxVertexList 
 
 void Graphics::DrawText(math::vec2 pos, std::string str, AEGfxVertexList **mesh, AEGfxTexture **texture, int size, float opacity) {
 
+	int j = 0;
+
 	for(int i = 0; i < str.length(); ++i) {
 
+		if(str.at(i) == '\n') {
+			pos.y -= size + 5;
+			j = 0;
+			continue;
+		}
+
 		if(str.at(i) == ':') {
-			Graphics::DrawMesh(math::vec2(pos.x + i * size - 5, pos.y), mesh, texture, opacity, 53, false, 52);
+			Graphics::DrawMesh(math::vec2(pos.x + j * size - 5, pos.y), mesh, texture, opacity, TEXT_ASCII_COUNT, false, 52);
+		} else if(str.at(i) == '.') {
+			Graphics::DrawMesh(math::vec2(pos.x + j * size - 5, pos.y), mesh, texture, opacity, TEXT_ASCII_COUNT, false, 53);
 		} else if(str.at(i) == ' ') {
+			++j;
 			continue;
 		} else {
 			if(static_cast<int>(str.at(i)) >= 97) {
-				Graphics::DrawMesh(math::vec2(pos.x + i * size - 5, pos.y), mesh, texture, opacity, 53, false, str.at(i) - 97);
+				Graphics::DrawMesh(math::vec2(pos.x + j * size - 5, pos.y), mesh, texture, opacity, TEXT_ASCII_COUNT, false, str.at(i) - 97);
 			} else {
-				Graphics::DrawMesh(math::vec2(pos.x + i * size - 5, pos.y), mesh, texture, opacity, 53, false, str.at(i) - 39);
+				Graphics::DrawMesh(math::vec2(pos.x + j * size - 5, pos.y), mesh, texture, opacity, TEXT_ASCII_COUNT, false, str.at(i) - 39);
 			}
 		}
+
+		++j;
 
 	}
 
