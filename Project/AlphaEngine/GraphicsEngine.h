@@ -3,6 +3,9 @@
 
 #include "Entity.h"
 
+// HACK: UNDEFINE DRAWTEXT FROM THE WINDOWS LIBRARY
+#undef DrawText
+
 namespace Graphics {
 
 	enum ScreenCorner {
@@ -15,6 +18,7 @@ namespace Graphics {
 	void DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder = 1.0f, int frameCount = 1, bool loopAnimation = true, unsigned int currFrame = 0, float opacity = 1.0f, math::vec2 scale = math::vec2(1.0f));
 	void DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **texture, float zOrder = 1.0f, int frameCount = 1, bool loopAnimation = true, unsigned int currFrame = 0, float opacity = 1.0f, math::vec2 scale = math::vec2(1.0f));
 	void DrawCounter(math::vec2 pos, unsigned int number, AEGfxVertexList **mesh, AEGfxTexture **texture);
+	void DrawText(math::vec2 pos, std::string str, AEGfxVertexList **mesh, AEGfxTexture **texture);
 	void EnableAnimations(float speed = 0.25f);
 	void WorldToScreen(float &x, float &y, ScreenCorner corner = SC_TOP_LEFT);
 

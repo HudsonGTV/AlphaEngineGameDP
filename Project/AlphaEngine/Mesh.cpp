@@ -60,7 +60,7 @@ void Graphics::DrawMesh(Entity *entity, AEGfxVertexList **mesh, AEGfxTexture **t
 		AEGfxTextureSet(*texture, (float)currFrame / (float)frameCount, 0.0f);
 	}
 
-	AEGfxSetTransparency(1.0f);
+	AEGfxSetTransparency(opacity);
 
 	AEGfxMeshDraw(*mesh, AE_GFX_MDM_TRIANGLES);
 
@@ -94,7 +94,7 @@ void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **t
 		AEGfxTextureSet(*texture, (float)currFrame / (float)frameCount, 0.0f);
 	}
 
-	AEGfxSetTransparency(1.0f);
+	AEGfxSetTransparency(opacity);
 
 	AEGfxMeshDraw(*mesh, AE_GFX_MDM_TRIANGLES);
 
@@ -112,6 +112,25 @@ void Graphics::DrawCounter(math::vec2 pos, unsigned int number, AEGfxVertexList 
 		} else {
 			Graphics::DrawMesh(math::vec2(pos.x, pos.y), mesh, texture, 1.0f, 10, false, nOnesPlace);
 		}
+	}
+
+}
+
+void Graphics::DrawText(math::vec2 pos, std::string str, AEGfxVertexList **mesh, AEGfxTexture **texture) {
+
+	for(int i = 0; i < str.length(); ++i) {
+
+		if(str.at(i) == ':') {
+			Graphics::DrawMesh(math::vec2(pos.x + i * 25, pos.y), mesh, texture, 1.0f, 53, false, 52);
+		} else {
+			if(static_cast<int>(str.at(i)) >= 97) {
+				Graphics::DrawMesh(math::vec2(pos.x + i * 25, pos.y), mesh, texture, 1.0f, 53, false, str.at(i) - 97);
+			} else {
+				Graphics::DrawMesh(math::vec2(pos.x + i * 25, pos.y), mesh, texture, 1.0f, 53, false, str.at(i) - 39);
+				AESysPrintf("str.at(i): %i\n", (int)str.at(i));
+			}
+		}
+
 	}
 
 }

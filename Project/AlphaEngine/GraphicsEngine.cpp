@@ -7,11 +7,13 @@
 
 // MESHES
 static AEGfxVertexList *meshTerrain;
-static AEGfxVertexList *meshNum;
+static AEGfxVertexList *meshNumbers;
+static AEGfxVertexList *meshLetters;
 
 // TEXTURES
 static AEGfxTexture *textureTerrain;
-static AEGfxTexture *textureNum;
+static AEGfxTexture *textureNumbers;
+static AEGfxTexture *textureLetters;
 
 // TERRAIN
 static std::vector<math::vec3 *> objectList;
@@ -22,7 +24,8 @@ void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 
 	// CREATE MESHES
 	Graphics::CreateMesh(&meshTerrain, &textureTerrain, "terrain/terrain.png", 7, math::vec2(50.0f));
-	Graphics::CreateMesh(&meshNum, &textureNum, "font/number.png", 10, math::vec2(30.0f));
+	Graphics::CreateMesh(&meshNumbers, &textureNumbers, "font/number.png", 10, math::vec2(30.0f));
+	Graphics::CreateMesh(&meshLetters, &textureLetters, "font/letter.png", 53, math::vec2(30.0f));
 
 	for(int i = 0; i < 25; ++i) {
 
@@ -96,7 +99,7 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 
 		Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_BOTTOM_LEFT);
 
-		Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY + 30.0f), (unsigned int)round(tmpPlayer->GetHealth()), &meshNum, &textureNum);
+		Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY + 30.0f), (unsigned int)round(tmpPlayer->GetHealth()), &meshNumbers, &textureNumbers);
 
 	}
 
@@ -108,7 +111,7 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 
 	Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_TOP_LEFT);
 
-	Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY - 30.0f), (unsigned int)round(fps), &meshNum, &textureNum);
+	Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY - 30.0f), (unsigned int)round(fps), &meshNumbers, &textureNumbers);
 
 }
 
@@ -116,10 +119,10 @@ void GraphicsEngine::Uninit() {
 
 	// FREE MESHES
 	AEGfxMeshFree(meshTerrain);
-	AEGfxMeshFree(meshNum);
+	AEGfxMeshFree(meshNumbers);
 
 	// FREE TEXTURES
 	AEGfxTextureUnload(textureTerrain);
-	AEGfxTextureUnload(textureNum);
+	AEGfxTextureUnload(textureNumbers);
 
 }
