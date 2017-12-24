@@ -112,6 +112,7 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 	Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_TOP_LEFT);
 
 	Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY - 30.0f), (unsigned int)round(fps), &meshNumbers, &textureNumbers);
+	Graphics::DrawText(math::vec2(nmX + 75.0f, nmY - 30.0f), "FPS", &meshLetters, &textureLetters);
 
 }
 
