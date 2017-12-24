@@ -15,6 +15,8 @@ static AEGfxVertexList *meshNumbers;
 // TEXTURES
 static AEGfxTexture *textureTerrain;
 static AEGfxTexture *textureNumbers;
+static AEGfxTexture *textureNumberR;
+static AEGfxTexture *textureNumberW;
 
 // TEXT
 static Text *textFPS;
@@ -30,12 +32,18 @@ void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 	// CREATE MESHES
 	Graphics::CreateMesh(&meshTerrain, &textureTerrain, "terrain/terrain.png", 7, math::vec2(50.0f));
 	Graphics::CreateMesh(&meshNumbers, &textureNumbers, "font/number.png", 10, math::vec2(30.0f));
+	Graphics::CreateMesh(&meshNumbers, &textureNumberR, "font/numberRed.png", 10, math::vec2(30.0f));
+	Graphics::CreateMesh(&meshNumbers, &textureNumberW, "font/numberWarning.png", 10, math::vec2(30.0f));
 
 	// CREATE TEXT
-	textFPS = new Text(math::vec2(0.0f), "FPS");
+	textFPS = new Text(math::vec2(0.0f), " FPS");
 	textPaused = new Text(math::vec2(0.0f), "Game Paused", 60);
 
+	textFPS->SetTextAlignment(TEXT_LEFT);
 	textPaused->SetTextAlignment(TEXT_CENTER);
+
+	textFPS->SetOpacity(0.5f);
+	textPaused->SetOpacity(1.0f);
 
 	GenerateTerrain();
 
@@ -101,7 +109,7 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 
 		Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_BOTTOM_LEFT);
 
-		Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY + 30.0f), (unsigned int)round(tmpPlayer->GetHealth()), &meshNumbers, &textureNumbers);
+		Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY + 30.0f), (unsigned int)round(tmpPlayer->GetHealth()), &meshNumbers, &textureNumberR);
 
 	}
 
@@ -113,7 +121,7 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 
 	Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_TOP_LEFT);
 
-	Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY - 30.0f), (unsigned int)round(fps), &meshNumbers, &textureNumbers);
+	Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY - 30.0f), (unsigned int)round(fps), &meshNumbers, &textureNumbers, 30, &textureNumberW);
 	textFPS->Render(math::vec2(nmX + 75.0f, nmY - 30.0f));
 
 }

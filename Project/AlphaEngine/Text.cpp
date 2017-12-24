@@ -13,18 +13,18 @@ Text::Text(math::vec2 position, std::string textString, int fontSize) {
 
 void Text::Render() {
 	if(m_alignment != TEXT_LEFT) {
-		Graphics::DrawText(math::vec2(m_position.x - m_totalWidth / m_alignment, m_position.y), m_textString, &m_mesh, &m_texture, m_fontSize);
+		Graphics::DrawText(math::vec2(m_position.x - m_totalWidth / m_alignment, m_position.y), m_textString, &m_mesh, &m_texture, m_fontSize, m_opacity);
 	} else {
-		Graphics::DrawText(m_position, m_textString, &m_mesh, &m_texture, m_fontSize);
+		Graphics::DrawText(m_position, m_textString, &m_mesh, &m_texture, m_fontSize, m_opacity);
 	}
 }
 
 void Text::Render(math::vec2 position) {
 	m_position = position;
 	if(m_alignment != TEXT_LEFT) {
-		Graphics::DrawText(math::vec2(m_position.x - m_totalWidth / m_alignment, m_position.y), m_textString, &m_mesh, &m_texture, m_fontSize);
+		Graphics::DrawText(math::vec2(m_position.x - m_totalWidth / m_alignment, m_position.y), m_textString, &m_mesh, &m_texture, m_fontSize, m_opacity);
 	} else {
-		Graphics::DrawText(m_position, m_textString, &m_mesh, &m_texture, m_fontSize);
+		Graphics::DrawText(m_position, m_textString, &m_mesh, &m_texture, m_fontSize, m_opacity);
 	}
 }
 
@@ -35,6 +35,10 @@ void Text::SetText(std::string textString) {
 
 void Text::SetTextAlignment(TextAlign alignment) {
 	m_alignment = alignment;
+}
+
+void Text::SetOpacity(float opacity) {
+	m_opacity = opacity;
 }
 
 std::string Text::GetText() const {

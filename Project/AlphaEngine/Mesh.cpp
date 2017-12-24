@@ -100,10 +100,15 @@ void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **t
 
 }
 
-void Graphics::DrawCounter(math::vec2 pos, unsigned int number, AEGfxVertexList **mesh, AEGfxTexture **texture) {
+void Graphics::DrawCounter(math::vec2 pos, unsigned int number, AEGfxVertexList **mesh, AEGfxTexture **texture, int lowestSafeValue, AEGfxTexture **textureW) {
 
 	unsigned int nOnesPlace = (unsigned int)round(number) % 10U;
 	unsigned int nTensPlace = (unsigned int)round(number) / 10U;
+
+	if(number < lowestSafeValue && number != -1 && textureW != nullptr) {
+		Graphics::DrawCounter(pos, number, mesh, textureW, -1);
+		return;
+	}
 
 	if(number >= 0.0f) {
 		if(nTensPlace != 0) {
@@ -116,20 +121,19 @@ void Graphics::DrawCounter(math::vec2 pos, unsigned int number, AEGfxVertexList 
 
 }
 
-void Graphics::DrawText(math::vec2 pos, std::string str, AEGfxVertexList **mesh, AEGfxTexture **texture, int size) {
+void Graphics::DrawText(math::vec2 pos, std::string str, AEGfxVertexList **mesh, AEGfxTexture **texture, int size, float opacity) {
 
 	for(int i = 0; i < str.length(); ++i) {
 
 		if(str.at(i) == ':') {
-			Graphics::DrawMesh(math::vec2(pos.x + i * size - 5, pos.y), mesh, texture, 1.0f, 53, false, 52);
+			Graphics::DrawMesh(math::vec2(pos.x + i * size - 5, pos.y), mesh, texture, opacity, 53, false, 52);
 		} else if(str.at(i) == ' ') {
 			continue;
 		} else {
 			if(static_cast<int>(str.at(i)) >= 97) {
-				Graphics::DrawMesh(math::vec2(pos.x + i * size - 5, pos.y), mesh, texture, 1.0f, 53, false, str.at(i) - 97);
+				Graphics::DrawMesh(math::vec2(pos.x + i * size - 5, pos.y), mesh, texture, opacity, 53, false, str.at(i) - 97);
 			} else {
-				Graphics::DrawMesh(math::vec2(pos.x + i * size - 5, pos.y), mesh, texture, 1.0f, 53, false, str.at(i) - 39);
-				AESysPrintf("str.at(i): %i\n", (int)str.at(i));
+				Graphics::DrawMesh(math::vec2(pos.x + i * size - 5, pos.y), mesh, texture, opacity, 53, false, str.at(i) - 39);
 			}
 		}
 

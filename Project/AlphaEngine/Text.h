@@ -20,7 +20,9 @@ private:
 
 	TextAlign m_alignment = TEXT_LEFT;
 
-	int m_fontSize = 30.0f;
+	float m_opacity = 1.0f;
+
+	int m_fontSize = 30;
 	int m_totalWidth = 0;
 
 	AEGfxVertexList *m_mesh;
@@ -33,7 +35,8 @@ public:
 	void Render(math::vec2 position);
 
 	void SetText(std::string textString);
-	void Text::SetTextAlignment(TextAlign alignment);
+	void SetTextAlignment(TextAlign alignment);
+	void SetOpacity(float opacity);
 
 	std::string GetText() const;
 
