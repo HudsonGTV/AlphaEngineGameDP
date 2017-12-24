@@ -145,6 +145,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vec3.cpp" />
     <ClCompile Include="Vec4.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="TextStyle.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />

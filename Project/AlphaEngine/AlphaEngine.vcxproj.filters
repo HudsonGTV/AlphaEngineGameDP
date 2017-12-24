@@ -138,6 +138,9 @@
     <ClCompile Include="Object.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -198,6 +201,9 @@
       <Filter>Header Files\Application\IO</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,19 +1,24 @@
 #include "GraphicsEngine.h"
 #include "AEEngine.h"
 #include "Math.h"
+#include "Text.h"
 
 #include <time.h>
 #include <stdbool.h>
 
+void GenerateTerrain();
+
 // MESHES
 static AEGfxVertexList *meshTerrain;
 static AEGfxVertexList *meshNumbers;
-static AEGfxVertexList *meshLetters;
 
 // TEXTURES
 static AEGfxTexture *textureTerrain;
 static AEGfxTexture *textureNumbers;
-static AEGfxTexture *textureLetters;
+
+// TEXT
+static Text *textFPS;
+static Text *textPaused;
 
 // TERRAIN
 static std::vector<math::vec3 *> objectList;
@@ -25,17 +30,14 @@ void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 	// CREATE MESHES
 	Graphics::CreateMesh(&meshTerrain, &textureTerrain, "terrain/terrain.png", 7, math::vec2(50.0f));
 	Graphics::CreateMesh(&meshNumbers, &textureNumbers, "font/number.png", 10, math::vec2(30.0f));
-	Graphics::CreateMesh(&meshLetters, &textureLetters, "font/letter.png", 53, math::vec2(30.0f));
 
-	for(int i = 0; i < 25; ++i) {
+	// CREATE TEXT
+	textFPS = new Text(math::vec2(0.0f), "FPS");
+	textPaused = new Text(math::vec2(0.0f), "Game Paused", 60);
 
-		int positionX = ((rand() % (12 - -12)) + -12) * 50;
-		int positionY = ((rand() % (9 - -9)) + -9) * 50;
-		int randType = (rand() % (5 - 4)) + 4;
+	textPaused->SetTextAlignment(TEXT_CENTER);
 
-		objectList.push_back(new math::vec3(positionX, positionY, randType));
-
-	}
+	GenerateTerrain();
 
 	//AEGfxSetBackgroundColor(0.3f, 0.15f, 0.05f);
 	AEGfxSetBackgroundColor(0.44f, 0.24f, 0.09f);
@@ -112,11 +114,24 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 	Graphics::WorldToScreen(nmX, nmY, Graphics::ScreenCorner::SC_TOP_LEFT);
 
 	Graphics::DrawCounter(math::vec2(nmX + 25.0f, nmY - 30.0f), (unsigned int)round(fps), &meshNumbers, &textureNumbers);
-	Graphics::DrawText(math::vec2(nmX + 75.0f, nmY - 30.0f), "FPS", &meshLetters, &textureLetters);
+	textFPS->Render(math::vec2(nmX + 75.0f, nmY - 30.0f));
+
+}
+
+void GraphicsEngine::PauseRender(std::vector<Entity *> *entityList, double dt) {
+
+	math::vec2 pausedCoords = math::vec2();
+
+	Graphics::WorldToScreen(pausedCoords.x, pausedCoords.y, Graphics::ScreenCorner::SC_MIDDLE);
+
+	textPaused->Render(pausedCoords);
 
 }
 
 void GraphicsEngine::Uninit() {
+
+	delete textFPS;
+	textFPS = nullptr;
 
 	// FREE MESHES
 	AEGfxMeshFree(meshTerrain);
@@ -125,5 +140,19 @@ void GraphicsEngine::Uninit() {
 	// FREE TEXTURES
 	AEGfxTextureUnload(textureTerrain);
 	AEGfxTextureUnload(textureNumbers);
+
+}
+
+void GenerateTerrain() {
+
+	for(int i = 0; i < 25; ++i) {
+
+		int positionX = ((rand() % (12 - -12)) + -12) * 50;
+		int positionY = ((rand() % (9 - -9)) + -9) * 50;
+		int randType = (rand() % (5 - 4)) + 4;
+
+		objectList.push_back(new math::vec3(positionX, positionY, randType));
+
+	}
 
 }

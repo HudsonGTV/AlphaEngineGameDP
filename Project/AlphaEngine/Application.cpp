@@ -128,6 +128,7 @@ void Application::Loop(HINSTANCE instanceH) {
 		m_graphics->PostRender(&m_entityList, m_deltaTime);
 	} else {
 		// TODO: RENDER PAUSE SCREEN
+		m_graphics->PauseRender(&m_entityList, m_deltaTime);
 	}
 
 	// INFORMING THE SYSTEM ABOUT THE LOOP'S END
