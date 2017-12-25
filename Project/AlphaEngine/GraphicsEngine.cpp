@@ -42,7 +42,7 @@ void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 	textFPS = new Text(math::vec2(0.0f), " FPS", 20);
 	textHP = new Text(math::vec2(0.0f), "HP: ", 20);
 	textPaused = new Text(math::vec2(0.0f), "Game Paused", 60);
-	textDebug = new Text(math::vec2(0.0f), "Enemy HP: \n\nDebug Mode", 20);
+	textDebug = new Text(math::vec2(0.0f), "Enemy HP: \nCamera Coordinates: TODO: ADD SUPPORT FOR COORDS\n\nDebug Mode", 20);
 
 	textFPS->SetTextAlignment(TEXT_LEFT);
 	textHP->SetTextAlignment(TEXT_LEFT);
@@ -140,7 +140,7 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 		// DEBUG
 		textDebug->Render(math::vec2(nmX + 20.0f, nmY - 50.0f));
 
-		Entity *tmpEnemy = ObjectManager::getEntityByName(entityList, "Enemy");
+		Entity *tmpEnemy = ObjectManager::getEntityByName(entityList, "Enemy", true);
 
 		if(tmpEnemy != nullptr) {
 			Graphics::DrawCounter(math::vec2(nmX + 200.0f, nmY - 50.0f), (unsigned int)round(tmpEnemy->GetHealth()), &meshNumbers, &textureNumbers);
