@@ -181,8 +181,8 @@ void GenerateTerrain() {
 
 	for(int i = 0; i < 25; ++i) {
 
-		int positionX = ((rand() % (12 - -12)) + -12) * 50;
-		int positionY = ((rand() % (9 - -9)) + -9) * 50;
+		int positionX = ((rand() % (12 + 12)) + -12) * 50;
+		int positionY = ((rand() % (9 + 9)) - 9) * 50;
 		int randType = (rand() % (5 - 4)) + 4;
 
 		objectList.push_back(new math::vec3(positionX, positionY, randType));
