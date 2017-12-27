@@ -121,10 +121,12 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 		textHP->Render(math::vec2(nmX + 20.0f, nmY + 20.0f));
 
 		Graphics::DrawCounter(math::vec2(nmX + 80.0f, nmY + 20.0f), (unsigned int)round(tmpPlayer->GetHealth()), &meshNumbers, &textureNumberR);
-
+		
 	}
 
 	if(Console::out::filterStatus(Console::Filters::Debug)) {
+
+		Graphics::DebugLines(true);
 
 		double fps = (1.0 / dt);
 
@@ -148,6 +150,8 @@ void GraphicsEngine::PostRender(std::vector<Entity *> *entityList, double dt) {
 			Graphics::DrawCounter(math::vec2(nmX + 200.0f, nmY - 50.0f), 0U, &meshNumbers, &textureNumbers);
 		}
 
+	} else {
+		Graphics::DebugLines(false);
 	}
 
 }

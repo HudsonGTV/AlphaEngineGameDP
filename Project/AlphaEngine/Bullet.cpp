@@ -16,7 +16,7 @@ void Bullet::Update() {
 
 	Graphics::DrawMesh(this, &m_mesh, &m_texture, m_zOrder, m_frameCount);
 
-	if(ENABLE_DEBUG_LINES) {
+	if(Graphics::CheckDebugLineStatus()) {
 		Graphics::DrawMesh(this, &m_debugMesh, &m_debugTexture, 5.0f);
 	}
 

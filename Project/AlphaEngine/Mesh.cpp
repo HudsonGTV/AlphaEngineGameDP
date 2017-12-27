@@ -2,6 +2,8 @@
 
 #include "GraphicsEngine.h"
 
+static bool debugModeEnabled = false;
+
 static int frameNum = 0;
 
 static double timeCounter = 0;
@@ -222,4 +224,12 @@ void Graphics::WorldToScreen(float &x, float &y, ScreenCorner corner) {
 	x = x - cX * cornerX - AEGfxGetWinMinX() + AEGfxGetWinMaxX();
 	y = y - cY * cornerY - AEGfxGetWinMinY() + AEGfxGetWinMaxY();
 
+}
+
+void Graphics::DebugLines(bool isEnabled) {
+	debugModeEnabled = isEnabled;
+}
+
+bool Graphics::CheckDebugLineStatus() {
+	return debugModeEnabled;
 }

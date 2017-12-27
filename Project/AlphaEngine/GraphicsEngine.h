@@ -23,6 +23,9 @@ namespace Graphics {
 	void DrawText(math::vec2 pos, std::string str, AEGfxVertexList **mesh, AEGfxTexture **texture, int size = 30, float opacity = 1.0f);
 	void EnableAnimations(float speed = 0.25f);
 	void WorldToScreen(float &x, float &y, ScreenCorner corner = SC_TOP_LEFT);
+	void DebugLines(bool isEnabled);
+
+	bool CheckDebugLineStatus();
 
 };
 
