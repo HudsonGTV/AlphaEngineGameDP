@@ -7,7 +7,7 @@ Text::Text(math::vec2 position, std::string textString, int fontSize) {
 	//m_totalWidth = static_cast<int>(m_textString.length() * m_fontSize - m_fontSize * m_textString.length() / 12);
 	m_totalWidth = static_cast<int>(11 * m_textString.length() * m_fontSize / 12);
 
-	Graphics::CreateMesh(&m_mesh, &m_texture, "font/letter.png", TEXT_ASCII_COUNT, math::vec2(m_fontSize));
+	Graphics::CreateMesh(&m_mesh, &m_texture, "font/letter.png", TEXT_ASCII_COUNT, math::vec2(static_cast<float>(m_fontSize)));
 
 }
 

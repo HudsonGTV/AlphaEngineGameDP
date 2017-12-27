@@ -15,7 +15,7 @@ void Collider::CircleCollision(Entity *thisEntity, Entity *otherEntity, double d
 }
 
 void Collider::Update(std::vector<Entity *> *entities, int currentEntity, double dt) {
-	for (int i = currentEntity; i < entities->size(); ++i) {
+	for(int i = currentEntity; i < static_cast<int>(entities->size()); ++i) {
 		ResolveCollision((*entities)[currentEntity], (*entities)[i], dt);
 	}
 }

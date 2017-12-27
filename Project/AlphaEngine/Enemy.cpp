@@ -78,7 +78,7 @@ void Enemy::AiUpdate(std::vector<Entity *> *entityList, double dt) {
 
 					// SET BULLET NAME AND VELOCITY
 					m_entityBullets.back()->SetName("EBullet");
-					math::vec3 vel = math::vec3(cos(angle)*m_bulletSpeed, sin(angle)*m_bulletSpeed, 0);
+					math::vec3 vel = math::vec3(cos(angle) * static_cast<float>(m_bulletSpeed), sin(angle) * static_cast<float>(m_bulletSpeed), 0);
 					m_entityBullets.back()->SetVelocity(vel);
 
 				}

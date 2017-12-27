@@ -78,8 +78,8 @@ void Entity::SetPosition(math::vec3 pos) {
 }
 
 void Entity::SetVelocity(math::vec3 vel) {
-	double dt = AEFrameRateControllerGetFrameTime();
-	m_velocity = vel * math::vec3(dt * 60.0, dt * 60.0, dt * 60.0);
+	float dt = static_cast<float>(AEFrameRateControllerGetFrameTime());
+	m_velocity = vel * math::vec3(dt * 60, dt * 60, dt * 60);
 }
 
 void Entity::SetHealth(float health) {
@@ -182,7 +182,7 @@ void Entity::Collide(Entity *other, double dt) {
 
 		} else if(other->GetName() == "Enemy") {
 
-			m_healthCooldown -= dt;
+			m_healthCooldown -= static_cast<float>(dt);
 
 			if(m_healthCooldown <= 0.0f) {
 

@@ -102,7 +102,7 @@ void Graphics::DrawMesh(math::vec2 pos, AEGfxVertexList **mesh, AEGfxTexture **t
 
 }
 
-void Graphics::DrawCounter(math::vec2 pos, unsigned int number, AEGfxVertexList **mesh, AEGfxTexture **texture, int lowestSafeValue, AEGfxTexture **textureW) {
+void Graphics::DrawCounter(math::vec2 pos, int number, AEGfxVertexList **mesh, AEGfxTexture **texture, int lowestSafeValue, AEGfxTexture **textureW) {
 
 	unsigned int nOnesPlace = (unsigned int)round(number) % 10U;
 	unsigned int nTensPlace = (unsigned int)round(number) / 10U;
@@ -112,8 +112,8 @@ void Graphics::DrawCounter(math::vec2 pos, unsigned int number, AEGfxVertexList 
 		return;
 	}
 
-	if(number >= 0.0f) {
-		if(nTensPlace != 0) {
+	if(number >= 0) {
+		if(nTensPlace != 0U) {
 			Graphics::DrawMesh(math::vec2(pos.x, pos.y), mesh, texture, 1.0f, 10, false, nTensPlace);
 			Graphics::DrawMesh(math::vec2(pos.x + 25.0f, pos.y), mesh, texture, 1.0f, 10, false, nOnesPlace);
 		} else {
@@ -127,7 +127,7 @@ void Graphics::DrawText(math::vec2 pos, std::string str, AEGfxVertexList **mesh,
 
 	int j = 0;
 
-	for(int i = 0; i < str.length(); ++i) {
+	for(int i = 0; i < static_cast<int>(str.length()); ++i) {
 
 		if(str.at(i) == '\n') {
 			pos.y -= size + 5;

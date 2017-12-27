@@ -7,7 +7,7 @@
 #include <time.h>
 #include <stdbool.h>
 
-void GenerateTerrain();
+inline void GenerateTerrain();
 
 // MESHES
 static AEGfxVertexList *meshTerrain;
@@ -30,7 +30,7 @@ static std::vector<math::vec3 *> objectList;
 
 void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)));
 
 	// CREATE MESHES
 	Graphics::CreateMesh(&meshTerrain, &textureTerrain, "terrain/terrain.png", 7, math::vec2(50.0f));
@@ -65,12 +65,12 @@ void GraphicsEngine::Init(std::vector<Entity *> *entityList) {
 void GraphicsEngine::PreRender(std::vector<Entity *> *entityList, double dt) {
 
 	/* BACKGROUND COLOR */
-	Graphics::DrawMesh(math::vec2(0.0f), &meshTerrain, &textureTerrain, 0.0f, 7, false, 6, 1.0f, math::vec2(29.0f, 20.0f));
+	Graphics::DrawMesh(math::vec2(0.0f), &meshTerrain, &textureTerrain, 0.0f, 7, false, 6U, 1.0f, math::vec2(29.0f, 20.0f));
 
 	/* ROCKS */
 	for(math::vec3 *objPos : objectList) {
 		if(objPos) {
-			Graphics::DrawMesh(math::vec2(objPos->x, objPos->y), &meshTerrain, &textureTerrain, 1.0f, 7, false, objPos->z);
+			Graphics::DrawMesh(math::vec2(objPos->x, objPos->y), &meshTerrain, &textureTerrain, 1.0f, 7, false, static_cast<unsigned int>(objPos->z));
 		}
 	}
 
@@ -181,13 +181,13 @@ void GraphicsEngine::Uninit() {
 
 }
 
-void GenerateTerrain() {
+inline void GenerateTerrain() {
 
 	for(int i = 0; i < 25; ++i) {
 
-		int positionX = ((rand() % (12 + 12)) + -12) * 50;
-		int positionY = ((rand() % (9 + 9)) - 9) * 50;
-		int randType = (rand() % (5 - 4)) + 4;
+		float positionX = static_cast<float>(((rand() % (12 + 12)) + -12) * 50);
+		float positionY = static_cast<float>(((rand() % (9 + 9)) - 9) * 50);
+		float randType = static_cast<float>((rand() % (5 - 4)) + 4);
 
 		objectList.push_back(new math::vec3(positionX, positionY, randType));
 

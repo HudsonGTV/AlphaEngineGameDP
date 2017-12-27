@@ -49,7 +49,7 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 				float nmX = 0.0f;
 				float nmY = 0.0f;
 				AEInputGetCursorPosition(&mX, &mY);
-				AEGfxConvertScreenCoordinatesToWorld(mX, mY, &nmX, &nmY);
+				AEGfxConvertScreenCoordinatesToWorld(static_cast<float>(mX), static_cast<float>(mY), &nmX, &nmY);
 				
 				//nmX = nmX - AEGfxGetWinMaxX();
 				//nmY = nmY - AEGfxGetWinMaxY();
@@ -65,7 +65,7 @@ void InputManager::Update(Entity *entity, bool controllable, float speed, double
 				double angle = atan2(vec.y, vec.x);
 
 				// SET BULLET VELOCITY TO BULLET DIRECTION * BULLET SPEED
-				math::vec3 vel = math::vec3(cos(angle)*m_bulletSpeed, sin(angle)*m_bulletSpeed, 0.0f);
+				math::vec3 vel = math::vec3(static_cast<float>(cos(angle) * m_bulletSpeed), static_cast<float>(sin(angle) * m_bulletSpeed), 0.0f);
 				m_entityBullets->back()->SetVelocity(vel);
 
 			}

@@ -44,7 +44,7 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityList, int id, 
 		return;
 	}
 
-	for(int i = 0; i < entityList->size(); ++i) {
+	for(int i = 0; i < static_cast<int>(entityList->size()); ++i) {
 		if((*entityList)[i]->GetID() == id) {
 
 			(*entityList)[i]->m_objectWasRemovedByID = true;
@@ -66,7 +66,7 @@ void ObjectManager::removeEntityByID(std::vector<Entity *> *entityList, int id, 
 
 Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityList, int id, bool suppressWarnings) {
 
-	for(int i = 0; i < entityList->size(); ++i) {
+	for(int i = 0; i < static_cast<int>(entityList->size()); ++i) {
 		if((*entityList)[i]->GetID() == id) {
 			return (*entityList)[i];
 		}
@@ -82,7 +82,7 @@ Entity *ObjectManager::getEntityByID(std::vector<Entity *> *entityList, int id, 
 
 Entity *ObjectManager::getEntityByName(std::vector<Entity *> *entityList, std::string name, bool suppressWarnings) {
 	
-	for(int i = 0; i < entityList->size(); ++i) {
+	for(int i = 0; i < static_cast<int>(entityList->size()); ++i) {
 		if((*entityList)[i]->GetName() == name) {
 			return (*entityList)[i];
 		}
