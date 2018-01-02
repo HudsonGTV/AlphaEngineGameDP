@@ -8,6 +8,7 @@
 #include <stdbool.h>
 
 inline void GenerateTerrain();
+inline void DestroyTerrain();
 
 // MESHES
 static AEGfxVertexList *meshTerrain;
@@ -169,7 +170,16 @@ void GraphicsEngine::PauseRender(std::vector<Entity *> *entityList, double dt) {
 void GraphicsEngine::Uninit() {
 
 	delete textFPS;
+	delete textHP;
+	delete textPaused;
+	delete textDebug;
+
 	textFPS = nullptr;
+	textHP = nullptr;
+	textPaused = nullptr;
+	textDebug = nullptr;
+
+	DestroyTerrain();
 
 	// FREE MESHES
 	AEGfxMeshFree(meshTerrain);
@@ -178,11 +188,12 @@ void GraphicsEngine::Uninit() {
 	// FREE TEXTURES
 	AEGfxTextureUnload(textureTerrain);
 	AEGfxTextureUnload(textureNumbers);
+	AEGfxTextureUnload(textureNumberR);
+	AEGfxTextureUnload(textureNumberW);
 
 }
 
 inline void GenerateTerrain() {
-
 	for(int i = 0; i < 25; ++i) {
 
 		float positionX = static_cast<float>(((rand() % (12 + 12)) + -12) * 50);
@@ -192,5 +203,8 @@ inline void GenerateTerrain() {
 		objectList.push_back(new math::vec3(positionX, positionY, randType));
 
 	}
+}
 
+inline void DestroyTerrain() {
+	objectList.empty();
 }

@@ -30,7 +30,7 @@ void ObjectManager::updateObjectAi(std::vector<Entity *> *entityList, IEntityAi 
 		obj->AiUpdate(entityList, dt);
 	} else {
 		static bool problem = false;
-		if (!problem)
+		if(!problem)
 			Console::out::println("Could not update object AI. Object was nullptr.", "Warning");
 		problem = true;
 	}
