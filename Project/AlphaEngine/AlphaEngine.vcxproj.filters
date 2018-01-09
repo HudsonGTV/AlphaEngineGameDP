@@ -141,6 +141,9 @@
     <ClCompile Include="Text.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="consoleio.cpp">
+      <Filter>Source Files\Application\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">

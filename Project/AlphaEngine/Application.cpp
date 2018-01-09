@@ -189,19 +189,20 @@ void Application::GlobalInputManager(double dt) {
 
 	/* FILTER KEYBINDS */
 
-	if(AEInputCheckReleased(VK_F2)) {
+	if(AEInputCheckReleased(VK_F2) || ConsoleAsyncKeyIsPressed(VK_F2)) {
 		Console::out::toggleFilter(Console::Filters::Info);
 	}
 	
-	if(AEInputCheckReleased(VK_F3)) {
+	if(AEInputCheckReleased(VK_F3) || ConsoleAsyncKeyIsPressed(VK_F3)) {
 		Console::out::toggleFilter(Console::Filters::Debug);
+		ShowWindow(GetConsoleWindow(), Console::out::filterStatus(Console::Filters::Debug));
 	}
 
-	if(AEInputCheckReleased(VK_F4)) {
+	if(AEInputCheckReleased(VK_F4) || ConsoleAsyncKeyIsPressed(VK_F4)) {
 		Console::out::toggleFilter(Console::Filters::Warning);
 	}
 
-	if(AEInputCheckReleased(VK_F5)) {
+	if(AEInputCheckReleased(VK_F5) || ConsoleAsyncKeyIsPressed(VK_F5)) {
 		Console::out::toggleFilter(Console::Filters::Error);
 	}
 

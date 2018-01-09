@@ -132,6 +132,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="consoleio.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="IEntityAi.cpp" />
     <ClCompile Include="Object.cpp" />

@@ -3,4 +3,9 @@
 
 #include "out.h"
 
+bool IsConsoleInForeground();
+bool IsConsoleKeyDown();
+bool ConsoleAsyncKeyIsDown(int vKey);
+bool ConsoleAsyncKeyIsPressed(int vKey);
+
 #endif
